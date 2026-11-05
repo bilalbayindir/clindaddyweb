@@ -1,0 +1,13 @@
+# Files that must never be uploaded to a deployment.
+
+# Local machine values, including credentials and private mailboxes.
+.env*.local
+
+# Source artwork masters. The built site reads the optimized copies in
+# public/images/, so these are dead weight on every upload (~11 MB).
+pics/
+
+# Build output and dependencies are rebuilt on Vercel.
+.next/
+node_modules/
+tsconfig.tsbuildinfo
