@@ -13,3 +13,5 @@ screenshots/
 debug.mjs
 qa.mjs
 screenshots.mjs
+
+*.tsbuildinfo
