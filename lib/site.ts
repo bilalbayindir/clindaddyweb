@@ -20,73 +20,45 @@ export type NavItem = {
 
 export const site = {
   name: "ClinDaddy",
+  legalName: "ClinDaddy LLC",
   /** Used in metadata, JSON-LD, and the sitemap. */
   url: process.env.NEXT_PUBLIC_SITE_URL?.replace(/\/$/, "") ?? "https://www.clindaddy.com",
   title: "ClinDaddy | Clinical Data Automation from Protocol to Submission",
   description:
     "ClinDaddy automates clinical data workflows from protocol and EDC study design through data capture, analysis, QC, and regulatory submission.",
-  /**
-   * PLACEHOLDER — replace before launch by setting NEXT_PUBLIC_CONTACT_EMAIL.
-   * Used as the destination for contact-form notifications and the mailto
-   * fallback shown when no email provider is configured.
-   */
   contactEmail: process.env.NEXT_PUBLIC_CONTACT_EMAIL ?? "hello@clindaddy.com",
+  founderEmail: "bilal.bayindir@clindaddy.com",
+  address: {
+    street: "1028 W Airy St",
+    city: "Norristown",
+    state: "PA",
+    postalCode: "19401",
+    country: "US",
+  },
   productNames: ["FlashEDC", "FlashAnalysis"] as const,
 } as const;
 
+export const siteAddress = `${site.address.street}, ${site.address.city}, ${site.address.state} ${site.address.postalCode}`;
+
 /** The one primary conversion action, reused across every page. */
 export const primaryCTA = {
-  label: "Request a Demo",
+  label: "Request a demo",
   href: "/contact?interest=demo",
 } as const;
 
 export const secondaryCTA = {
-  label: "Explore the Platform",
-  href: "/platform",
+  label: "Join the pilot program",
+  href: "/pilot",
 } as const;
 
 export const navigation: NavItem[] = [
-  {
-    label: "Platform",
-    href: "/platform",
-    children: [
-      {
-        label: "Platform overview",
-        href: "/platform",
-        description: "One platform. Two engines. One clinical data lifecycle.",
-      },
-      {
-        label: "FlashEDC",
-        href: "/flashedc",
-        description: "Protocol → EDC & Data Capture",
-      },
-      {
-        label: "FlashAnalysis",
-        href: "/flashanalysis",
-        description: "Clinical Data → Analysis → Submission",
-      },
-    ],
-  },
-  { label: "Technology", href: "/technology" },
+  { label: "Platform", href: "/platform" },
+  { label: "FlashEDC", href: "/flashedc" },
+  { label: "FlashAnalysis", href: "/flashanalysis" },
+  { label: "Roadmap", href: "/roadmap" },
+  { label: "Pilot Program", href: "/pilot" },
   { label: "Trust", href: "/trust" },
-  {
-    label: "Solutions",
-    href: "/solutions",
-    children: [
-      {
-        label: "CROs",
-        href: "/solutions#cros",
-        description: "Turn data operations into a competitive advantage.",
-      },
-      {
-        label: "Pharma & Biotech",
-        href: "/solutions#pharma-biotech",
-        description: "Speed, consistency, and traceability.",
-      },
-    ],
-  },
   { label: "About", href: "/about" },
-  { label: "Investors", href: "/investors" },
 ];
 
 export const footerNavigation: { heading: string; links: NavLink[] }[] = [
@@ -96,25 +68,25 @@ export const footerNavigation: { heading: string; links: NavLink[] }[] = [
       { label: "Platform overview", href: "/platform" },
       { label: "FlashEDC", href: "/flashedc" },
       { label: "FlashAnalysis", href: "/flashanalysis" },
-      { label: "Technology", href: "/technology" },
-    ],
-  },
-  {
-    heading: "Trust",
-    links: [
-      { label: "Trust & governance", href: "/trust" },
-      { label: "Deterministic execution", href: "/trust#deterministic-execution" },
-      { label: "Independent QC", href: "/trust#independent-qc" },
-      { label: "Traceability", href: "/trust#traceability" },
+      { label: "Roadmap", href: "/roadmap" },
     ],
   },
   {
     heading: "Company",
     links: [
       { label: "About", href: "/about" },
+      { label: "Pilot program", href: "/pilot" },
       { label: "Investors", href: "/investors" },
-      { label: "Solutions", href: "/solutions" },
       { label: "Contact", href: "/contact" },
+    ],
+  },
+  {
+    heading: "Trust",
+    links: [
+      { label: "Trust & governance", href: "/trust" },
+      { label: "Technology", href: "/technology" },
+      { label: "Solutions", href: "/solutions" },
+      { label: "Privacy policy", href: "/privacy" },
     ],
   },
 ];
@@ -124,8 +96,11 @@ export const footerNavigation: { heading: string; links: NavLink[] }[] = [
  * labels and section ids cannot drift apart.
  */
 export const trustAnchors = [
+  { label: "Regulatory", href: "#regulatory" },
   { label: "Deterministic execution", href: "#deterministic-execution" },
-  { label: "Traceability", href: "#traceability" },
   { label: "Independent QC", href: "#independent-qc" },
-  { label: "Human in the loop", href: "#human-in-the-loop" },
+  { label: "AI governance", href: "#ai-governance" },
 ] as const;
+
+export const legalFooter =
+  "ClinDaddy software supports, but does not replace, sponsor responsibility for regulatory submissions. Product names are trademarks of ClinDaddy LLC.";

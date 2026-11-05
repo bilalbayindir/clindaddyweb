@@ -5,31 +5,27 @@ import Link from "next/link";
 import { FlashAnalysisPanel, FlashEdcPanel } from "@/components/diagrams/product-panels";
 import { CtaBand } from "@/components/sections/cta-band";
 import { HomeHero } from "@/components/sections/home-hero";
-import { IllustrationFigure } from "@/components/sections/illustration-figure";
 import { ProductCard } from "@/components/sections/product-card";
 import { BorderedGrid, BorderedGridCell } from "@/components/ui/card";
 import { Eyebrow, Section, SectionHeading } from "@/components/ui/section";
 import { Reveal } from "@/components/motion/reveal";
 import {
-  differentiators,
   evidence,
   flashanalysis,
   flashedc,
-  maturityStatement,
   problemPoints,
   products,
-  solutions,
-  trustPillars,
+  roadmapStages,
+  team,
+  whyNow,
 } from "@/lib/content";
 import { pageMetadata } from "@/lib/metadata";
-import { primaryCTA, site } from "@/lib/site";
+import { primaryCTA, secondaryCTA, site } from "@/lib/site";
 
 export const metadata: Metadata = pageMetadata({
   title: site.title,
   description: site.description,
   path: "/",
-  // The homepage title is already the full brand line; the `%s | ClinDaddy`
-  // template would append the company name a second time.
   absolute: true,
 });
 
@@ -44,7 +40,7 @@ export default function HomePage() {
       <Section tone="surface" bordered>
         <SectionHeading
           eyebrow="The problem"
-          title="Clinical trials still depend on enormous amounts of manual data work."
+          title="Clinical data work is still assembled by hand, study after study."
           lead="Between an approved protocol and a submission sits a large body of translation work. It is high-volume, high-consequence, and repeated for every study."
         />
 
@@ -56,37 +52,19 @@ export default function HomePage() {
             </BorderedGridCell>
           ))}
         </BorderedGrid>
-
-        <p className="mt-8 max-w-3xl text-sm leading-relaxed text-muted">
-          We make no claims here about market size or the cost of that work. The description above
-          is what the process involves — the same steps, performed by hand, at every sponsor and
-          every CRO.
-        </p>
       </Section>
 
       {/* ---------------------------------------------------------------- */}
-      {/* Platform                                                          */}
+      {/* Two products, one pipeline                                        */}
       {/* ---------------------------------------------------------------- */}
       <Section tone="light" bordered id="platform">
         <SectionHeading
-          eyebrow="The platform"
-          title="One platform. Two engines. One clinical data lifecycle."
-          lead="FlashEDC covers the front of the lifecycle — protocol to an EDC study build in 10 to 30 minutes, including edit-check specifications and programming code, against roughly ten weeks by hand — and the data capture built on that design. FlashAnalysis covers everything downstream: clinical data through standards, analysis, QC, and submission."
+          eyebrow="Two products, one pipeline"
+          title="Build the study. Then carry the data to submission."
+          lead="FlashEDC covers protocol to eCRFs to EDC data collection. FlashAnalysis covers clinical data through SDTM, ADaM and TLFs, with independent QC and the submission artifacts behind them. One study identity runs through both."
         />
 
-        <Reveal className="mt-14">
-          <IllustrationFigure
-            src="/images/lifecycle-illustration.jpg"
-            alt="Illustration of the clinical data lifecycle running from protocol through FlashEDC, data collection, and FlashAnalysis to submission."
-            width={1408}
-            height={768}
-            sizes="(min-width: 1280px) 1216px, 100vw"
-            priority
-            caption="Illustration. The full lifecycle the two engines cover: protocol to EDC study design and data capture at the front, data through standards, analysis, QC, and submission at the back."
-          />
-        </Reveal>
-
-        <div className="mt-8 flex flex-col gap-6">
+        <div className="mt-14 flex flex-col gap-6">
           <Reveal>
             <ProductCard product={flashedc}>
               <FlashEdcPanel />
@@ -101,44 +79,43 @@ export default function HomePage() {
         </div>
 
         <p className="mt-6 text-xs leading-relaxed text-muted">
-          Interfaces shown are illustrative and built with synthetic values. They are not
-          customer systems, and no study data is reproduced anywhere on this site.
+          Interfaces shown are illustrative and built with synthetic values. They are not customer
+          systems, and no study data is reproduced anywhere on this site.
         </p>
       </Section>
 
       {/* ---------------------------------------------------------------- */}
-      {/* Trust, condensed                                                  */}
+      {/* Why now                                                           */}
       {/* ---------------------------------------------------------------- */}
-      <Section tone="dark" bordered id="trust">
+      <Section tone="dark" bordered>
         <div className="grid gap-14 lg:grid-cols-[minmax(0,0.9fr)_minmax(0,1.1fr)] lg:gap-16">
           <div>
             <SectionHeading
               tone="dark"
-              eyebrow="Trust & governance"
-              title="AI assists. Deterministic systems execute. Humans approve."
-              lead="ClinDaddy is not uncontrolled autonomous AI. Interpretation is separated from execution, production is separated from QC, and approval is an explicit human act."
+              eyebrow="Why now"
+              title="The standards are mandatory. The models can finally read the protocol."
+              lead="Three changes make this the right moment to automate the clinical data lifecycle."
             />
-
             <Link
-              href="/trust"
+              href="/technology"
               className="mt-8 inline-flex items-center gap-2 text-sm font-medium text-teal-300 transition-colors hover:text-teal-200"
               data-analytics="nav_click"
-              data-analytics-label="Trust & governance"
+              data-analytics-label="Technology"
             >
-              See how the controls work
+              See how the platform works
               <ArrowRight className="size-4" aria-hidden />
             </Link>
           </div>
 
           <ul className="flex flex-col divide-y divide-white/10 border-y border-white/10">
-            {trustPillars.map((pillar) => (
-              <li key={pillar.id} className="flex gap-6 py-6">
+            {whyNow.map((point, index) => (
+              <li key={point.title} className="flex gap-6 py-6">
                 <span className="font-mono text-[0.6875rem] tracking-[0.14em] text-teal-300">
-                  {pillar.index}
+                  {String(index + 1).padStart(2, "0")}
                 </span>
                 <div className="min-w-0">
-                  <h3 className="text-base font-semibold text-white">{pillar.eyebrow}</h3>
-                  <p className="mt-2 text-sm leading-relaxed text-navy-300">{pillar.points[0]}</p>
+                  <h3 className="text-base font-semibold text-white">{point.title}</h3>
+                  <p className="mt-2 text-sm leading-relaxed text-navy-300">{point.description}</p>
                 </div>
               </li>
             ))}
@@ -147,42 +124,102 @@ export default function HomePage() {
       </Section>
 
       {/* ---------------------------------------------------------------- */}
-      {/* Differentiation                                                   */}
+      {/* Roadmap teaser                                                    */}
       {/* ---------------------------------------------------------------- */}
       <Section tone="light" bordered>
-        <SectionHeading
-          eyebrow="Why ClinDaddy"
-          title="Trustworthy clinical-data automation — not an AI wrapper."
-          lead="The difference is not that the model is smarter. It is that the model is not the thing producing the clinical numbers."
-        />
+        <div className="flex flex-col gap-8 lg:flex-row lg:items-end lg:justify-between">
+          <SectionHeading
+            eyebrow="Roadmap"
+            title="Two products today. More of the trial next."
+            lead="Every module reuses the protocol-derived data model, so new systems integrate on day one. Statuses are literal."
+          />
+          <Link
+            href="/roadmap"
+            className="inline-flex shrink-0 items-center gap-2 text-sm font-medium text-teal-700 transition-colors hover:text-teal-800"
+            data-analytics="nav_click"
+            data-analytics-label="Roadmap"
+          >
+            See the full roadmap
+            <ArrowRight className="size-4" aria-hidden />
+          </Link>
+        </div>
 
-        <div className="mt-14 grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
-          {differentiators.map((item, index) => (
-            <Reveal key={item.title} delay={index * 0.05}>
-              <div className="border-t border-line pt-6">
-                <h3 className="text-base font-semibold">{item.title}</h3>
-                <p className="mt-2 text-sm leading-relaxed text-muted">{item.description}</p>
-              </div>
-            </Reveal>
+        <div className="mt-14 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+          {roadmapStages.slice(0, 4).map((stage) => (
+            <Link
+              key={stage.id}
+              href={`/roadmap#${stage.id}`}
+              className="group flex flex-col rounded-2xl border border-line bg-white p-6 transition-colors hover:border-navy-300"
+              data-analytics="nav_click"
+              data-analytics-label={`Roadmap — ${stage.stage}`}
+            >
+              <span className="font-mono text-[0.6875rem] tracking-[0.14em] text-muted uppercase">
+                {stage.stage} · {stage.timeline}
+              </span>
+              <span className="mt-4 text-base font-semibold text-ink">
+                {stage.items.map((item) => item.name).join(" · ")}
+              </span>
+              <span className="mt-3 inline-flex items-center gap-1.5 text-sm font-medium text-teal-700">
+                {stage.statusLabel}
+                <ArrowRight className="size-3.5 transition-transform group-hover:translate-x-0.5" aria-hidden />
+              </span>
+            </Link>
           ))}
         </div>
       </Section>
 
       {/* ---------------------------------------------------------------- */}
-      {/* Evidence and maturity                                             */}
+      {/* Pilot band                                                        */}
       {/* ---------------------------------------------------------------- */}
       <Section tone="surface" bordered>
-        <div className="grid gap-14 lg:grid-cols-[minmax(0,1fr)_minmax(0,1fr)] lg:gap-16">
-          <SectionHeading
-            eyebrow="Where the technology is today"
-            title={maturityStatement.headline}
-            lead={maturityStatement.body[0]}
-          />
-
+        <div className="grid gap-10 rounded-2xl border border-navy-200 bg-navy-50/60 p-7 sm:p-10 lg:grid-cols-[minmax(0,1.1fr)_minmax(0,0.9fr)] lg:items-center lg:gap-16">
           <div>
-            <dl className="flex flex-col divide-y divide-line border-y border-line">
+            <Eyebrow>Pilot program</Eyebrow>
+            <h2 className="mt-5 text-[1.75rem] leading-[1.15] font-semibold sm:text-4xl">
+              Now accepting pilot sponsors.
+            </h2>
+            <p className="mt-4 max-w-2xl text-base leading-relaxed text-body">
+              One real deliverable — an SDTM/ADaM/TLF package from your current EDC data, or one
+              FlashEDC study build — at discounted pilot pricing, with a written path to a
+              full-price per-study contract.
+            </p>
+          </div>
+          <div className="flex flex-col gap-3 sm:flex-row lg:justify-end">
+            <Link
+              href="/pilot"
+              className="inline-flex h-12 items-center justify-center rounded-full bg-navy-900 px-7 text-sm font-medium text-white transition-colors hover:bg-navy-800"
+              data-analytics="cta_pilot_click"
+              data-analytics-label="Join the pilot program"
+            >
+              {secondaryCTA.label}
+            </Link>
+            <Link
+              href={primaryCTA.href}
+              className="inline-flex h-12 items-center justify-center rounded-full border border-navy-300 px-7 text-sm font-medium text-navy-800 transition-colors hover:bg-white"
+              data-analytics="cta_demo_click"
+              data-analytics-label={primaryCTA.label}
+            >
+              {primaryCTA.label}
+            </Link>
+          </div>
+        </div>
+      </Section>
+
+      {/* ---------------------------------------------------------------- */}
+      {/* Evidence + founder                                                */}
+      {/* ---------------------------------------------------------------- */}
+      <Section tone="light" bordered>
+        <div className="grid gap-14 lg:grid-cols-[minmax(0,1fr)_minmax(0,1fr)] lg:gap-16">
+          <div>
+            <SectionHeading
+              eyebrow="Where the technology is today"
+              title="Finished products, demo-ready now."
+              lead="FlashEDC and FlashAnalysis are working products. ClinDaddy is early as a company, and we say so."
+            />
+
+            <dl className="mt-10 flex flex-col divide-y divide-line border-y border-line">
               {evidence.map((item) => (
-                <div key={item.label} className="py-6">
+                <div key={item.label} className="py-5">
                   <dt className="flex flex-wrap items-baseline gap-x-4 gap-y-1">
                     <span className="font-mono text-[0.6875rem] tracking-[0.12em] text-muted uppercase">
                       {item.label}
@@ -193,75 +230,79 @@ export default function HomePage() {
                 </div>
               ))}
             </dl>
-
-            <p className="mt-6 text-xs leading-relaxed text-muted">{maturityStatement.body[1]}</p>
           </div>
-        </div>
 
-        {/* Audiences */}
-        <div className="mt-16 border-t border-line pt-10">
-          <Eyebrow>Who we build for</Eyebrow>
-          <div className="mt-8 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
-            {solutions.map((solution) => (
-              <Link
-                key={solution.id}
-                href={`/solutions#${solution.id}`}
-                className="group rounded-xl border border-line bg-white p-6 transition-colors hover:border-navy-300"
-                data-analytics="nav_click"
-                data-analytics-label={solution.audience}
-              >
-                <p className="text-base font-semibold text-ink">{solution.audience}</p>
-                <p className="mt-2 text-sm leading-relaxed text-muted">{solution.headline}</p>
-                <span className="mt-4 inline-flex items-center gap-1.5 text-sm font-medium text-teal-700">
-                  Explore
-                  <ArrowRight className="size-3.5 transition-transform group-hover:translate-x-0.5" aria-hidden />
-                </span>
-              </Link>
-            ))}
-
+          <div className="flex flex-col justify-center rounded-2xl border border-line bg-white p-7 sm:p-9">
+            <Eyebrow>Built by a clinical data insider</Eyebrow>
+            <p className="mt-5 text-[1.375rem] leading-snug font-semibold sm:text-2xl">
+              13+ years building EDC software.
+            </p>
+            <p className="mt-4 text-sm leading-relaxed text-body">
+              {team.members[0].bio}
+            </p>
             <Link
-              href="/investors"
-              className="group rounded-xl border border-line bg-white p-6 transition-colors hover:border-navy-300"
-              data-analytics="cta_investor_click"
-              data-analytics-label="Investors"
+              href="/about"
+              className="mt-7 inline-flex items-center gap-2 text-sm font-medium text-teal-700 transition-colors hover:text-teal-800"
+              data-analytics="nav_click"
+              data-analytics-label="About"
             >
-              <p className="text-base font-semibold text-ink">Investors</p>
-              <p className="mt-2 text-sm leading-relaxed text-muted">
-                Building the clinical data automation layer.
-              </p>
-              <span className="mt-4 inline-flex items-center gap-1.5 text-sm font-medium text-teal-700">
-                Read the thesis
-                <ArrowRight className="size-3.5 transition-transform group-hover:translate-x-0.5" aria-hidden />
-              </span>
+              More about ClinDaddy
+              <ArrowRight className="size-4" aria-hidden />
             </Link>
           </div>
         </div>
       </Section>
 
       <CtaBand
-        title="Start a conversation about your clinical data workflow."
-        body="Tell us where the manual effort sits in your studies. We will show you what the platform does today and what it does not."
+        title="See the platform against a study you already know."
+        body="Bring a protocol or a dataset and we will walk through what the platform produces today, and where a person still has to decide."
         primary={{ label: primaryCTA.label, href: primaryCTA.href }}
-        secondary={{ label: "Talk to ClinDaddy", href: "/contact" }}
+        secondary={{ label: secondaryCTA.label, href: secondaryCTA.href, analytics: "cta_pilot_click" }}
       />
 
-      {/* Structured data for search engines — facts only, no claims. */}
+      {/* Structured data for search engines — facts only. */}
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{
           __html: JSON.stringify({
             "@context": "https://schema.org",
             "@type": "Organization",
-            name: "ClinDaddy",
+            name: site.legalName,
             description:
               "Clinical data automation company spanning the clinical-trial data lifecycle from protocol to regulatory submission.",
             url: site.url,
+            email: site.contactEmail,
+            address: {
+              "@type": "PostalAddress",
+              streetAddress: site.address.street,
+              addressLocality: site.address.city,
+              addressRegion: site.address.state,
+              postalCode: site.address.postalCode,
+              addressCountry: site.address.country,
+            },
             brand: products.map((product) => ({
               "@type": "Brand",
               name: product.name,
               slogan: product.tagline,
             })),
           }),
+        }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(
+            products.map((product) => ({
+              "@context": "https://schema.org",
+              "@type": "SoftwareApplication",
+              name: product.name,
+              applicationCategory: "BusinessApplication",
+              operatingSystem: "Web",
+              description: product.summary,
+              url: `${site.url}${product.href}`,
+              publisher: { "@type": "Organization", name: site.legalName },
+            })),
+          ),
         }}
       />
     </>

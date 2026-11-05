@@ -4,15 +4,16 @@ import { WorkflowTimeline } from "@/components/diagrams/workflow-timeline";
 import { Reveal } from "@/components/motion/reveal";
 import { ProductPage } from "@/components/sections/product-page";
 import { IllustrationFigure } from "@/components/sections/illustration-figure";
+import { BorderedGrid, BorderedGridCell } from "@/components/ui/card";
 import { Section, SectionHeading } from "@/components/ui/section";
-import { flashedc, flashedcSpeed } from "@/lib/content";
+import { flashedc } from "@/lib/content";
 import { pageMetadata } from "@/lib/metadata";
 
 const description =
-  "FlashEDC analyzes a clinical trial protocol and generates the visits, forms, fields, code lists, and edit checks needed to build the study in an EDC environment — and captures study data against that same design, with human review before anything is finalized.";
+  "FlashEDC reads a clinical trial protocol and produces CDASH-aligned eCRFs, edit checks and a versioned study design — then runs the study on ClinDaddy's own EDC runtime, with human review before anything is finalized.";
 
 export const metadata: Metadata = pageMetadata({
-  title: "FlashEDC — Protocol to EDC study design and data capture",
+  title: "FlashEDC — Protocol to eCRFs, then EDC data collection",
   description,
   path: "/flashedc",
 });
@@ -21,7 +22,7 @@ export const metadata: Metadata = pageMetadata({
 const REVIEW_LOOP: { title: string; description: string }[] = [
   {
     title: "Generate",
-    description: "The pipeline produces a draft: skeleton first, then forms, fields, and checks.",
+    description: "The pipeline produces a draft: skeleton first, then eCRFs, fields and edit checks.",
   },
   {
     title: "Review",
@@ -38,11 +39,34 @@ const REVIEW_LOOP: { title: string; description: string }[] = [
   },
 ];
 
+const BUILD_POINTS = [
+  {
+    title: "Minutes, not weeks",
+    description:
+      "A review-ready study design is drafted from the protocol in minutes in our internal benchmarks, rather than assembled by hand over weeks. The review and approval path is unchanged.",
+  },
+  {
+    title: "Standards at design time",
+    description:
+      "CDASH field identifiers, codelists and eCRF naming are applied while the study is designed, not retrofitted before submission.",
+  },
+  {
+    title: "Versioned by default",
+    description:
+      "A published design is never edited in place. Updates create a new version, so the design a site collected against stays reconstructable.",
+  },
+  {
+    title: "Its own EDC runtime",
+    description:
+      "The study runs on FlashEDC's EDC data collection. Sites enter data against the design a reviewer approved.",
+  },
+];
+
 export default function FlashEdcPage() {
   return (
     <ProductPage
       product={flashedc}
-      heroTitle="Turn a Clinical Trial Protocol into an EDC Study — and capture the data."
+      heroTitle="Turn a clinical trial protocol into an EDC study — and capture the data."
       heroAside={
         <IllustrationFigure
           src="/images/flashedc-illustration.jpg"
@@ -56,47 +80,34 @@ export default function FlashEdcPage() {
       }
       workflowLead="The protocol goes in at the top. A reviewable study design comes out at the bottom — with two points where a person has to look at it before the next stage runs."
       maturity={{
-        title: "A working internal tool, not a finished product.",
-        body: "FlashEDC runs in internal CRO use with strong engine fidelity: the generation path from protocol to study design is real and exercised on real protocols.",
-        note: "It currently depends on a specific EDC environment, which is the main constraint on how it is deployed today. We describe it that way rather than as a generally available commercial product.",
+        title: "Available today.",
+        body: "FlashEDC is a finished product: protocol analysis, eCRF design and the EDC runtime that collects the data. It is demo-ready now.",
+        note: "Status describes the product, not commercial traction. There are no customers or case studies to point to yet.",
       }}
     >
       {/* ------------------------------------------------------------------ */}
-      {/* Speed — how fast the design arrives                                 */}
+      {/* What makes it different                                             */}
       {/* ------------------------------------------------------------------ */}
       <Section tone="surface" bordered>
         <SectionHeading
-          eyebrow="Speed"
-          title={flashedcSpeed.headline}
-          lead={flashedcSpeed.lead}
+          eyebrow="Study build, then data collection"
+          title="One design, from protocol to the site's screen."
+          lead="The structure that was reviewed at study build is the structure data is captured against. There is no second build in another system, and no translation step between design and collection."
         />
 
-        {/* Sits directly above the figures, and the caveat below them, so the
-            "10-30 MIN" in the artwork can never be read on its own as a claim
-            about time to a *live* study. */}
-        <IllustrationFigure
-          className="mt-12"
-          src="/images/flashedc-speed-illustration.jpg"
-          alt="Illustration of a protocol document dropping into a chute, a stack of generated study-design cards emerging from the other side, a clock reading 10-30 MIN, and a tall stack of folders labelled ~10 WEEKS fading out behind."
-          width={1379}
-          height={752}
-          sizes="(min-width: 1024px) 64rem, 100vw"
-          caption="Illustration. The protocol goes in and a study design comes out in 10–30 minutes — against roughly ten weeks to assemble the same build by hand. That is time to a review-ready build, not to a live study."
-        />
-
-        <div className="mt-12 grid gap-px overflow-hidden rounded-2xl border border-line bg-line sm:grid-cols-2">
-          {flashedcSpeed.stats.map((stat) => (
-            <div key={stat.label} className="bg-white p-7 sm:p-9">
-              <p className="text-[2.25rem] leading-none font-semibold tracking-tight text-ink sm:text-[2.5rem]">
-                {stat.value}
-              </p>
-              <p className="mt-4 text-sm font-medium text-body">{stat.label}</p>
-              <p className="mt-2 text-sm leading-relaxed text-muted">{stat.detail}</p>
-            </div>
+        <BorderedGrid columns={2} className="mt-14">
+          {BUILD_POINTS.map((point) => (
+            <BorderedGridCell key={point.title}>
+              <h3 className="text-[0.9375rem] leading-snug font-semibold">{point.title}</h3>
+              <p className="mt-2 text-sm leading-relaxed text-muted">{point.description}</p>
+            </BorderedGridCell>
           ))}
-        </div>
+        </BorderedGrid>
 
-        <p className="mt-6 max-w-3xl text-xs leading-relaxed text-muted">{flashedcSpeed.note}</p>
+        <p className="mt-8 max-w-3xl text-xs leading-relaxed text-muted">
+          The speed figure is time to a study build ready for human review, not time to a live
+          study. A study going live still follows the same review, approval and validation path.
+        </p>
       </Section>
 
       {/* ------------------------------------------------------------------ */}

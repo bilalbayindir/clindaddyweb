@@ -1,4 +1,4 @@
-import { Mail } from "lucide-react";
+import { Mail, MapPin } from "lucide-react";
 import type { Metadata } from "next";
 
 import { ContactForm } from "@/components/sections/contact-form";
@@ -7,7 +7,7 @@ import { PageHero } from "@/components/sections/page-hero";
 import { Container } from "@/components/ui/container";
 import { Eyebrow } from "@/components/ui/section";
 import { pageMetadata } from "@/lib/metadata";
-import { site } from "@/lib/site";
+import { site, siteAddress } from "@/lib/site";
 
 const description =
   "Talk to ClinDaddy about a product demo, a pilot, partnership, or investment. Tell us about the studies you run and the systems you use.";
@@ -81,6 +81,23 @@ export default function ContactPage() {
                   <Mail className="size-4" aria-hidden />
                   {site.contactEmail}
                 </a>
+                <a
+                  href={`mailto:${site.founderEmail}`}
+                  className="mt-3 flex items-center gap-2.5 text-sm text-body transition-colors hover:text-ink"
+                  data-analytics="outbound_email_click"
+                  data-analytics-label="founder email"
+                >
+                  <Mail className="size-4" aria-hidden />
+                  {site.founderEmail}
+                </a>
+              </div>
+
+              <div className="border-t border-line pt-8">
+                <Eyebrow>Address</Eyebrow>
+                <p className="mt-4 flex items-start gap-2.5 text-sm leading-relaxed text-body">
+                  <MapPin className="mt-0.5 size-4 shrink-0" aria-hidden />
+                  {siteAddress}
+                </p>
               </div>
 
               <div className="border-t border-line pt-8">

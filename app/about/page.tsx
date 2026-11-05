@@ -1,18 +1,16 @@
 import type { Metadata } from "next";
 
-import { FlowChain } from "@/components/diagrams/flow-chain";
 import { Reveal } from "@/components/motion/reveal";
 import { CtaBand } from "@/components/sections/cta-band";
-import { IllustrationFigure } from "@/components/sections/illustration-figure";
 import { HeroActions, PageHero } from "@/components/sections/page-hero";
 import { BorderedGrid, BorderedGridCell } from "@/components/ui/card";
 import { Eyebrow, Section, SectionHeading } from "@/components/ui/section";
-import { aboutPillars, aiCroDestination, team } from "@/lib/content";
+import { aboutPillars, team } from "@/lib/content";
 import { pageMetadata } from "@/lib/metadata";
-import { primaryCTA } from "@/lib/site";
+import { primaryCTA, secondaryCTA, siteAddress } from "@/lib/site";
 
 const description =
-  "Why ClinDaddy exists: clinical trials depend on enormous amounts of manual data work, and automating it only helps if the result can be trusted. AI assists, deterministic engines execute, humans approve.";
+  "ClinDaddy LLC is a clinical data automation company founded in November 2026 in Norristown, Pennsylvania. It builds FlashEDC and FlashAnalysis: protocol to eCRFs and EDC data collection, then SDTM, ADaM, TLFs and submission artifacts.";
 
 export const metadata: Metadata = pageMetadata({
   title: "About",
@@ -20,11 +18,11 @@ export const metadata: Metadata = pageMetadata({
   path: "/about",
 });
 
-const APPROACH_CHAIN = [
-  { title: "AI assists", description: "Interpretation and specification." },
-  { title: "Deterministic engines execute", description: "Repeatable processing." },
-  { title: "Humans approve", description: "Explicit, attributable sign-off." },
-  { title: "Everything is traceable", description: "Outputs connected to source." },
+const COMPANY_FACTS = [
+  { label: "Company", value: "ClinDaddy LLC" },
+  { label: "Founded", value: "November 2026" },
+  { label: "Based", value: siteAddress },
+  { label: "Products", value: "FlashEDC · FlashAnalysis" },
 ];
 
 export default function AboutPage() {
@@ -33,23 +31,32 @@ export default function AboutPage() {
       <PageHero
         eyebrow="About"
         title="Clinical data work should not be rebuilt by hand for every study."
-        lead="ClinDaddy exists because the same mechanical translation happens at every sponsor and every CRO, on every study, and the effort resets each time a new protocol is approved."
+        lead="ClinDaddy builds the software layer that turns a protocol into a study — and carries the resulting data to submission. It was founded in 2026 by someone who spent 13 years building the systems studies run on."
         actions={
           <HeroActions
             primary={{ label: primaryCTA.label, href: primaryCTA.href }}
-            secondary={{ label: "Explore the Platform", href: "/platform" }}
+            secondary={{ label: secondaryCTA.label, href: secondaryCTA.href, analytics: "cta_pilot_click" }}
           />
         }
       />
 
-      {/* ------------------------------------------------------------------ */}
-      {/* Why, what, how, where next                                          */}
-      {/* ------------------------------------------------------------------ */}
+      {/* Company facts */}
+      <section className="border-b border-line bg-surface">
+        <div className="mx-auto grid max-w-7xl gap-px overflow-hidden border-x border-line bg-line sm:grid-cols-2 lg:grid-cols-4">
+          {COMPANY_FACTS.map((fact) => (
+            <div key={fact.label} className="bg-white px-6 py-6">
+              <p className="font-mono text-[0.625rem] tracking-[0.12em] text-muted uppercase">
+                {fact.label}
+              </p>
+              <p className="mt-2 text-sm font-medium text-ink">{fact.value}</p>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      {/* Why, what, how, where next */}
       <Section tone="surface" bordered>
-        <SectionHeading
-          eyebrow="The company"
-          title="Four questions, answered plainly."
-        />
+        <SectionHeading eyebrow="The company" title="Four questions, answered plainly." />
 
         <BorderedGrid columns={2} className="mt-14">
           {aboutPillars.map((pillar, index) => (
@@ -64,64 +71,19 @@ export default function AboutPage() {
         </BorderedGrid>
       </Section>
 
-      {/* ------------------------------------------------------------------ */}
-      {/* The lifecycle                                                       */}
-      {/* ------------------------------------------------------------------ */}
+      {/* Founder */}
       <Section tone="light" bordered>
-        <div className="grid gap-12 lg:grid-cols-[minmax(0,0.85fr)_minmax(0,1.15fr)] lg:items-center lg:gap-16">
-          <SectionHeading
-            eyebrow="The long view"
-            title="One canonical study model, spanning the whole lifecycle."
-            lead="The two products are not two businesses. They are the first two projections of one system-neutral study model read from the protocol, and the value of covering both is that the study does not have to be re-described at every handoff."
-          />
-
-          <Reveal className="min-w-0">
-            <IllustrationFigure
-              src="/images/lifecycle-illustration.jpg"
-              alt="Illustration of the clinical data lifecycle running from protocol through FlashEDC, data collection, and FlashAnalysis to submission."
-              width={1408}
-              height={768}
-              sizes="(min-width: 1024px) 40rem, 100vw"
-              caption="Illustration. Protocol to submission — FlashEDC covering protocol, study build, and data capture; FlashAnalysis covering the downstream chain."
-            />
-          </Reveal>
-        </div>
-
-        {/* The destination, said as a destination — never as today's capability. */}
-        <div className="mt-14 grid gap-8 rounded-2xl border border-navy-200 bg-navy-50/50 p-7 sm:p-9 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.2fr)] lg:gap-14">
-          <h3 className="text-xl font-semibold sm:text-2xl">{aiCroDestination.headline}</h3>
-          <div className="flex flex-col gap-4">
-            <p className="text-sm leading-relaxed text-body">{aiCroDestination.body}</p>
-            <p className="text-sm leading-relaxed text-muted">{aiCroDestination.today}</p>
-          </div>
-        </div>
-      </Section>
-
-      {/* ------------------------------------------------------------------ */}
-      {/* Approach                                                            */}
-      {/* ------------------------------------------------------------------ */}
-      <Section tone="surface" bordered>
-        <SectionHeading
-          eyebrow="The approach"
-          title="Four rules, applied to everything we build."
-          lead="Automating clinical work is only useful if the output can be defended. That constraint shapes the architecture more than any other decision we have made."
-        />
-
-        <Reveal className="mt-14">
-          <FlowChain steps={APPROACH_CHAIN} label="The ClinDaddy approach" />
-        </Reveal>
-      </Section>
-
-      {/* ------------------------------------------------------------------ */}
-      {/* Team                                                                */}
-      {/* ------------------------------------------------------------------ */}
-      <Section tone="light" bordered>
-        <div className="grid gap-10 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.1fr)] lg:gap-16">
+        <div className="grid gap-12 lg:grid-cols-[minmax(0,0.9fr)_minmax(0,1.1fr)] lg:gap-16">
           <div>
             <Eyebrow>{team.heading}</Eyebrow>
             <h2 className="mt-5 text-[1.75rem] leading-[1.15] font-semibold sm:text-4xl">
               {team.lead}
             </h2>
+            <p className="mt-5 max-w-md text-base leading-relaxed text-body">
+              A company of one at the start is not a weakness to hide; it is the reason the products
+              are coherent. Both were designed and built by the same person who has to defend them
+              in a diligence conversation.
+            </p>
           </div>
 
           <div className="flex flex-col gap-6">
@@ -137,46 +99,60 @@ export default function AboutPage() {
                 <p className="mt-4 text-sm leading-relaxed text-muted">{member.bio}</p>
               </div>
             ))}
-
-            <div className="rounded-2xl border border-line bg-surface p-7 sm:p-9">
-              <p className="font-mono text-[0.6875rem] tracking-[0.14em] text-teal-700 uppercase">
-                {team.artifact.label}
-              </p>
-              <p className="mt-3 text-sm leading-relaxed text-body">{team.artifact.body}</p>
-            </div>
-
-            <div className="rounded-2xl border border-navy-200 bg-navy-50/50 p-7 sm:p-9">
-              <p className="font-mono text-[0.6875rem] tracking-[0.14em] text-navy-600 uppercase">
-                {team.notClaimed.label}
-              </p>
-              <p className="mt-3 text-sm leading-relaxed text-body">{team.notClaimed.body}</p>
-            </div>
           </div>
         </div>
       </Section>
 
-      {/* ------------------------------------------------------------------ */}
-      {/* Maturity                                                            */}
-      {/* ------------------------------------------------------------------ */}
+      {/* Hiring */}
+      <Section tone="surface" bordered>
+        <div className="grid gap-12 lg:grid-cols-[minmax(0,1fr)_minmax(0,1fr)] lg:gap-16">
+          <SectionHeading
+            eyebrow={team.hiring.label}
+            title="The next four roles."
+            lead={team.hiring.body}
+          />
+
+          <ul className="flex flex-col divide-y divide-line border-y border-line">
+            {team.hiring.roles.map((role, index) => (
+              <li key={role} className="flex items-baseline gap-6 py-5">
+                <span className="font-mono text-[0.6875rem] tracking-[0.14em] text-teal-700">
+                  {String(index + 1).padStart(2, "0")}
+                </span>
+                <span className="text-base font-medium text-ink">{role}</span>
+              </li>
+            ))}
+          </ul>
+        </div>
+      </Section>
+
+      {/* Vision */}
       <Section tone="dark" bordered>
         <div className="grid gap-10 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.1fr)] lg:gap-16">
           <div>
-            <Eyebrow tone="dark">Maturity</Eyebrow>
+            <Eyebrow tone="dark">The long view</Eyebrow>
             <h2 className="mt-5 text-[1.75rem] leading-[1.15] font-semibold text-white sm:text-4xl">
-              Working technology with a clear path toward productization.
+              Toward an AI CRO.
             </h2>
           </div>
 
           <div className="flex flex-col gap-5">
             <p className="text-base leading-relaxed text-navy-300">
-              We are honest about the stage we are at. FlashEDC is in internal CRO use. FlashAnalysis
-              is a tested, policy-driven platform. Neither is presented as mature commercial
-              software, because neither is.
+              A CRO is paid to do the work of running a trial, with software as its instrument.
+              Software that can produce trial systems from a single protocol read points somewhere
+              further: a CRO whose instrument is that software.
             </p>
-            <p className="text-sm leading-relaxed text-navy-400">
-              If you are evaluating ClinDaddy, that distinction should be part of your assessment —
-              not something you discover later.
+            <p className="text-base leading-relaxed text-navy-300">
+              That is the destination, not where ClinDaddy is today. Today it is a clinical data
+              automation company with two finished products: FlashEDC and FlashAnalysis. RTSM is in
+              development for 2027; patient-facing capture and trial operations are planned on the
+              same data model.
             </p>
+            <Reveal>
+              <p className="text-sm leading-relaxed text-navy-400">
+                The roadmap is published with literal statuses so this paragraph can be checked
+                against it.
+              </p>
+            </Reveal>
           </div>
         </div>
       </Section>
@@ -185,7 +161,7 @@ export default function AboutPage() {
         title="Start a conversation."
         body="Whether you are running studies, evaluating the technology, or looking at the company, we would rather talk than pitch."
         primary={{ label: primaryCTA.label, href: primaryCTA.href }}
-        secondary={{ label: "Talk to ClinDaddy", href: "/contact" }}
+        secondary={{ label: secondaryCTA.label, href: secondaryCTA.href, analytics: "cta_pilot_click" }}
       />
     </>
   );

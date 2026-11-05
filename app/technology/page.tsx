@@ -7,7 +7,7 @@ import { IllustrationFigure } from "@/components/sections/illustration-figure";
 import { HeroActions, PageHero } from "@/components/sections/page-hero";
 import { BorderedGrid, BorderedGridCell } from "@/components/ui/card";
 import { Eyebrow, Section, SectionHeading } from "@/components/ui/section";
-import { technologyConcepts, technologyPrinciples } from "@/lib/content";
+import { technologyConcepts, technologyPrinciples, technologyStack } from "@/lib/content";
 import { pageMetadata } from "@/lib/metadata";
 import { primaryCTA } from "@/lib/site";
 
@@ -28,8 +28,8 @@ const FLASHEDC_ARCHITECTURE = [
   { title: "Deterministic code generation", description: "Specifications turned into study-builder code by defined processing." },
   { title: "Second-eye QC", description: "Adversarial review of the generated design." },
   { title: "Human review", description: "A study builder corrects and approves." },
-  { title: "EDC study design", description: "Exportable design for the EDC environment.", speed: "10–30 min" },
-  { title: "Data capture", description: "Sites and subjects enter data into the EDC study built from the reviewed design.", inDevelopment: true },
+  { title: "EDC study design", description: "Versioned, CDASH-aligned design." },
+  { title: "Data collection", description: "Sites enter data on FlashEDC's own EDC runtime." },
 ];
 
 /** The FlashAnalysis pipeline, top to bottom. */
@@ -120,11 +120,21 @@ export default function TechnologyPage() {
         </div>
 
         <p className="mx-auto mt-10 max-w-3xl text-xs leading-relaxed text-muted">
-          The 10–30 minute figure covers the full study build — visit and form structure, fields and
-          code lists, edit-check specifications, and the generated programming code — against
-          roughly ten weeks to do the same build by hand. It is time to a build ready for review,
-          not to a live study, which still follows the same review, approval, and validation path.
+          The build is drafted in minutes, not weeks, in our internal benchmarks. That is time to a
+          study design ready for human review — not to a live study, which still follows the same
+          review, approval and validation path.
         </p>
+
+        <div className="mt-14 grid gap-px overflow-hidden rounded-2xl border border-line bg-line sm:grid-cols-2 lg:grid-cols-4">
+          {technologyStack.map((item) => (
+            <div key={item.layer} className="bg-white p-6">
+              <p className="font-mono text-[0.625rem] tracking-[0.12em] text-muted uppercase">
+                {item.layer}
+              </p>
+              <p className="mt-2 text-sm font-medium text-ink">{item.detail}</p>
+            </div>
+          ))}
+        </div>
 
         <Reveal className="mt-14">
           <IllustrationFigure

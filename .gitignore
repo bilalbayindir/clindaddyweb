@@ -6,3 +6,10 @@ out/
 .env*.local
 *.log
 .DS_Store
+
+# Local QA artifacts
+screenshots/
+.server.pid
+debug.mjs
+qa.mjs
+screenshots.mjs

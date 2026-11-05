@@ -18,7 +18,7 @@ export const metadata: Metadata = pageMetadata({
   path: "/investors",
 });
 
-const THESIS_PARTS = [investorThesis.wedge, investorThesis.expansion];
+const THESIS_PARTS = [investorThesis.wedge, investorThesis.expansion, investorThesis.gtm];
 
 export default function InvestorsPage() {
   return (
@@ -29,8 +29,8 @@ export default function InvestorsPage() {
         lead={investorThesis.intro}
         actions={
           <HeroActions
-            primary={{ label: "Talk to ClinDaddy", href: "/contact?interest=investment", analytics: "cta_investor_click" }}
-            secondary={{ label: "Explore the Platform", href: "/platform" }}
+            primary={{ label: "Request the investor deck", href: "/contact?interest=investment", analytics: "cta_investor_click" }}
+            secondary={{ label: "See the roadmap", href: "/roadmap" }}
           />
         }
         aside={
@@ -56,14 +56,16 @@ export default function InvestorsPage() {
           lead="The expansion story is not a second product line. It is the same study continuing through stages that are already effort-heavy and already specification-driven — and, further out, the same neutral study model projected into the systems a trial runs on."
         />
 
-        <div className="mt-14 grid gap-6 lg:grid-cols-2">
+        <div className="mt-14 grid gap-6 lg:grid-cols-3">
           {THESIS_PARTS.map((part) => (
             <Reveal key={part.label}>
               <div className="flex h-full flex-col rounded-2xl border border-line bg-white p-7 sm:p-9">
                 <p className="font-mono text-[0.6875rem] tracking-[0.14em] text-teal-700 uppercase">
                   {part.label}
                 </p>
-                <h3 className="mt-4 text-xl font-semibold sm:text-2xl">{part.product}</h3>
+                <h3 className="mt-4 text-xl font-semibold sm:text-2xl">
+                  {"product" in part ? part.product : "Go-to-market"}
+                </h3>
                 <p className="mt-3 text-base font-medium text-ink">{part.statement}</p>
                 <p className="mt-4 text-sm leading-relaxed text-muted">{part.body}</p>
               </div>
@@ -157,42 +159,49 @@ export default function InvestorsPage() {
       </Section>
 
       {/* ------------------------------------------------------------------ */}
-      {/* Credibility                                                         */}
+      {/* Traction                                                            */}
       {/* ------------------------------------------------------------------ */}
       <Section tone="dark" bordered>
         <div className="grid gap-10 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.1fr)] lg:gap-16">
           <div>
-            <Eyebrow tone="dark">A note on claims</Eyebrow>
+            <Eyebrow tone="dark">Traction to date</Eyebrow>
             <h2 className="mt-5 text-[1.75rem] leading-[1.15] font-semibold text-white sm:text-4xl">
-              What this website does not say.
+              Products built. Customers next.
             </h2>
           </div>
 
-          <div className="flex flex-col gap-5">
-            <p className="text-base leading-relaxed text-navy-300">
-              We do not publish customer names, deployment counts, funding, revenue, partnerships,
-              certifications, or regulatory status, because none of that has been established in a
-              form we are prepared to stand behind.
-            </p>
-            <p className="text-base leading-relaxed text-navy-300">
-              What we can show is working technology: a FlashEDC internal CRO tool that drafts a full
-              study build — edit-check specifications and programming code included — in 10 to 30
-              minutes against roughly ten weeks by hand, and a FlashAnalysis platform covered by
-              approximately 2,500 passing tests with policy-driven provenance governance.
-            </p>
-            <p className="text-sm leading-relaxed text-navy-400">
-              Anything beyond that, we would rather demonstrate in a conversation than assert on a
-              page.
-            </p>
-          </div>
+          <ul className="flex flex-col divide-y divide-white/10 border-y border-white/10">
+            <li className="py-5">
+              <h3 className="text-base font-semibold text-white">Two finished products</h3>
+              <p className="mt-2 text-sm leading-relaxed text-navy-300">
+                FlashEDC covers protocol analysis, eCRF design and its own EDC runtime.
+                FlashAnalysis covers SDTM, ADaM, TLFs, independent QC and submission artifacts, with
+                approximately 2,500 automated tests.
+              </p>
+            </li>
+            <li className="py-5">
+              <h3 className="text-base font-semibold text-white">Pilot program open</h3>
+              <p className="mt-2 text-sm leading-relaxed text-navy-300">
+                Discounted paid pilots for the first customers, with a written path to a full-price
+                per-study contract.
+              </p>
+            </li>
+            <li className="py-5">
+              <h3 className="text-base font-semibold text-white">No customers yet</h3>
+              <p className="mt-2 text-sm leading-relaxed text-navy-300">
+                No case studies, customer logos or revenue. We state that plainly rather than
+                letting a reader discover it during diligence.
+              </p>
+            </li>
+          </ul>
         </div>
       </Section>
 
       <CtaBand
-        title="Start a conversation with the team."
-        body="Tell us what you need to evaluate, and we will give you the working technology rather than the narrative."
-        primary={{ label: "Talk to ClinDaddy", href: "/contact?interest=investment", analytics: "cta_investor_click" }}
-        secondary={{ label: "Explore the Platform", href: "/platform" }}
+        title="Request the investor deck."
+        body="Tell us what you need to evaluate, and we will send the deck and the working technology rather than the narrative alone."
+        primary={{ label: "Request the investor deck", href: "/contact?interest=investment", analytics: "cta_investor_click" }}
+        secondary={{ label: "See the roadmap", href: "/roadmap" }}
       />
     </>
   );
