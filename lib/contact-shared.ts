@@ -7,10 +7,11 @@
  */
 
 export const INTEREST_OPTIONS = [
-  { value: "investment", label: "Investment" },
-  { value: "demo", label: "Product Demo" },
-  { value: "pilot", label: "Pilot" },
+  { value: "demo", label: "Product demo" },
+  { value: "pilot", label: "Pilot program" },
   { value: "partnership", label: "Partnership" },
+  { value: "investment", label: "Investment" },
+  { value: "early-access", label: "Early access to a module" },
   { value: "other", label: "Other" },
 ] as const;
 

@@ -41,13 +41,25 @@ export function ContactForm({ fallbackEmail }: { fallbackEmail: string }) {
    * URL after mount so the page itself can stay statically rendered.
    */
   useEffect(() => {
-    const requested = new URLSearchParams(window.location.search).get("interest");
-    if (!requested || !isInterestValue(requested)) return;
-    setValues((current) =>
-      current.interest.includes(requested)
-        ? current
-        : { ...current, interest: [...current.interest, requested] },
-    );
+    const params = new URLSearchParams(window.location.search);
+    const requested = params.get("interest");
+    const moduleName = params.get("module");
+
+    if (requested && isInterestValue(requested)) {
+      setValues((current) =>
+        current.interest.includes(requested)
+          ? current
+          : { ...current, interest: [...current.interest, requested] },
+      );
+    }
+
+    if (moduleName) {
+      setValues((current) =>
+        current.message
+          ? current
+          : { ...current, message: `I would like early access to ${moduleName}.` },
+      );
+    }
   }, []);
 
   function update<K extends keyof ContactSubmission>(key: K, value: ContactSubmission[K]) {

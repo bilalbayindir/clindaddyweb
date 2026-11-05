@@ -35,11 +35,36 @@ export default function FlashAnalysisPage() {
       }
       workflowLead="Collected data enters at the top. Submission artifacts come out at the bottom, having passed through standards transformation, analysis, and two independent checks."
       maturity={{
-        title: "A tested platform with a clear path toward productization.",
-        body: "The current FlashAnalysis codebase is covered by approximately 2,500 passing tests, alongside a policy-driven approach to governing real versus synthetic data.",
-        note: "Passing tests describe code health. They are not evidence of commercial traction, and we do not present them as such.",
+        title: "Available today — and sold on its own.",
+        body: "FlashAnalysis is a finished product: SDTM, ADaM, TLFs, independent QC and submission artifacts, covered by approximately 2,500 automated tests.",
+        note: "It works with FlashEDC data, any other EDC's export, or the sponsor's own specifications. A sponsor does not have to switch EDC to use it.",
       }}
     >
+      {/* ------------------------------------------------------------------ */}
+      {/* Any EDC input                                                       */}
+      {/* ------------------------------------------------------------------ */}
+      <Section tone="light" bordered>
+        <div className="grid gap-10 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.15fr)] lg:gap-16">
+          <SectionHeading
+            eyebrow="Sold separately"
+            title="Keep your EDC. Add the analysis layer."
+            lead="FlashAnalysis is not a reason to migrate systems. It accepts data from FlashEDC, any other EDC, or the sponsor's own specifications, and produces the submission package from there."
+          />
+          <div className="flex flex-col gap-4 lg:pt-14">
+            <p className="text-base leading-relaxed text-body">
+              Many small sponsors already have an EDC they are comfortable with, and a programming
+              gap downstream. FlashAnalysis can be bought as one deliverable — an SDTM/ADaM/TLF
+              package, an independent QC run, or a submission-readiness check — without changing
+              where the data is collected.
+            </p>
+            <p className="text-sm leading-relaxed text-muted">
+              FlashEDC and FlashAnalysis connect when a sponsor uses both, but neither depends on
+              the other to be useful.
+            </p>
+          </div>
+        </div>
+      </Section>
+
       {/* ------------------------------------------------------------------ */}
       {/* Independent QC                                                      */}
       {/* ------------------------------------------------------------------ */}

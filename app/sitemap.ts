@@ -14,12 +14,15 @@ const ROUTES: { path: string; priority: number; changeFrequency: "weekly" | "mon
   { path: "/platform", priority: 0.9, changeFrequency: "monthly" },
   { path: "/flashedc", priority: 0.9, changeFrequency: "monthly" },
   { path: "/flashanalysis", priority: 0.9, changeFrequency: "monthly" },
+  { path: "/roadmap", priority: 0.8, changeFrequency: "monthly" },
+  { path: "/pilot", priority: 0.9, changeFrequency: "monthly" },
   { path: "/technology", priority: 0.8, changeFrequency: "monthly" },
   { path: "/trust", priority: 0.9, changeFrequency: "monthly" },
   { path: "/solutions", priority: 0.7, changeFrequency: "monthly" },
   { path: "/about", priority: 0.6, changeFrequency: "monthly" },
   { path: "/investors", priority: 0.8, changeFrequency: "monthly" },
   { path: "/contact", priority: 0.7, changeFrequency: "monthly" },
+  { path: "/privacy", priority: 0.3, changeFrequency: "monthly" },
 ];
 
 export default function sitemap(): MetadataRoute.Sitemap {

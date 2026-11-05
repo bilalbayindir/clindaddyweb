@@ -2,26 +2,32 @@ import type { Metadata } from "next";
 import type { ReactNode } from "react";
 
 import { FlowChain } from "@/components/diagrams/flow-chain";
-import { LineageTrace } from "@/components/diagrams/lineage-trace";
 import { QcDiagram } from "@/components/diagrams/qc-diagram";
 import { Reveal } from "@/components/motion/reveal";
 import { CtaBand } from "@/components/sections/cta-band";
 import { HeroActions, PageHero } from "@/components/sections/page-hero";
-import { IllustrationFigure } from "@/components/sections/illustration-figure";
+import { Button } from "@/components/ui/button";
 import { Container } from "@/components/ui/container";
-import { Eyebrow, Section } from "@/components/ui/section";
+import { Eyebrow, Section, SectionHeading } from "@/components/ui/section";
 import { trustPillars, trustPrinciples } from "@/lib/content";
 import { pageMetadata } from "@/lib/metadata";
-import { primaryCTA, trustAnchors } from "@/lib/site";
+import { primaryCTA, secondaryCTA, trustAnchors } from "@/lib/site";
 
 const description =
-  "ClinDaddy separates interpretation from execution, production from QC, and automation from approval: deterministic engines execute, humans approve, and every output is traceable to its source.";
+  "ClinDaddy is built to 21 CFR Part 11 and GxP standards, with CDISC conformance, deterministic execution, independent QC, human approval and AI governance documented for evaluation.";
 
 export const metadata: Metadata = pageMetadata({
   title: "Trust & governance",
   description,
   path: "/trust",
 });
+
+const COMPLIANCE_CHAIN = [
+  { title: "21 CFR Part 11", description: "Audit trail, e-signatures, access control, versioning." },
+  { title: "GxP", description: "Validated development and change control." },
+  { title: "CDISC", description: "CDASH at design; SDTM, ADaM and Define-XML downstream." },
+  { title: "Human approval", description: "Explicit, attributable sign-off." },
+];
 
 const EXECUTION_CHAIN = [
   { title: "AI", description: "Reads and interprets language." },
@@ -30,47 +36,18 @@ const EXECUTION_CHAIN = [
   { title: "Clinical output", description: "Produced by defined processing." },
 ];
 
-const HUMAN_CHAIN = [
-  { title: "AI", description: "Drafts." },
-  { title: "Draft", description: "A working artifact." },
-  { title: "Human review", description: "A person reads it." },
-  { title: "Correction", description: "Judgement captured in the artifact." },
-  { title: "Second-eye QC", description: "Independent adversarial review." },
-  { title: "Approved output", description: "Signed off by a named reviewer." },
+const AI_CHAIN = [
+  { title: "AI draft", description: "Editable, reviewable, logged." },
+  { title: "Human review", description: "A qualified person reads and corrects." },
+  { title: "Approval", description: "A named person signs off." },
+  { title: "Audit log", description: "Append-only record of the decision." },
 ];
 
-const LINEAGE_HOPS = [
-  { kind: "Output", label: "Table 14.2.1 · Mean SYSBP", detail: "Week 12" },
-  { kind: "Dataset", label: "ADVS.VSSTRESN", detail: "ADaM" },
-  { kind: "Specification", label: "ADVS-014 derivation", detail: "approved" },
-  { kind: "Transformation", label: "SDTM VS → ADVS", detail: "processing step" },
-  { kind: "Source record", label: "VS · USUBJID 1001 · V2", detail: "collected value 128" },
-];
-
-/** The diagram shown against each pillar. */
 const DIAGRAMS: Record<string, ReactNode> = {
+  regulatory: <FlowChain steps={COMPLIANCE_CHAIN} label="Regulatory posture" />,
   "deterministic-execution": <FlowChain steps={EXECUTION_CHAIN} label="Deterministic execution path" />,
-  traceability: (
-    <LineageTrace
-      title="Lineage · one value traced to its record"
-      value="5 hops"
-      hops={LINEAGE_HOPS}
-    />
-  ),
   "independent-qc": <QcDiagram />,
-  "human-in-the-loop": (
-    <div className="flex flex-col gap-6">
-      <FlowChain steps={HUMAN_CHAIN} label="Human review path" />
-      <IllustrationFigure
-        src="/images/trust-illustration.jpg"
-        alt="Illustration of a reviewer approving a submission after production data and independent QC results have been reconciled."
-        width={1408}
-        height={768}
-        sizes="(min-width: 1024px) 40rem, 100vw"
-        caption="Illustration. Approval is an explicit act performed by a person — the last step in the chain, never an inferred state."
-      />
-    </div>
-  ),
+  "ai-governance": <FlowChain steps={AI_CHAIN} label="AI governance path" />,
 };
 
 export default function TrustPage() {
@@ -79,8 +56,8 @@ export default function TrustPage() {
       <PageHero
         tone="dark"
         eyebrow="Trust & governance"
-        title="AI assists. Deterministic systems execute. Humans approve."
-        lead="ClinDaddy is not uncontrolled autonomous AI. Interpretation is separated from execution, production is separated from independent QC, and approval is an explicit human act. Everything in between is traceable."
+        title="Built for regulated use. Honest about what is not certified."
+        lead="ClinDaddy is built to 21 CFR Part 11 and GxP standards, with CDISC conformance, deterministic execution, independent QC and explicit human approval. No third-party certification or audit is claimed."
         actions={
           <HeroActions
             tone="dark"
@@ -90,13 +67,8 @@ export default function TrustPage() {
         }
       />
 
-      {/* ------------------------------------------------------------------ */}
-      {/* In-page navigation                                                  */}
-      {/* ------------------------------------------------------------------ */}
-      <nav
-        aria-label="Trust topics"
-        className="border-b border-line bg-white"
-      >
+      {/* In-page navigation */}
+      <nav aria-label="Trust topics" className="border-b border-line bg-white">
         <Container className="flex flex-wrap gap-x-8 gap-y-3 py-5">
           {trustAnchors.map((anchor) => (
             <a
@@ -151,24 +123,45 @@ export default function TrustPage() {
               </p>
             </div>
 
-            <Reveal className="min-w-0">{DIAGRAMS[pillar.id]}</Reveal>
+            <Reveal className="min-w-0 lg:self-center">{DIAGRAMS[pillar.id]}</Reveal>
           </div>
         </Section>
       ))}
 
-      {/* ------------------------------------------------------------------ */}
-      {/* Governance commitments                                              */}
-      {/* ------------------------------------------------------------------ */}
+      {/* Validation */}
+      <Section tone="surface" bordered>
+        <div className="grid gap-10 lg:grid-cols-[minmax(0,1fr)_minmax(0,1fr)] lg:items-center lg:gap-16">
+          <SectionHeading
+            eyebrow="Validation"
+            title="Documentation is available under NDA."
+            lead="Validation documentation, security details and hosting controls are shared during evaluation rather than summarized as a marketing claim."
+          />
+
+          <div className="flex flex-col items-start gap-4 rounded-2xl border border-line bg-white p-7 sm:p-9">
+            <p className="text-sm leading-relaxed text-body">
+              Tell us what your quality or procurement process needs and we will route the request
+              to the right person.
+            </p>
+            <Button href="/contact?interest=other" variant="primary">
+              Request validation documentation
+            </Button>
+            <p className="text-xs leading-relaxed text-muted">
+              Please do not send confidential study data through the website.
+            </p>
+          </div>
+        </div>
+      </Section>
+
+      {/* Limits */}
       <Section tone="dark" bordered>
         <div className="grid gap-12 lg:grid-cols-[minmax(0,1fr)_minmax(0,1fr)] lg:gap-16">
           <div>
-            <Eyebrow tone="dark">Our commitments</Eyebrow>
+            <Eyebrow tone="dark">Limits</Eyebrow>
             <h2 className="mt-5 text-[1.75rem] leading-[1.15] font-semibold text-white sm:text-4xl">
-              What we will not claim on this website.
+              What we do not claim.
             </h2>
             <p className="mt-5 max-w-xl text-base leading-relaxed text-navy-300">
-              A trust page is only worth reading if it also states its limits. These are ours, and
-              they are the reason some sections of this site are deliberately short.
+              A trust page is only worth reading if it also states its limits. These are ours.
             </p>
           </div>
 
@@ -187,9 +180,9 @@ export default function TrustPage() {
 
       <CtaBand
         title="Bring your governance questions to the demo."
-        body="Validation approach, audit trails, QC independence, and human approval are fair questions to ask before anything else."
+        body="Validation approach, audit trails, QC independence and human approval are fair questions to ask before anything else."
         primary={{ label: primaryCTA.label, href: primaryCTA.href }}
-        secondary={{ label: "Talk to ClinDaddy", href: "/contact" }}
+        secondary={{ label: secondaryCTA.label, href: secondaryCTA.href, analytics: "cta_pilot_click" }}
       />
     </>
   );

@@ -4,7 +4,7 @@ import Link from "next/link";
 import { Logo } from "@/components/brand/logo";
 import { Button } from "@/components/ui/button";
 import { Container } from "@/components/ui/container";
-import { footerNavigation, primaryCTA, site } from "@/lib/site";
+import { footerNavigation, legalFooter, primaryCTA, site, siteAddress } from "@/lib/site";
 
 export function Footer() {
   const year = new Date().getFullYear();
@@ -63,23 +63,28 @@ export function Footer() {
         <div className="flex flex-col gap-6 border-t border-white/10 py-8 sm:flex-row sm:items-center sm:justify-between">
           <div className="flex flex-col gap-2">
             <p className="text-xs text-navy-400">
-              © {year} {site.name}. All rights reserved.
+              © {year} {site.legalName} · {siteAddress}
             </p>
-            <p className="max-w-xl text-xs leading-relaxed text-navy-400">
-              Working technology with a clear path toward productization. Nothing on this site
-              represents regulatory approval, a production deployment, or commercial traction.
-            </p>
+            <p className="max-w-xl text-xs leading-relaxed text-navy-400">{legalFooter}</p>
           </div>
 
-          <a
-            href={`mailto:${site.contactEmail}`}
-            className="inline-flex items-center gap-1.5 text-sm text-navy-200 transition-colors hover:text-white"
-            data-analytics="outbound_email_click"
-            data-analytics-label="Footer email"
-          >
-            {site.contactEmail}
-            <ArrowUpRight className="size-3.5" aria-hidden />
-          </a>
+          <div className="flex flex-col items-start gap-2 sm:items-end">
+            <a
+              href={`mailto:${site.contactEmail}`}
+              className="inline-flex items-center gap-1.5 text-sm text-navy-200 transition-colors hover:text-white"
+              data-analytics="outbound_email_click"
+              data-analytics-label="Footer email"
+            >
+              {site.contactEmail}
+              <ArrowUpRight className="size-3.5" aria-hidden />
+            </a>
+            <Link
+              href="/privacy"
+              className="text-xs text-navy-400 transition-colors hover:text-navy-200"
+            >
+              Privacy policy
+            </Link>
+          </div>
         </div>
       </Container>
     </footer>

@@ -111,31 +111,29 @@ export default function SolutionsPage() {
       ))}
 
       {/* ------------------------------------------------------------------ */}
-      {/* Scope note                                                          */}
+      {/* Partner track                                                       */}
       {/* ------------------------------------------------------------------ */}
       <Section tone="dark" bordered>
         <div className="grid gap-10 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.1fr)] lg:gap-16">
           <div>
-            <Eyebrow tone="dark">Scope</Eyebrow>
+            <Eyebrow tone="dark">Partner track</Eyebrow>
             <h2 className="mt-5 text-[1.75rem] leading-[1.15] font-semibold text-white sm:text-4xl">
-              Outcomes we describe, and outcomes we can demonstrate.
+              Deliver FlashAnalysis output under your own brand.
             </h2>
           </div>
 
           <div className="flex flex-col gap-5">
             <p className="text-base leading-relaxed text-navy-300">
-              The outcomes on this page describe what the platform is built to change — the
-              mechanical effort inside study build, standards transformation, programming, QC, and
-              submission documentation.
+              CROs and biostatistics firms can use FlashAnalysis as overflow capacity or white-label
+              the output for their own sponsors, with the QC code and traceability evidence behind
+              it.
             </p>
             <p className="text-base leading-relaxed text-navy-300">
-              They are not measured results from customer deployments, and we do not publish
-              percentages we cannot substantiate. Where a number appears on this site it is an
-              engineering metric, stated as such.
+              FlashEDC can add study-build capacity during a peak, without pulling your builders off
+              another study. Both are scoped per deliverable, so the commitment tracks the work.
             </p>
             <p className="text-sm leading-relaxed text-navy-400">
-              If you want to know what a specific claim is based on, ask us directly. We would
-              rather answer that question than have you assume.
+              To discuss a partner arrangement, use the partnership option on the contact form.
             </p>
           </div>
         </div>
@@ -145,7 +143,7 @@ export default function SolutionsPage() {
         title="Tell us where the manual effort sits in your studies."
         body="We will show you the parts of that work the platform takes on today, and the parts it does not."
         primary={{ label: primaryCTA.label, href: primaryCTA.href }}
-        secondary={{ label: "Talk to ClinDaddy", href: "/contact" }}
+        secondary={{ label: "Join the pilot program", href: "/pilot", analytics: "cta_pilot_click" }}
       />
     </>
   );

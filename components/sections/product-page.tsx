@@ -1,6 +1,5 @@
 import type { ReactNode } from "react";
 
-import { ComingSoon } from "@/components/diagrams/coming-soon";
 import { WorkflowTimeline } from "@/components/diagrams/workflow-timeline";
 import { CtaBand } from "@/components/sections/cta-band";
 import { DemoSection } from "@/components/sections/demo-section";
@@ -9,8 +8,8 @@ import { Badge, InDevelopmentBadge } from "@/components/ui/badge";
 import { BorderedGrid, BorderedGridCell } from "@/components/ui/card";
 import { Section, SectionHeading } from "@/components/ui/section";
 import { Reveal } from "@/components/motion/reveal";
-import { plannedSystems, type Product } from "@/lib/content";
-import { primaryCTA } from "@/lib/site";
+import type { Product } from "@/lib/content";
+import { primaryCTA, secondaryCTA } from "@/lib/site";
 
 /**
  * The shared shell for a product page.
@@ -68,8 +67,6 @@ export function ProductPage({
             label={`${product.name} workflow`}
           />
         </Reveal>
-
-        <ComingSoon systems={plannedSystems} />
       </Section>
 
       {/* ------------------------------------------------------------------ */}
@@ -131,7 +128,7 @@ export function ProductPage({
         title={`See ${product.name} against your own protocol or dataset.`}
         body="Bring a study and we will walk through what the platform produces — and where a human still has to decide."
         primary={{ label: primaryCTA.label, href: primaryCTA.href }}
-        secondary={{ label: "Talk to ClinDaddy", href: "/contact" }}
+        secondary={{ label: secondaryCTA.label, href: secondaryCTA.href, analytics: "cta_pilot_click" }}
       />
     </>
   );
