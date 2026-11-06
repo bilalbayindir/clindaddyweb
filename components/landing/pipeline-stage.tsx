@@ -394,7 +394,7 @@ export function PipelineStage() {
             {[
               ["Reading the protocol", "Every page: objectives, eligibility, visit schedule, endpoints.", 0],
               ["Analyzing the design", "Visits, assessments and timing become a structured study model.", 3],
-              ["Extracting the build", "CDASH forms, codelists and edit checks, drafted for your sign-off.", 6],
+              ["Extracting the build", "A review-ready draft in minutes: CDASH forms, codelists, edit checks.", 6],
               ["Collecting the data", "Sites enter data in FlashEDC; edit checks raise queries instantly.", 9],
               ["Submitting with confidence", "SDTM, ADaM, TLFs and Define-XML, validated and packaged.", 12],
             ].map(([title, subtitle, delay], i) => (
@@ -412,7 +412,7 @@ export function PipelineStage() {
       <ol className="sr-only">
         <li>Reading the protocol: every page, objectives, eligibility, visit schedule and endpoints.</li>
         <li>Analyzing the design: visits, assessments and timing become a structured study model.</li>
-        <li>Extracting the build: CDASH forms, codelists and edit checks, drafted for sign-off.</li>
+        <li>Extracting the build: a review-ready draft in minutes — CDASH forms, codelists, edit checks.</li>
         <li>Collecting the data: sites enter data in FlashEDC; edit checks raise queries instantly.</li>
         <li>Submitting with confidence: SDTM, ADaM, TLFs and Define-XML, validated and packaged.</li>
       </ol>

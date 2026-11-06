@@ -21,7 +21,7 @@ const COMPARISON = [
   {
     task: "Database build",
     usually: "Specified and built by hand from the protocol",
-    withUs: "Drafted from the protocol, reviewed by your data manager",
+    withUs: "Drafted from the protocol in 10–30 minutes, then reviewed by your data manager",
   },
   {
     task: "Edit checks",
@@ -80,6 +80,16 @@ export default function HomePage() {
                 and sign off at every step.
               </p>
 
+              <div className="border-y border-rule py-3 lg:hidden">
+                <p className="text-[15px] font-semibold text-ink">
+                  Review-ready study build draft in{" "}
+                  <span className="whitespace-nowrap">10–30 minutes.*</span>
+                </p>
+                <p className="mt-1 text-xs leading-relaxed text-text-3">
+                  * Protocol upload to draft, on internal test protocols. Method on request.
+                </p>
+              </div>
+
               <div className="flex flex-wrap items-center gap-6">
                 <Link
                   href="#pilot"
@@ -100,14 +110,22 @@ export default function HomePage() {
                 </Link>
               </div>
 
-              <dl className="mt-2 hidden grid-cols-[96px_1fr] gap-x-4 gap-y-2.5 border-t border-rule pt-[18px] text-sm lg:grid">
-                <dt className="text-text-3">Standards</dt>
-                <dd className="text-ink">CDASH, SDTM, ADaM, Define-XML</dd>
-                <dt className="text-text-3">Controls</dt>
-                <dd className="text-ink">Audit trail, versioned designs, human approval</dd>
-                <dt className="text-text-3">QC code</dt>
-                <dd className="text-ink">SAS, R and SQL, yours to rerun</dd>
-              </dl>
+              <div className="mt-2 hidden lg:block">
+                <dl className="grid grid-cols-[96px_1fr] gap-x-4 gap-y-2.5 border-t border-rule pt-[18px] text-sm">
+                  <dt className="text-text-3">Study build</dt>
+                  <dd className="font-semibold text-ink">Review-ready draft in 10–30 minutes*</dd>
+                  <dt className="text-text-3">Standards</dt>
+                  <dd className="text-ink">CDASH, SDTM, ADaM, Define-XML</dd>
+                  <dt className="text-text-3">Controls</dt>
+                  <dd className="text-ink">Audit trail, versioned designs, human approval</dd>
+                  <dt className="text-text-3">QC code</dt>
+                  <dd className="text-ink">SAS, R and SQL, yours to rerun</dd>
+                </dl>
+                <p className="mt-3 text-xs leading-relaxed text-text-3">
+                  * Measured from protocol upload to a review-ready study build draft, on internal
+                  test protocols. Method available on request.
+                </p>
+              </div>
             </div>
 
             <div className="w-[720px] max-w-full flex-none">
@@ -160,7 +178,10 @@ export default function HomePage() {
               {COMPARISON.map((row) => (
                 <div key={row.task} className="flex flex-col gap-1.5 border-b border-rule py-4">
                   <p className="text-[15px] font-medium text-ink">{row.task}</p>
-                  <p className="text-[15px] leading-normal text-text-2">{row.withUs}</p>
+                  <p className="text-[15px] leading-normal text-text-2">
+                    {row.withUs}
+                    {row.task === "Database build" ? "." : ""}
+                  </p>
                 </div>
               ))}
             </div>
