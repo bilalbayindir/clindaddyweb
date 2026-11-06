@@ -12,6 +12,7 @@ import { cn } from "@/lib/utils";
 const LINKS = [
   { label: "FlashEDC", href: "/flashedc" },
   { label: "FlashAnalysis", href: "/flashanalysis" },
+  { label: "Studio", href: "/#studio" },
   { label: "Compliance", href: "/trust" },
   { label: "Roadmap", href: "/roadmap" },
   { label: "Company", href: "/about" },

@@ -4,6 +4,7 @@ import Link from "next/link";
 
 import { PipelineStage } from "@/components/landing/pipeline-stage";
 import { PilotForm } from "@/components/landing/pilot-form";
+import { StudioStage } from "@/components/landing/studio-stage";
 import { IllustrationFigure } from "@/components/sections/illustration-figure";
 import { Container } from "@/components/ui/container";
 import { products } from "@/lib/content";
@@ -44,7 +45,7 @@ const AUDIT = [
   { time: "11-04 14:02", by: "J. Rivera, DM", action: "Approved", rest: "form VS, version 3", tone: "ok" },
   { time: "11-04 13:57", by: "J. Rivera, DM", action: "", rest: "Edited edit check VS-004, reason: amendment 2", tone: "" },
   { time: "11-04 13:41", by: "ClinDaddy AI", action: "Proposed", rest: "edit check VS-004", tone: "signal" },
-  { time: "11-04 13:40", by: "ClinDaddy AI", action: "Proposed", rest: "form VS from protocol §7.2", tone: "signal" },
+  { time: "11-04 13:40", by: "ClinDaddy AI", action: "Proposed", rest: "form VS from the protocol", tone: "signal" },
 ];
 
 const ROADMAP = [
@@ -80,16 +81,6 @@ export default function HomePage() {
                 and sign off at every step.
               </p>
 
-              <div className="border-y border-rule py-3 lg:hidden">
-                <p className="text-[15px] font-semibold text-ink">
-                  Review-ready study build draft in{" "}
-                  <span className="whitespace-nowrap">10–30 minutes.*</span>
-                </p>
-                <p className="mt-1 text-xs leading-relaxed text-text-3">
-                  * Protocol upload to draft, on internal test protocols. Method on request.
-                </p>
-              </div>
-
               <div className="flex flex-wrap items-center gap-6">
                 <Link
                   href="#pilot"
@@ -112,8 +103,6 @@ export default function HomePage() {
 
               <div className="mt-2 hidden lg:block">
                 <dl className="grid grid-cols-[96px_1fr] gap-x-4 gap-y-2.5 border-t border-rule pt-[18px] text-sm">
-                  <dt className="text-text-3">Study build</dt>
-                  <dd className="font-semibold text-ink">Review-ready draft in 10–30 minutes*</dd>
                   <dt className="text-text-3">Standards</dt>
                   <dd className="text-ink">CDASH, SDTM, ADaM, Define-XML</dd>
                   <dt className="text-text-3">Controls</dt>
@@ -121,16 +110,70 @@ export default function HomePage() {
                   <dt className="text-text-3">QC code</dt>
                   <dd className="text-ink">SAS, R and SQL, yours to rerun</dd>
                 </dl>
-                <p className="mt-3 text-xs leading-relaxed text-text-3">
-                  * Measured from protocol upload to a review-ready study build draft, on internal
-                  test protocols. Method available on request.
-                </p>
               </div>
             </div>
 
             <div className="w-[720px] max-w-full flex-none">
               <PipelineStage />
             </div>
+          </div>
+        </Container>
+      </section>
+
+      {/* ---------------------------------------------------------------- */}
+      {/* Speed                                                             */}
+      {/* ---------------------------------------------------------------- */}
+      <section id="speed" className="bg-ink-strong text-white">
+        <Container>
+          <div className="flex flex-col gap-4 py-12 lg:gap-12 lg:pt-[88px] lg:pb-[72px]">
+            <div className="flex flex-wrap items-end gap-2.5 lg:gap-12">
+              <div className="flex flex-wrap items-baseline gap-2.5 lg:gap-[18px]">
+                <span className="whitespace-nowrap font-display text-[104px] leading-[0.85] tracking-[-0.045em] text-white lg:text-[184px] lg:leading-[0.82]">
+                  10–30
+                </span>
+                <span className="font-display text-[36px] italic leading-none text-[#F4A27E] lg:text-[56px]">
+                  minutes
+                </span>
+              </div>
+
+              <div className="flex min-w-0 flex-1 basis-[340px] flex-col gap-3.5 pb-1.5">
+                <p className="font-display text-[24px] leading-[1.2] text-white lg:text-[30px]">
+                  From protocol upload to a review-ready study build.
+                  <sup className="text-[16px] text-navy-300">*</sup>
+                </p>
+                <p className="max-w-[52ch] text-[15px] leading-[1.55] text-navy-300 lg:text-[16px] lg:leading-[1.6]">
+                  Visits, CDASH forms, fields, codelists and edit checks, drafted and waiting for
+                  your data manager in the Study Build Studio.
+                </p>
+              </div>
+            </div>
+
+            <div className="hidden flex-col gap-3.5 border-t border-[#2B4360] pt-7 lg:flex">
+              <div className="grid grid-cols-[200px_1fr] items-center gap-5">
+                <span className="text-sm font-semibold text-white">With ClinDaddy</span>
+                <div className="flex items-center gap-3.5">
+                  <span className="size-3.5 rounded-[2px] bg-[#F4A27E]" />
+                  <span className="text-sm text-white">10–30 minutes, then your review</span>
+                </div>
+              </div>
+              <div className="grid grid-cols-[200px_1fr] items-center gap-5">
+                <span className="text-sm text-navy-300">Typical manual build</span>
+                <div className="flex items-center gap-3.5">
+                  <span className="h-3.5 flex-1 rounded-[2px] bg-[#3A5373]" />
+                  <span className="whitespace-nowrap text-sm text-navy-300">
+                    weeks of specification and build
+                  </span>
+                </div>
+              </div>
+            </div>
+
+            <p className="hidden text-xs leading-[1.5] text-navy-400 lg:block">
+              * Measured from protocol upload to a review-ready study build draft, on internal test
+              protocols. Method available on request. Bars are illustrative, not to scale.
+            </p>
+            <p className="text-xs leading-[1.5] text-navy-400 lg:hidden">
+              * Protocol upload to draft, on internal test protocols. Method on request.
+            </p>
           </div>
         </Container>
       </section>
@@ -264,6 +307,55 @@ export default function HomePage() {
                 sizes="(min-width: 1280px) 1240px, 100vw"
                 caption="Illustration. The lifecycle both products cover: protocol, eCRFs and EDC at the front; SDTM, ADaM and TLFs at the back."
               />
+            </div>
+          </div>
+        </Container>
+      </section>
+
+      {/* ---------------------------------------------------------------- */}
+      {/* Study Build Studio                                                */}
+      {/* ---------------------------------------------------------------- */}
+      <section id="studio" className="border-t border-rule">
+        <Container>
+          <div className="flex flex-col gap-12 py-12 sm:py-16 lg:py-[104px]">
+            <div className="flex flex-wrap items-end justify-between gap-8">
+              <div className="flex min-w-0 flex-1 basis-[520px] flex-col gap-4">
+                <p className="flex items-center gap-3 text-[15px] text-text-2">
+                  <span aria-hidden className="h-0.5 w-7 shrink-0 bg-signal" />
+                  After the AI drafts the study
+                </p>
+                <h2 className="max-w-[18ch] text-[32px] leading-[1.08] tracking-[-0.02em] lg:text-[48px] lg:leading-[1.05]">
+                  Make it yours in the Study Build Studio.
+                </h2>
+              </div>
+              <p className="max-w-[46ch] min-w-0 flex-1 basis-[380px] text-[15px] leading-[1.6] text-text-2 lg:text-[17px]">
+                Everything the AI extracted lands in a drag-and-drop studio. Rearrange forms, drop in
+                fields, change controls and codelists, or ask the assistant for a layout. Your team
+                always has the final word.
+              </p>
+            </div>
+
+            <StudioStage />
+
+            <div className="grid border-t border-ink sm:grid-cols-2 lg:grid-cols-4">
+              {[
+                ["Drag and drop", "Reorder forms and fields, or drop new ones in from the palette."],
+                ["Standards follow the change", "CDASH variables, codelists and edit checks update with every edit."],
+                ["An assistant, not an autopilot", "Ask for a layout or a control. It suggests; you apply."],
+                ["Versioned, never overwritten", "Publishing creates a new design version for approval."],
+              ].map(([title, body], index) => (
+                <div
+                  key={title}
+                  className={[
+                    "flex flex-col gap-1.5 border-b border-rule py-5 sm:pb-6",
+                    index > 0 ? "lg:border-l lg:border-b-0 lg:pl-6" : "lg:border-b-0",
+                    index < 3 ? "lg:pr-6" : "",
+                  ].join(" ")}
+                >
+                  <p className="text-base font-semibold text-ink">{title}</p>
+                  <p className="text-[15px] leading-[1.55] text-text-2">{body}</p>
+                </div>
+              ))}
             </div>
           </div>
         </Container>

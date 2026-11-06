@@ -1,0 +1,66 @@
+/* Study Build Studio — 8s drag-and-drop loop, ported from the reference. */
+
+.ghost {
+  opacity: 0;
+  animation: sbGhost 8s cubic-bezier(0.45, 0.05, 0.25, 1) infinite;
+}
+.drop {
+  opacity: 0;
+  animation: sbDrop 8s ease-in-out infinite;
+}
+.row {
+  overflow: hidden;
+  max-height: 0;
+  opacity: 0;
+  animation: sbRow 8s ease-in-out infinite;
+}
+.hi {
+  animation: sbHi 8s ease-out infinite;
+}
+
+.paused,
+.paused * {
+  animation-play-state: paused !important;
+}
+
+@keyframes sbGhost {
+  0%, 8% { opacity: 0; transform: translate(0, 0) scale(1) rotate(0deg); }
+  12% { opacity: 1; transform: translate(0, -4px) scale(1.04) rotate(-2deg); }
+  44% { opacity: 1; transform: translate(182px, -27px) scale(1.04) rotate(-2deg); }
+  50% { opacity: 0; transform: translate(182px, -21px) scale(1) rotate(0deg); }
+  100% { opacity: 0; transform: translate(182px, -21px); }
+}
+@keyframes sbDrop {
+  0%, 28% { opacity: 0; }
+  34%, 48% { opacity: 1; }
+  52%, 100% { opacity: 0; }
+}
+@keyframes sbRow {
+  0%, 48% { max-height: 0; opacity: 0; }
+  56%, 92% { max-height: 52px; opacity: 1; }
+  98%, 100% { max-height: 0; opacity: 0; }
+}
+@keyframes sbHi {
+  0%, 50% { background: #fdede7; }
+  75%, 100% { background: #ffffff; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ghost,
+  .drop,
+  .row,
+  .hi {
+    animation: none !important;
+  }
+  .ghost,
+  .drop {
+    opacity: 0 !important;
+  }
+  .row {
+    max-height: 52px !important;
+    opacity: 1 !important;
+  }
+  .hi {
+    background: #ffffff !important;
+  }
+}

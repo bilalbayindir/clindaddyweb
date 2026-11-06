@@ -29,3 +29,10 @@ screenshots.mjs
 /qa3.mjs
 
 /shots-update.mjs
+
+/shots-studio.mjs
+/shots-studio2.mjs
+/record-studio.mjs
+/debug-studio.mjs
+/debug-ghost.mjs
+/measure-ref.mjs
