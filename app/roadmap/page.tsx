@@ -4,6 +4,7 @@ import Link from "next/link";
 
 import { CtaBand } from "@/components/sections/cta-band";
 import { HeroActions, PageHero } from "@/components/sections/page-hero";
+import { IllustrationFigure } from "@/components/sections/illustration-figure";
 import { Badge } from "@/components/ui/badge";
 import { Eyebrow, Section } from "@/components/ui/section";
 import { roadmapNote, roadmapStages, type RoadmapStage } from "@/lib/content";
@@ -37,6 +38,17 @@ export default function RoadmapPage() {
           <HeroActions
             primary={{ label: primaryCTA.label, href: primaryCTA.href }}
             secondary={{ label: secondaryCTA.label, href: secondaryCTA.href, analytics: "cta_pilot_click" }}
+          />
+        }
+        aside={
+          <IllustrationFigure
+            src="/images/platform-illustration.jpg"
+            alt="Illustration of the ClinDaddy character holding one study model card that projects into EDC, RTSM, eSource, CTMS, eTMF, ePRO, eCOA and eConsent panels."
+            width={1408}
+            height={768}
+            sizes="(min-width: 1024px) 34rem, 100vw"
+            priority
+            caption="Illustration. One study model, projected into the systems a trial runs on — EDC today, RTSM next, the rest planned."
           />
         }
       />
