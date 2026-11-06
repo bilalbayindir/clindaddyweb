@@ -4,6 +4,7 @@ import Link from "next/link";
 
 import { PipelineStage } from "@/components/landing/pipeline-stage";
 import { PilotForm } from "@/components/landing/pilot-form";
+import { IllustrationFigure } from "@/components/sections/illustration-figure";
 import { Container } from "@/components/ui/container";
 import { products } from "@/lib/content";
 import { pageMetadata } from "@/lib/metadata";
@@ -231,6 +232,17 @@ export default function HomePage() {
                   Request a FlashAnalysis demo
                 </Link>
               </article>
+            </div>
+
+            <div className="mt-4 border-t border-rule pt-10">
+              <IllustrationFigure
+                src="/images/lifecycle-illustration.jpg"
+                alt="Illustration of the clinical data lifecycle running from protocol through FlashEDC data collection and FlashAnalysis to submission."
+                width={1408}
+                height={768}
+                sizes="(min-width: 1280px) 1240px, 100vw"
+                caption="Illustration. The lifecycle both products cover: protocol, eCRFs and EDC at the front; SDTM, ADaM and TLFs at the back."
+              />
             </div>
           </div>
         </Container>
