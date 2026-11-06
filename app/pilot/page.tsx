@@ -64,7 +64,7 @@ export default function PilotPage() {
         <div className="mt-14 grid gap-6 lg:grid-cols-2">
           {pilotProgram.what.map((item) => (
             <Reveal key={item.title}>
-              <div className="flex h-full flex-col rounded-2xl border border-line bg-white p-7 sm:p-9">
+              <div className="flex h-full flex-col rounded-[6px] border border-line bg-white p-7 sm:p-9">
                 <h3 className="text-xl font-semibold">{item.title}</h3>
                 <p className="mt-3 text-sm leading-relaxed text-muted">{item.description}</p>
               </div>
@@ -123,3 +123,4 @@ export default function PilotPage() {
     </>
   );
 }
+

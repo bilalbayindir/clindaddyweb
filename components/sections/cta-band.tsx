@@ -30,21 +30,17 @@ export function CtaBand({
     <section
       className={cn(
         "relative overflow-hidden",
-        dark ? "bg-navy-950" : "bg-surface",
+        dark ? "bg-ink-strong" : "bg-paper",
         className,
       )}
     >
-      {dark ? (
-        <div aria-hidden className="absolute inset-0 bg-grid-dark mask-fade-edges opacity-60" />
-      ) : null}
-
-      <Container className="relative py-20 sm:py-24">
+      <Container className="relative py-16 sm:py-20 lg:py-24">
         <div className="flex flex-col gap-8 lg:flex-row lg:items-end lg:justify-between">
           <div className="max-w-2xl">
             <Eyebrow tone={dark ? "dark" : "light"}>{eyebrow}</Eyebrow>
             <h2
               className={cn(
-                "mt-5 text-[1.75rem] leading-[1.15] font-semibold sm:text-4xl",
+                "mt-5 text-[1.75rem] leading-[1.15] font-normal sm:text-4xl",
                 dark ? "text-white" : "text-ink",
               )}
             >

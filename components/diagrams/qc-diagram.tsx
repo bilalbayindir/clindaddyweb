@@ -81,7 +81,7 @@ function Node({
   return (
     <div
       className={cn(
-        "rounded-xl border px-5 py-4 text-center",
+        "rounded-[4px] border px-5 py-4 text-center",
         emphasis
           ? dark
             ? "border-teal-400/40 bg-teal-500/15"
@@ -133,7 +133,7 @@ function Lane({
   return (
     <div
       className={cn(
-        "rounded-xl border px-5 py-4",
+        "rounded-[4px] border px-5 py-4",
         accent === "teal"
           ? dark
             ? "border-teal-400/35 bg-teal-500/10"
@@ -196,3 +196,4 @@ function Fork({ direction, tone }: { direction: "down" | "up"; tone: "light" | "
     </div>
   );
 }
+

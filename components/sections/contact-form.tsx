@@ -136,7 +136,7 @@ export function ContactForm({ fallbackEmail }: { fallbackEmail: string }) {
   if (status.state === "sent") {
     return (
       <div
-        className="flex flex-col items-start rounded-2xl border border-success/20 bg-success-soft p-7 sm:p-9"
+        className="flex flex-col items-start rounded-[6px] border border-success/20 bg-success-soft p-7 sm:p-9"
         role="status"
       >
         <CircleCheck className="size-6 text-success" aria-hidden />
@@ -178,7 +178,7 @@ export function ContactForm({ fallbackEmail }: { fallbackEmail: string }) {
           ref={errorRef}
           tabIndex={-1}
           role="alert"
-          className="flex items-start gap-2.5 rounded-xl border border-danger/20 bg-danger-soft px-4 py-3 text-sm text-danger"
+          className="flex items-start gap-2.5 rounded-[4px] border border-danger/20 bg-danger-soft px-4 py-3 text-sm text-danger"
         >
           <CircleAlert className="mt-0.5 size-4 shrink-0" aria-hidden />
           Please correct the highlighted {errorCount === 1 ? "field" : "fields"} and try again.
@@ -233,7 +233,7 @@ export function ContactForm({ fallbackEmail }: { fallbackEmail: string }) {
               <label
                 key={option.value}
                 className={cn(
-                  "flex cursor-pointer items-center gap-3 rounded-xl border px-4 py-3 text-sm transition-colors",
+                  "flex cursor-pointer items-center gap-3 rounded-[4px] border px-4 py-3 text-sm transition-colors",
                   checked
                     ? "border-teal-400 bg-teal-50 text-ink"
                     : "border-line bg-white text-body hover:border-navy-300",
@@ -272,7 +272,7 @@ export function ContactForm({ fallbackEmail }: { fallbackEmail: string }) {
           aria-describedby={errors.message ? `${formId}-message-error` : undefined}
           placeholder="Tell us about the studies you run, the systems you use, and what you would like to see."
           className={cn(
-            "mt-2 w-full rounded-xl border bg-white px-4 py-3 text-sm leading-relaxed text-ink transition-colors placeholder:text-muted/70",
+            "mt-2 w-full rounded-[4px] border bg-white px-4 py-3 text-sm leading-relaxed text-ink transition-colors placeholder:text-muted/70",
             errors.message ? "border-danger" : "border-line-strong focus:border-navy-400",
           )}
         />
@@ -286,7 +286,7 @@ export function ContactForm({ fallbackEmail }: { fallbackEmail: string }) {
       {status.state === "failed" ? (
         <div
           role="alert"
-          className="flex flex-col gap-2 rounded-xl border border-warning/20 bg-warning-soft px-4 py-3.5"
+          className="flex flex-col gap-2 rounded-[4px] border border-warning/20 bg-warning-soft px-4 py-3.5"
         >
           <p className="flex items-start gap-2.5 text-sm leading-relaxed text-warning">
             <CircleAlert className="mt-0.5 size-4 shrink-0" aria-hidden />
@@ -363,7 +363,7 @@ function Field({
         aria-invalid={Boolean(error)}
         aria-describedby={error ? `${id}-error` : undefined}
         className={cn(
-          "mt-2 h-11 w-full rounded-xl border bg-white px-4 text-sm text-ink transition-colors",
+          "mt-2 h-11 w-full rounded-[4px] border bg-white px-4 text-sm text-ink transition-colors",
           error ? "border-danger" : "border-line-strong focus:border-navy-400",
         )}
       />
@@ -375,3 +375,4 @@ function Field({
     </div>
   );
 }
+

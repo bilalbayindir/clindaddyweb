@@ -347,7 +347,7 @@ export const roadmapStages: RoadmapStage[] = [
 ];
 
 export const roadmapNote =
-  "Each module reuses the protocol-derived data model, so new modules ship faster and integrate on day one. Statuses are literal: only the Today column is available today.";
+  "Each module reuses the protocol-derived data model, so new modules ship faster and integrate on day one. The Today column is what is available now.";
 
 /* ==========================================================================
    Homepage — problem, why now

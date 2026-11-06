@@ -4,6 +4,7 @@ import { Reveal } from "@/components/motion/reveal";
 import { CtaBand } from "@/components/sections/cta-band";
 import { HeroActions, PageHero } from "@/components/sections/page-hero";
 import { BorderedGrid, BorderedGridCell } from "@/components/ui/card";
+import { Container } from "@/components/ui/container";
 import { Eyebrow, Section, SectionHeading } from "@/components/ui/section";
 import { aboutPillars, team } from "@/lib/content";
 import { pageMetadata } from "@/lib/metadata";
@@ -41,17 +42,17 @@ export default function AboutPage() {
       />
 
       {/* Company facts */}
-      <section className="border-b border-line bg-surface">
-        <div className="mx-auto grid max-w-7xl gap-px overflow-hidden border-x border-line bg-line sm:grid-cols-2 lg:grid-cols-4">
-          {COMPANY_FACTS.map((fact) => (
-            <div key={fact.label} className="bg-white px-6 py-6">
-              <p className="font-mono text-[0.625rem] tracking-[0.12em] text-muted uppercase">
-                {fact.label}
-              </p>
-              <p className="mt-2 text-sm font-medium text-ink">{fact.value}</p>
-            </div>
-          ))}
-        </div>
+      <section className="border-b border-rule bg-white">
+        <Container>
+          <div className="grid gap-px bg-rule sm:grid-cols-2 lg:grid-cols-4">
+            {COMPANY_FACTS.map((fact) => (
+              <div key={fact.label} className="bg-white px-6 py-6">
+                <p className="text-xs text-text-3">{fact.label}</p>
+                <p className="mt-2 text-sm font-medium text-ink">{fact.value}</p>
+              </div>
+            ))}
+          </div>
+        </Container>
       </section>
 
       {/* Why, what, how, where next */}
@@ -88,10 +89,10 @@ export default function AboutPage() {
 
           <div className="flex flex-col gap-6">
             {team.members.map((member) => (
-              <div key={member.name} className="rounded-2xl border border-line bg-white p-7 sm:p-9">
+              <div key={member.name} className="rounded-[6px] border border-line bg-white p-7 sm:p-9">
                 <div className="flex flex-wrap items-baseline gap-x-3 gap-y-1">
                   <h3 className="text-xl font-semibold">{member.name}</h3>
-                  <span className="font-mono text-[0.6875rem] tracking-[0.14em] text-teal-700 uppercase">
+                  <span className="text-sm text-brand">
                     {member.role}
                   </span>
                 </div>
@@ -149,7 +150,7 @@ export default function AboutPage() {
             </p>
             <Reveal>
               <p className="text-sm leading-relaxed text-navy-400">
-                The roadmap is published with literal statuses so this paragraph can be checked
+                The roadmap shows each module&apos;s current status, so this paragraph can be checked
                 against it.
               </p>
             </Reveal>
@@ -166,3 +167,5 @@ export default function AboutPage() {
     </>
   );
 }
+
+

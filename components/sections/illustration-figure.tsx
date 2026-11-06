@@ -30,7 +30,7 @@ export function IllustrationFigure({
   className?: string;
 }) {
   return (
-    <figure className={cn("overflow-hidden rounded-2xl border border-line bg-surface", className)}>
+    <figure className={cn("overflow-hidden rounded-[6px] border border-line bg-surface", className)}>
       <Image
         src={src}
         alt={alt}
@@ -48,3 +48,4 @@ export function IllustrationFigure({
     </figure>
   );
 }
+

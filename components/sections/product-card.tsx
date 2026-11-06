@@ -27,7 +27,7 @@ export function ProductCard({
   return (
     <article
       className={cn(
-        "relative overflow-hidden rounded-2xl border border-line bg-white",
+        "relative overflow-hidden rounded-[6px] border border-line bg-white",
         className,
       )}
     >
@@ -50,15 +50,15 @@ export function ProductCard({
             <span className="font-mono text-[0.6875rem] tracking-[0.14em] text-muted">{product.index}</span>
             <span
               className={cn(
-                "font-mono text-[0.6875rem] tracking-[0.1em] uppercase",
-                accent === "teal" ? "text-teal-700" : "text-navy-600",
+                "text-[13px]",
+                accent === "teal" ? "text-brand" : "text-text-3",
               )}
             >
               {product.tagline}
             </span>
           </div>
 
-          <h3 className="mt-5 text-2xl font-semibold sm:text-[1.75rem]">{product.name}</h3>
+          <h3 className="mt-5 text-[26px] font-medium sm:text-[1.75rem]">{product.name}</h3>
 
           <p className="mt-4 max-w-xl text-base leading-relaxed text-body">{product.summary}</p>
 
@@ -94,3 +94,4 @@ export function ProductCard({
     </article>
   );
 }
+

@@ -41,7 +41,7 @@ export function FlowChain({
         <Fragment key={step.title}>
           <li
             className={cn(
-              "flex flex-1 flex-col justify-center rounded-xl border p-5",
+              "flex flex-1 flex-col justify-center rounded-[4px] border p-5",
               tone === "light" && "border-line bg-white",
               tone === "dark" && "border-white/12 bg-white/[0.04]",
             )}
@@ -119,7 +119,7 @@ export function LayerStack({
         <li key={layer.title} className="relative">
           <div
             className={cn(
-              "flex items-start gap-4 rounded-xl border px-5 py-4",
+              "flex items-start gap-4 rounded-[4px] border px-5 py-4",
               tone === "light" && "border-line bg-white hover:border-navy-200",
               tone === "dark" && "border-white/12 bg-white/[0.04]",
               "transition-colors duration-200",
@@ -166,3 +166,4 @@ export function LayerStack({
     </ol>
   );
 }
+

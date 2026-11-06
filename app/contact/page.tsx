@@ -112,7 +112,7 @@ export default function ContactPage() {
                 </ul>
               </div>
 
-              <div className="rounded-xl border border-line bg-surface p-5">
+              <div className="rounded-[4px] border border-line bg-surface p-5">
                 <p className="text-xs leading-relaxed text-muted">
                   Please do not send patient data, confidential study data, or any other sensitive
                   material through this form. If a conversation needs it, we will set up an
@@ -126,3 +126,4 @@ export default function ContactPage() {
     </>
   );
 }
+

@@ -6,6 +6,7 @@ import { QcDiagram } from "@/components/diagrams/qc-diagram";
 import { Reveal } from "@/components/motion/reveal";
 import { CtaBand } from "@/components/sections/cta-band";
 import { HeroActions, PageHero } from "@/components/sections/page-hero";
+import { IllustrationFigure } from "@/components/sections/illustration-figure";
 import { Button } from "@/components/ui/button";
 import { Container } from "@/components/ui/container";
 import { Eyebrow, Section, SectionHeading } from "@/components/ui/section";
@@ -74,7 +75,7 @@ export default function TrustPage() {
             <a
               key={anchor.href}
               href={anchor.href}
-              className="font-mono text-[0.6875rem] tracking-[0.12em] text-muted uppercase transition-colors hover:text-ink"
+              className="text-[13px] text-text-3 transition-colors hover:text-ink"
               data-analytics="nav_click"
               data-analytics-label={anchor.label}
             >
@@ -118,7 +119,7 @@ export default function TrustPage() {
                 ))}
               </ul>
 
-              <p className="mt-6 font-mono text-[0.625rem] leading-relaxed tracking-[0.08em] text-muted uppercase">
+              <p className="mt-6 text-xs leading-relaxed text-text-3">
                 {pillar.diagramLabel}
               </p>
             </div>
@@ -127,6 +128,42 @@ export default function TrustPage() {
           </div>
         </Section>
       ))}
+
+      {/* ------------------------------------------------------------------ */}
+      {/* Human approval                                                      */}
+      {/* ------------------------------------------------------------------ */}
+      <Section tone="light" bordered>
+        <div className="grid gap-12 lg:grid-cols-[minmax(0,0.9fr)_minmax(0,1.1fr)] lg:items-center lg:gap-16">
+          <div>
+            <SectionHeading
+              eyebrow="Human approval"
+              title="A person presses approve. The system records who, when and why."
+              lead="Production and independent QC converge on a reconciliation step. A named reviewer sees both results, resolves the difference, and only then is the output submission-ready."
+            />
+            <ul className="mt-8 flex flex-col divide-y divide-rule border-y border-rule">
+              {[
+                "Approval is an explicit act by a named person",
+                "Every AI proposal and reviewer edit is written to the audit trail",
+                "QC differences are surfaced for review, never reconciled silently",
+              ].map((point) => (
+                <li key={point} className="flex gap-3 py-3.5 text-sm leading-relaxed text-text-2">
+                  <span aria-hidden className="mt-2 size-1 shrink-0 rounded-full bg-signal" />
+                  {point}
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          <IllustrationFigure
+            src="/images/trust-illustration.jpg"
+            alt="Illustration of a reviewer at a console comparing production data with independent QC, then pressing an approve control for a regulatory submission."
+            width={1408}
+            height={768}
+            sizes="(min-width: 1024px) 40rem, 100vw"
+            caption="Illustration. Production and independent QC reconcile; approval is the human act that releases the output."
+          />
+        </div>
+      </Section>
 
       {/* Validation */}
       <Section tone="surface" bordered>
@@ -137,12 +174,12 @@ export default function TrustPage() {
             lead="Validation documentation, security details and hosting controls are shared during evaluation rather than summarized as a marketing claim."
           />
 
-          <div className="flex flex-col items-start gap-4 rounded-2xl border border-line bg-white p-7 sm:p-9">
+          <div className="flex flex-col items-start gap-4 rounded-[6px] border border-line bg-white p-7 sm:p-9">
             <p className="text-sm leading-relaxed text-body">
               Tell us what your quality or procurement process needs and we will route the request
               to the right person.
             </p>
-            <Button href="/contact?interest=other" variant="primary">
+            <Button href="/contact?interest=validation" variant="primary">
               Request validation documentation
             </Button>
             <p className="text-xs leading-relaxed text-muted">
@@ -187,3 +224,5 @@ export default function TrustPage() {
     </>
   );
 }
+
+

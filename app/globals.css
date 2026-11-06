@@ -1,80 +1,82 @@
 @import "tailwindcss";
 
 /* ==========================================================================
-   ClinDaddy design system
+   ClinDaddy design system — editorial / clinical
    --------------------------------------------------------------------------
-   A clinical teal and a deep navy, supported by a cool neutral scale.
-   Restrained on purpose — two brand hues, one neutral ramp, three status
-   colours. No decorative gradients.
-
-   The teal predates the current logo: it was read off the previous mark's teal
-   arrow, and is kept as the primary brand hue. The logo is now a navy wordmark
-   beside a multicolour character, so the palette is no longer derived from the
-   artwork — the character's browns and skin tones are illustration colours and
-   are deliberately not part of the UI palette.
+   Paper and ink, one hairline rule, one signal colour. Serif display type,
+   technical sans for text, mono for data only. No gradients, no pills.
    ========================================================================== */
 
 @theme {
   /* -- Typography -------------------------------------------------------- */
-  --font-sans: var(--font-inter), ui-sans-serif, system-ui, -apple-system, sans-serif;
-  --font-display: var(--font-display), var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+  --font-sans: var(--font-text), ui-sans-serif, system-ui, -apple-system, sans-serif;
+  --font-display: var(--font-display), Georgia, "Times New Roman", serif;
   --font-mono: var(--font-mono), ui-monospace, SFMono-Regular, Menlo, monospace;
 
-  /* -- Brand: teal (primary) --------------------------------------------- */
-  --color-teal-50: #eef7f9;
-  --color-teal-100: #d5ecf0;
-  --color-teal-200: #aedae1;
-  --color-teal-300: #7fcfd4;
-  --color-teal-400: #55b4c2;
-  --color-teal-500: #4098a8;
-  --color-teal-600: #2f7e8d;
-  --color-teal-700: #266573;
-  --color-teal-800: #1f4f5b;
-  --color-teal-900: #183c46;
+  /* -- Core tokens ------------------------------------------------------- */
+  --color-paper: #f6f6f3;
+  --color-ink-strong: #142b44;
+  --color-ink-deep: #0f2133;
+  --color-text-2: #475467;
+  --color-text-3: #5d6b7e;
+  --color-rule: #d9dce1;
+  --color-rule-strong: #101828;
+  --color-input-border: #c9ced6;
+  --color-brand: #1f4e79;
+  --color-signal: #d9480f;
+  --color-signal-text: #a3360a;
+  --color-ok: #0e7c5a;
+  --color-ok-text: #0b6b4d;
 
-  /* -- Brand: navy (secondary + ink) ------------------------------------- */
-  --color-navy-50: #f1f6f9;
-  --color-navy-100: #dce8ef;
-  --color-navy-200: #b9d0de;
-  --color-navy-300: #8aafc5;
-  --color-navy-400: #4e7e9e;
-  --color-navy-500: #2a6389;
-  --color-navy-600: #205880;
-  --color-navy-700: #1a4666;
-  --color-navy-800: #143750;
-  --color-navy-900: #0e2a3d;
-  --color-navy-950: #081e2c;
+  /* -- Existing semantic names, remapped to the new tokens --------------- */
+  --color-teal-50: #eef3f8;
+  --color-teal-100: #dce6f0;
+  --color-teal-200: #b9cbe0;
+  --color-teal-300: #9fb6ce;
+  --color-teal-400: #6c93b8;
+  --color-teal-500: #3e6e9e;
+  --color-teal-600: #2a5c87;
+  --color-teal-700: #1f4e79;
+  --color-teal-800: #142b44;
+  --color-teal-900: #0f2133;
 
-  /* -- Semantic surfaces -------------------------------------------------- */
-  --color-ink: #0d2436;
-  --color-body: #3c5567;
-  --color-muted: #6b8296;
-  --color-line: #e1e9ee;
-  --color-line-strong: #cddae2;
-  --color-surface: #f6fafb;
-  --color-surface-2: #edf4f6;
+  --color-navy-50: #f1f4f7;
+  --color-navy-100: #e6ebf1;
+  --color-navy-200: #d9dce1;
+  --color-navy-300: #c3ccd8;
+  --color-navy-400: #8fa0b5;
+  --color-navy-500: #5d6b7e;
+  --color-navy-600: #475467;
+  --color-navy-700: #2b4360;
+  --color-navy-800: #1b3a57;
+  --color-navy-900: #142b44;
+  --color-navy-950: #0f2133;
+
+  --color-ink: #101828;
+  --color-body: #475467;
+  --color-muted: #5d6b7e;
+  --color-line: #d9dce1;
+  --color-line-strong: #c9ced6;
+  --color-surface: #f6f6f3;
+  --color-surface-2: #eef0f2;
 
   /* -- Status ------------------------------------------------------------- */
-  --color-success: #157f52;
-  --color-success-soft: #e6f4ee;
-  --color-warning: #a96a10;
-  --color-warning-soft: #fbf1e2;
-  --color-danger: #b4362f;
-  --color-danger-soft: #fbeceb;
+  --color-success: #0e7c5a;
+  --color-success-soft: #e0f3ea;
+  --color-warning: #a3360a;
+  --color-warning-soft: #fdede7;
+  --color-danger: #b42318;
+  --color-danger-soft: #fde2d6;
 
-  /* -- Flash: the speed mark --------------------------------------------- */
-  /* A deliberate fourth hue, and the only one not derived from the logo.
-     Used solely for the bolt that marks how fast FlashEDC builds a study, so
-     it stays a mark rather than becoming a general accent. Distinct from
-     --color-warning on purpose: speed is not a caution. */
-  --color-flash: #b8500f;
-  --color-flash-soft: #fdf1e6;
-  --color-flash-line: #f0cbab;
+  /* -- Signal (hero dash, scan line, in-development) --------------------- */
+  --color-flash: #d9480f;
+  --color-flash-soft: #fdede7;
+  --color-flash-line: #f3b9a3;
 
-  /* -- Elevation: restrained, cool-tinted -------------------------------- */
-  --shadow-card: 0 1px 2px rgb(13 36 54 / 0.04), 0 8px 24px -12px rgb(13 36 54 / 0.10);
-  --shadow-raised: 0 1px 2px rgb(13 36 54 / 0.05), 0 16px 40px -16px rgb(13 36 54 / 0.16);
-  --shadow-nav: 0 1px 0 rgb(13 36 54 / 0.06), 0 8px 24px -16px rgb(13 36 54 / 0.20);
+  /* -- Elevation: only the stage carries a shadow ------------------------ */
+  --shadow-card: 0 1px 2px rgb(16 24 40 / 0.04), 0 12px 32px rgb(16 24 40 / 0.06);
+  --shadow-raised: 0 1px 2px rgb(16 24 40 / 0.04), 0 12px 32px rgb(16 24 40 / 0.06);
+  --shadow-nav: 0 1px 0 rgb(16 24 40 / 0.05);
 
   /* -- Motion ------------------------------------------------------------- */
   --ease-out-soft: cubic-bezier(0.22, 1, 0.36, 1);
@@ -108,19 +110,18 @@
 
 @layer base {
   * {
-    border-color: var(--color-line);
+    border-color: var(--color-rule);
   }
 
   html {
     scroll-behavior: smooth;
-    /* Offset in-page anchors so the sticky header never covers a heading. */
-    scroll-padding-top: 6rem;
+    scroll-padding-top: 5rem;
     -webkit-text-size-adjust: 100%;
   }
 
   body {
-    background-color: #ffffff;
-    color: var(--color-body);
+    background-color: var(--color-paper);
+    color: var(--color-text-2);
     font-family: var(--font-sans);
     font-synthesis-weight: none;
     text-rendering: optimizeLegibility;
@@ -132,25 +133,32 @@
   h3,
   h4 {
     font-family: var(--font-display);
+    font-weight: 400;
     color: var(--color-ink);
-    letter-spacing: -0.021em;
-    text-wrap: balance;
+    letter-spacing: -0.02em;
   }
 
   p {
     text-wrap: pretty;
   }
 
-  /* One consistent, always-visible focus treatment across the site. */
+  a {
+    color: var(--color-brand);
+  }
+
+  a:hover {
+    color: var(--color-ink-strong);
+  }
+
   :focus-visible {
-    outline: 2px solid var(--color-teal-600);
+    outline: 2px solid var(--color-brand);
     outline-offset: 2px;
     border-radius: 2px;
   }
 
   ::selection {
     background-color: var(--color-teal-200);
-    color: var(--color-navy-900);
+    color: var(--color-ink-strong);
   }
 
   @media (prefers-reduced-motion: reduce) {
@@ -172,18 +180,18 @@
    Utilities
    ========================================================================== */
 
+/* Small section label. Deliberately sans, sentence case, with a signal rule. */
 @utility eyebrow {
-  font-family: var(--font-mono);
-  font-size: 0.6875rem;
+  font-family: var(--font-sans);
+  font-size: 0.875rem;
   font-weight: 500;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
+  letter-spacing: 0;
+  text-transform: none;
 }
 
-/* Faint engineering grid, used behind hero and dark bands. */
 @utility bg-grid {
-  background-image: linear-gradient(to right, rgb(13 36 54 / 0.045) 1px, transparent 1px),
-    linear-gradient(to bottom, rgb(13 36 54 / 0.045) 1px, transparent 1px);
+  background-image: linear-gradient(to right, rgb(16 24 40 / 0.04) 1px, transparent 1px),
+    linear-gradient(to bottom, rgb(16 24 40 / 0.04) 1px, transparent 1px);
   background-size: 64px 64px;
 }
 
@@ -193,7 +201,6 @@
   background-size: 64px 64px;
 }
 
-/* Fades a grid or texture out toward the edges of its container. */
 @utility mask-fade-edges {
   mask-image: radial-gradient(ellipse 80% 70% at 50% 40%, #000 40%, transparent 100%);
 }

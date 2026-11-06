@@ -7,22 +7,23 @@ type Variant = "primary" | "secondary" | "ghost" | "onDark" | "onDarkOutline";
 type Size = "sm" | "md" | "lg";
 
 const variants: Record<Variant, string> = {
-  primary: "bg-navy-900 text-white hover:bg-navy-800 active:bg-navy-950",
+  primary: "bg-ink-strong text-white hover:bg-ink-deep active:bg-ink-deep",
   secondary:
-    "border border-line-strong bg-white text-ink hover:border-navy-300 hover:bg-surface active:bg-surface-2",
-  ghost: "text-ink hover:bg-surface active:bg-surface-2",
-  onDark: "bg-white text-navy-900 hover:bg-teal-50 active:bg-teal-100",
-  onDarkOutline: "border border-white/25 text-white hover:border-white/50 hover:bg-white/10",
+    "px-0 text-ink underline decoration-1 underline-offset-4 hover:text-brand active:text-ink-strong",
+  ghost: "text-ink hover:text-brand active:text-ink-strong",
+  onDark: "bg-white text-ink-strong hover:bg-paper active:bg-surface-2",
+  onDarkOutline:
+    "px-0 text-white underline decoration-1 underline-offset-4 hover:text-white/80",
 };
 
 const sizes: Record<Size, string> = {
   sm: "h-9 px-4 text-sm",
   md: "h-11 px-5 text-sm",
-  lg: "h-12 px-6 text-[0.9375rem]",
+  lg: "h-[3.25rem] px-[22px] text-[15px]",
 };
 
 const base =
-  "inline-flex items-center justify-center gap-2 rounded-full font-medium tracking-[-0.01em] transition-colors duration-200 select-none disabled:pointer-events-none disabled:opacity-50";
+  "inline-flex items-center justify-center gap-2 rounded-[4px] font-medium tracking-[-0.005em] transition-colors duration-200 select-none disabled:pointer-events-none disabled:opacity-50";
 
 type CommonProps = {
   variant?: Variant;

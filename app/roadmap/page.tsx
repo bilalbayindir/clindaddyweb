@@ -4,6 +4,7 @@ import Link from "next/link";
 
 import { CtaBand } from "@/components/sections/cta-band";
 import { HeroActions, PageHero } from "@/components/sections/page-hero";
+import { IllustrationFigure } from "@/components/sections/illustration-figure";
 import { Badge } from "@/components/ui/badge";
 import { Eyebrow, Section } from "@/components/ui/section";
 import { roadmapNote, roadmapStages, type RoadmapStage } from "@/lib/content";
@@ -32,11 +33,22 @@ export default function RoadmapPage() {
       <PageHero
         eyebrow="Roadmap"
         title="Two products today. More of the trial next."
-        lead="Every module is designed on the same protocol-derived data model, so new systems ship faster and integrate on day one. The status below each item is literal."
+        lead="Every module is designed on the same protocol-derived data model, so new systems ship faster and integrate on day one. The current status of each item is shown below."
         actions={
           <HeroActions
             primary={{ label: primaryCTA.label, href: primaryCTA.href }}
             secondary={{ label: secondaryCTA.label, href: secondaryCTA.href, analytics: "cta_pilot_click" }}
+          />
+        }
+        aside={
+          <IllustrationFigure
+            src="/images/platform-illustration.jpg"
+            alt="Illustration of the ClinDaddy character holding one study model card that projects into EDC, RTSM, eSource, CTMS, eTMF, ePRO, eCOA and eConsent panels."
+            width={1408}
+            height={768}
+            sizes="(min-width: 1024px) 34rem, 100vw"
+            priority
+            caption="Illustration. One study model, projected into the systems a trial runs on — EDC today, RTSM next, the rest planned."
           />
         }
       />
@@ -58,7 +70,7 @@ export default function RoadmapPage() {
 
                 <div className="flex flex-wrap items-baseline gap-x-4 gap-y-2">
                   <Eyebrow>{stage.stage}</Eyebrow>
-                  <span className="font-mono text-[0.625rem] tracking-[0.12em] text-muted uppercase">
+                  <span className="text-xs text-text-3">
                     {stage.timeline}
                   </span>
                   <Badge tone={TONES[stage.status]}>{stage.statusLabel}</Badge>
@@ -72,7 +84,7 @@ export default function RoadmapPage() {
                   {stage.items.map((item) => (
                     <div
                       key={item.name}
-                      className="flex flex-col rounded-xl border border-line bg-white p-5"
+                      className="flex flex-col rounded-[4px] border border-line bg-white p-5"
                     >
                       <h3 className="text-base font-semibold text-ink">{item.name}</h3>
                       <p className="mt-1.5 text-sm leading-relaxed text-muted">{item.label}</p>
@@ -120,3 +132,5 @@ export default function RoadmapPage() {
     </>
   );
 }
+
+

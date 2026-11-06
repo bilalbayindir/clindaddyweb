@@ -32,23 +32,14 @@ export function PageHero({
     <section
       className={cn(
         "relative overflow-hidden border-b",
-        dark ? "border-white/10 bg-navy-950" : "border-line bg-white",
+        dark ? "border-white/10 bg-ink-strong" : "border-rule bg-paper",
         className,
       )}
     >
-      {dark ? (
-        <div aria-hidden className="absolute inset-0 bg-grid-dark mask-fade-edges opacity-50" />
-      ) : (
-        <div
-          aria-hidden
-          className="absolute inset-x-0 top-0 h-72 bg-grid mask-fade-edges opacity-70"
-        />
-      )}
-
       <Container className="relative">
         <div
           className={cn(
-            "grid gap-12 py-16 sm:py-20 lg:py-24",
+            "grid gap-12 py-12 sm:py-16 lg:py-20",
             aside && "lg:grid-cols-[minmax(0,1.05fr)_minmax(0,1fr)] lg:items-center lg:gap-16",
           )}
         >
@@ -57,7 +48,7 @@ export function PageHero({
 
             <h1
               className={cn(
-                "mt-6 text-[2rem] leading-[1.1] font-semibold sm:text-[2.75rem] lg:text-[3.25rem]",
+                "mt-6 text-[38px] leading-[1.08] tracking-[-0.02em] font-normal sm:text-[48px] lg:text-[60px] lg:leading-[1.04]",
                 dark ? "text-white" : "text-ink",
               )}
             >
@@ -67,8 +58,8 @@ export function PageHero({
             {lead ? (
               <p
                 className={cn(
-                  "mt-6 max-w-2xl text-base leading-relaxed sm:text-lg",
-                  dark ? "text-navy-300" : "text-body",
+                  "mt-6 max-w-2xl text-base leading-[1.6] lg:text-[18px]",
+                  dark ? "text-navy-300" : "text-text-2",
                 )}
               >
                 {lead}

@@ -64,7 +64,7 @@ export function DemoSection({
             role="tablist"
             aria-label="Choose a product"
             className={cn(
-              "inline-flex shrink-0 rounded-full border border-line bg-surface p-1",
+              "inline-flex shrink-0 rounded-[4px] border border-line bg-surface p-1",
               !showSwitcher && "hidden",
             )}
           >
@@ -79,7 +79,7 @@ export function DemoSection({
                   aria-selected={selected}
                   onClick={() => selectProduct(key)}
                   className={cn(
-                    "min-h-9 rounded-full px-4 text-sm font-medium transition-colors",
+                    "min-h-9 rounded-[4px] px-4 text-sm font-medium transition-colors",
                     selected ? "bg-white text-ink shadow-card" : "text-muted hover:text-ink",
                   )}
                 >
@@ -140,10 +140,10 @@ export function DemoSection({
             {active === "flashedc" ? <FlashEdcPanel /> : <FlashAnalysisPanel />}
 
             <div
-              className="mt-5 flex flex-col gap-2 rounded-xl border border-line bg-surface px-5 py-4 sm:flex-row sm:items-baseline sm:gap-4"
+              className="mt-5 flex flex-col gap-2 rounded-[4px] border border-line bg-surface px-5 py-4 sm:flex-row sm:items-baseline sm:gap-4"
               aria-live="polite"
             >
-              <p className="shrink-0 font-mono text-[0.625rem] tracking-[0.12em] text-teal-700 uppercase">
+              <p className="shrink-0 text-xs text-brand">
                 {step.title}
               </p>
               <p className="text-sm leading-relaxed text-body">{step.artifact}</p>
@@ -156,3 +156,7 @@ export function DemoSection({
     </section>
   );
 }
+
+
+
+
