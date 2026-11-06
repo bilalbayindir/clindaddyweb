@@ -59,7 +59,7 @@ export default function PrivacyPage() {
       />
 
       <Container className="max-w-3xl py-16 sm:py-20">
-        <p className="font-mono text-[0.6875rem] tracking-[0.12em] text-muted uppercase">
+        <p className="text-[13px] text-text-3">
           Effective November 2026
         </p>
 
@@ -80,3 +80,4 @@ export default function PrivacyPage() {
     </>
   );
 }
+

@@ -1,0 +1,257 @@
+/* Pipeline stage — ported from the approved reference.
+   One 15s clock. Acts are staggered by 3s. Children offset within the act.
+   Only geometry lives in the component; all motion lives here. */
+
+.act {
+  opacity: 0;
+  animation: act 15s linear infinite backwards;
+}
+.act.final {
+  opacity: 1;
+}
+
+.pop {
+  opacity: 1;
+  animation: popIn 15s cubic-bezier(0.2, 0.8, 0.2, 1) infinite backwards;
+}
+.up {
+  opacity: 1;
+  animation: slideUp 15s ease-out infinite backwards;
+}
+.rt {
+  opacity: 1;
+  animation: slideRight 15s ease-out infinite backwards;
+}
+.fade {
+  opacity: 1;
+  animation: fadeIn 15s linear infinite backwards;
+}
+.lab {
+  color: #98a2b3;
+  animation: labOn 15s linear infinite;
+}
+.turn {
+  opacity: 0;
+  transform-origin: left center;
+  animation: pageTurn 15s ease-in-out infinite;
+}
+.beam {
+  opacity: 0;
+  animation: scanBeam 15s linear infinite;
+}
+.pkt {
+  opacity: 0;
+  animation: travel 15s ease-in-out infinite;
+}
+.stamp {
+  opacity: 0;
+  animation: stampIn 15s ease-out infinite;
+}
+.bub {
+  opacity: 0;
+  animation: bubbleK 15s ease-out infinite;
+}
+.qrow {
+  opacity: 0;
+  animation: qRow 15s linear infinite;
+}
+.qa {
+  opacity: 0;
+  animation: qA 15s linear infinite;
+}
+.qb {
+  opacity: 0;
+  animation: qB 15s linear infinite;
+}
+.bar {
+  width: 0%;
+  animation: barFill 15s ease-out infinite;
+}
+.bob {
+  animation: bob 3s ease-in-out infinite;
+}
+.live {
+  animation: pulse 2s ease-in-out infinite;
+}
+
+.fillbar {
+  height: 4px;
+  width: 0%;
+}
+.fill1 {
+  background: #142b44;
+  animation: fill1 15s linear infinite;
+}
+.fill2 {
+  background: #142b44;
+  animation: fill2 15s linear infinite;
+}
+.fill3 {
+  background: #142b44;
+  animation: fill3 15s linear infinite;
+}
+.fill4 {
+  background: #142b44;
+  animation: fill4 15s linear infinite;
+}
+.fill5 {
+  background: #d9480f;
+  animation: fill5 15s linear infinite;
+}
+
+.paused,
+.paused * {
+  animation-play-state: paused !important;
+}
+
+@keyframes act {
+  0% { opacity: 0; transform: translateY(10px); }
+  1.5%, 18.5% { opacity: 1; transform: translateY(0); }
+  20%, 100% { opacity: 0; transform: translateY(-6px); }
+}
+@keyframes popIn {
+  0% { opacity: 0; transform: scale(0.5); }
+  1.3% { opacity: 1; transform: scale(1.08); }
+  2.4%, 19% { opacity: 1; transform: scale(1); }
+  20%, 100% { opacity: 0; transform: scale(1); }
+}
+@keyframes slideUp {
+  0% { opacity: 0; transform: translateY(14px); }
+  1.6%, 19% { opacity: 1; transform: translateY(0); }
+  20%, 100% { opacity: 0; }
+}
+@keyframes slideRight {
+  0% { opacity: 0; transform: translateX(-16px); }
+  1.6%, 19% { opacity: 1; transform: translateX(0); }
+  20%, 100% { opacity: 0; }
+}
+@keyframes fadeIn {
+  0% { opacity: 0; }
+  1.5%, 19% { opacity: 1; }
+  20%, 100% { opacity: 0; }
+}
+@keyframes labOn {
+  0%, 19.5% { color: #142b44; }
+  20%, 100% { color: #98a2b3; }
+}
+@keyframes fill1 {
+  0% { width: 0%; }
+  19%, 98% { width: 100%; }
+  100% { width: 0%; }
+}
+@keyframes fill2 {
+  0%, 20% { width: 0%; }
+  39%, 98% { width: 100%; }
+  100% { width: 0%; }
+}
+@keyframes fill3 {
+  0%, 40% { width: 0%; }
+  59%, 98% { width: 100%; }
+  100% { width: 0%; }
+}
+@keyframes fill4 {
+  0%, 60% { width: 0%; }
+  79%, 98% { width: 100%; }
+  100% { width: 0%; }
+}
+@keyframes fill5 {
+  0%, 80% { width: 0%; }
+  98% { width: 100%; }
+  100% { width: 0%; }
+}
+@keyframes pageTurn {
+  0% { opacity: 1; transform: rotateY(0deg); }
+  4.5% { opacity: 1; transform: rotateY(-110deg); }
+  6.5% { opacity: 0; transform: rotateY(-170deg); }
+  7%, 100% { opacity: 0; transform: rotateY(-170deg); }
+}
+@keyframes scanBeam {
+  0% { opacity: 0; transform: translateY(0); }
+  1% { opacity: 1; }
+  12% { opacity: 1; transform: translateY(272px); }
+  13%, 100% { opacity: 0; transform: translateY(272px); }
+}
+@keyframes travel {
+  0% { opacity: 0; transform: translateX(0); }
+  1% { opacity: 1; }
+  6% { opacity: 1; transform: translateX(150px); }
+  7%, 100% { opacity: 0; transform: translateX(150px); }
+}
+@keyframes stampIn {
+  0% { opacity: 0; transform: scale(1.9) rotate(-14deg); }
+  1.4% { opacity: 1; transform: scale(0.94) rotate(-8deg); }
+  2.2%, 19% { opacity: 1; transform: scale(1) rotate(-8deg); }
+  20%, 100% { opacity: 0; }
+}
+@keyframes bubbleK {
+  0% { opacity: 0; transform: translateY(6px) scale(0.85); }
+  1.3%, 6% { opacity: 1; transform: translateY(0) scale(1); }
+  7%, 100% { opacity: 0; }
+}
+@keyframes qRow {
+  0% { opacity: 0; background: #fde2d6; }
+  1.5%, 6.5% { opacity: 1; background: #fde2d6; }
+  8.5%, 19% { opacity: 1; background: #e0f3ea; }
+  20%, 100% { opacity: 0; }
+}
+@keyframes qA {
+  0% { opacity: 0; }
+  1.5%, 6% { opacity: 1; }
+  7%, 100% { opacity: 0; }
+}
+@keyframes qB {
+  0%, 7% { opacity: 0; }
+  8.5%, 19% { opacity: 1; }
+  20%, 100% { opacity: 0; }
+}
+@keyframes barFill {
+  0% { width: 0%; }
+  14%, 19% { width: 66%; }
+  20%, 100% { width: 0%; }
+}
+@keyframes bob {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-4px); }
+}
+@keyframes pulse {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(14, 124, 90, 0.55); }
+  50% { box-shadow: 0 0 0 6px rgba(14, 124, 90, 0); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .act,
+  .pop,
+  .up,
+  .rt,
+  .fade,
+  .turn,
+  .beam,
+  .pkt,
+  .stamp,
+  .bub,
+  .qrow,
+  .qa,
+  .qb,
+  .bar,
+  .bob,
+  .live,
+  .lab {
+    animation: none !important;
+  }
+  .act {
+    opacity: 0 !important;
+  }
+  .act.final {
+    opacity: 1 !important;
+  }
+  .act.final .pop,
+  .act.final .up,
+  .act.final .rt,
+  .act.final .fade {
+    opacity: 1 !important;
+    transform: none !important;
+  }
+  .fillbar {
+    width: 100% !important;
+  }
+}

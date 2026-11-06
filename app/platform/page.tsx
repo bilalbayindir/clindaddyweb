@@ -86,7 +86,7 @@ export default function PlatformPage() {
         />
 
         <Reveal className="mt-14">
-          <div className="rounded-2xl border border-line bg-white p-6 sm:p-8 lg:p-10">
+          <div className="rounded-[6px] border border-line bg-white p-6 sm:p-8 lg:p-10">
             <LifecycleRail variant="panel" />
           </div>
         </Reveal>
@@ -215,3 +215,4 @@ export default function PlatformPage() {
     </>
   );
 }
+

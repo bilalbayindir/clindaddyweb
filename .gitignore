@@ -15,3 +15,13 @@ qa.mjs
 screenshots.mjs
 
 *.tsbuildinfo
+
+# Redesign QA tooling
+/og.mjs
+/measure.mjs
+/measure-ref.mjs
+/qa2.mjs
+/stage-shots.mjs
+/record.mjs
+/lighthouse*.json
+/public/images/og-stage.png

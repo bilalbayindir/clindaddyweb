@@ -11,6 +11,7 @@ export const INTEREST_OPTIONS = [
   { value: "pilot", label: "Pilot program" },
   { value: "partnership", label: "Partnership" },
   { value: "investment", label: "Investment" },
+  { value: "validation", label: "Validation documentation" },
   { value: "early-access", label: "Early access to a module" },
   { value: "other", label: "Other" },
 ] as const;

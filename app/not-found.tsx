@@ -41,7 +41,7 @@ export default function NotFound() {
           </div>
 
           <div className="mt-14 border-t border-line pt-8">
-            <p className="font-mono text-[0.6875rem] tracking-[0.12em] text-muted uppercase">
+            <p className="text-[13px] text-text-3">
               Main sections
             </p>
             <ul className="mt-5 flex flex-wrap gap-x-8 gap-y-3">
@@ -63,3 +63,4 @@ export default function NotFound() {
     </section>
   );
 }
+

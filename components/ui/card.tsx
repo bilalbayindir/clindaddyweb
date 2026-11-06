@@ -17,7 +17,7 @@ export function Card({
   return (
     <div
       className={cn(
-        "rounded-2xl border p-6 sm:p-7",
+        "rounded-[6px] border p-6 sm:p-7",
         tone === "light" && "border-line bg-white",
         tone === "surface" && "border-line bg-surface",
         tone === "dark" && "border-white/10 bg-white/[0.03]",
@@ -46,7 +46,7 @@ export function BorderedGrid({
   return (
     <div
       className={cn(
-        "overflow-hidden rounded-2xl border-t border-l border-line bg-white",
+        "overflow-hidden rounded-[6px] border-t border-l border-line bg-white",
         "grid grid-cols-1",
         columns === 2 && "sm:grid-cols-2",
         columns === 3 && "sm:grid-cols-2 lg:grid-cols-3",
@@ -71,3 +71,4 @@ export function BorderedGridCell({
     <div className={cn("border-r border-b border-line p-6 sm:p-7", className)}>{children}</div>
   );
 }
+

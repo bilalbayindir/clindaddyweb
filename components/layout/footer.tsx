@@ -1,91 +1,73 @@
-import { ArrowUpRight } from "lucide-react";
+import Image from "next/image";
 import Link from "next/link";
 
-import { Logo } from "@/components/brand/logo";
-import { Button } from "@/components/ui/button";
 import { Container } from "@/components/ui/container";
-import { footerNavigation, legalFooter, primaryCTA, site, siteAddress } from "@/lib/site";
+import { legalFooter, site, siteAddress } from "@/lib/site";
+
+const COLUMNS = [
+  {
+    heading: "Product",
+    links: [
+      { label: "FlashEDC", href: "/flashedc" },
+      { label: "FlashAnalysis", href: "/flashanalysis" },
+      { label: "Roadmap", href: "/roadmap" },
+    ],
+  },
+  {
+    heading: "Company",
+    links: [
+      { label: "About", href: "/about" },
+      { label: "Trust and governance", href: "/trust" },
+      { label: "Investors", href: "/investors" },
+    ],
+  },
+  {
+    heading: "Contact",
+    links: [
+      { label: site.contactEmail, href: `mailto:${site.contactEmail}` },
+      { label: "Privacy", href: "/privacy" },
+    ],
+  },
+];
 
 export function Footer() {
-  const year = new Date().getFullYear();
-
   return (
-    <footer className="border-t border-white/10 bg-navy-950 text-navy-200">
+    <footer className="border-t border-rule bg-white">
       <Container>
-        <div className="grid gap-12 py-16 lg:grid-cols-[minmax(0,1.4fr)_repeat(3,minmax(0,1fr))] lg:gap-8 lg:py-20">
-          {/* Brand */}
-          <div className="max-w-sm">
-            <Logo variant="inverse" />
-            <p className="mt-6 text-sm leading-relaxed text-navy-300">
-              Clinical data automation from protocol to regulatory submission.
-            </p>
-            <p className="mt-4 font-mono text-[0.6875rem] leading-relaxed tracking-[0.06em] text-teal-300 uppercase">
-              AI assists. Deterministic systems execute.
-              <br />
-              Humans approve. Everything is traceable.
-            </p>
-            <Button
-              href={primaryCTA.href}
-              variant="onDark"
-              size="sm"
-              className="mt-7"
-              analytics="cta_demo_click"
-              data-analytics-label="Request a Demo"
-              data-analytics-location="footer"
-            >
-              {primaryCTA.label}
-            </Button>
+        <div className="flex flex-wrap justify-between gap-10 py-12">
+          <div className="flex flex-col gap-2.5">
+            <Image
+              src="/images/clindaddy-wordmark.png"
+              alt="ClinDaddy"
+              width={740}
+              height={155}
+              className="h-6 w-[112px] object-contain object-left"
+            />
+            <p className="text-sm text-text-2">{siteAddress}</p>
+            <p className="text-sm text-text-2">© 2026 {site.legalName}</p>
           </div>
 
-          {/* Link columns */}
-          {footerNavigation.map((group) => (
-            <nav key={group.heading} aria-label={group.heading}>
-              <h2 className="font-mono text-[0.6875rem] tracking-[0.14em] text-navy-400 uppercase">
-                {group.heading}
-              </h2>
-              <ul className="mt-5 space-y-3">
-                {group.links.map((link) => (
-                  <li key={link.href}>
-                    <Link
-                      href={link.href}
-                      className="text-sm text-navy-200 transition-colors hover:text-white"
-                    >
-                      {link.label}
-                    </Link>
-                  </li>
+          <div className="flex flex-wrap gap-14">
+            {COLUMNS.map((column) => (
+              <div key={column.heading} className="flex min-w-[9rem] flex-col gap-2.5 text-sm">
+                <p className="font-semibold text-ink">{column.heading}</p>
+                {column.links.map((link) => (
+                  <Link
+                    key={link.href}
+                    href={link.href}
+                    className="text-text-2 transition-colors hover:text-ink"
+                  >
+                    {link.label}
+                  </Link>
                 ))}
-              </ul>
-            </nav>
-          ))}
-        </div>
-
-        {/* Baseline */}
-        <div className="flex flex-col gap-6 border-t border-white/10 py-8 sm:flex-row sm:items-center sm:justify-between">
-          <div className="flex flex-col gap-2">
-            <p className="text-xs text-navy-400">
-              © {year} {site.legalName} · {siteAddress}
-            </p>
-            <p className="max-w-xl text-xs leading-relaxed text-navy-400">{legalFooter}</p>
-          </div>
-
-          <div className="flex flex-col items-start gap-2 sm:items-end">
-            <a
-              href={`mailto:${site.contactEmail}`}
-              className="inline-flex items-center gap-1.5 text-sm text-navy-200 transition-colors hover:text-white"
-              data-analytics="outbound_email_click"
-              data-analytics-label="Footer email"
-            >
-              {site.contactEmail}
-              <ArrowUpRight className="size-3.5" aria-hidden />
-            </a>
-            <Link
-              href="/privacy"
-              className="text-xs text-navy-400 transition-colors hover:text-navy-200"
-            >
-              Privacy policy
-            </Link>
+              </div>
+            ))}
           </div>
         </div>
+
+        <p className="border-t border-rule py-6 text-xs leading-relaxed text-text-3">
+          {legalFooter}
+        </p>
       </Container>
     </footer>
   );

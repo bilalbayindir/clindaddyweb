@@ -1,0 +1,407 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>ClinDaddy — from protocol to submission</title>
+</head>
+<body>
+<!-- head assets -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Newsreader:opsz,wght@6..72,400;6..72,500&amp;family=IBM+Plex+Sans:wght@400;500;600&amp;family=IBM+Plex+Mono:wght@400;500&amp;display=swap">
+<style>
+body{margin:0;background:#F6F6F3}
+a{color:#1F4E79}a:hover{color:#142B44}
+.st{position:absolute}
+.mono{font-family:'IBM Plex Mono',monospace}
+.act{opacity:0;animation:act 15s linear infinite backwards}
+.act.final{opacity:1}
+.pop{opacity:1;animation:popIn 15s cubic-bezier(.2,.8,.2,1) infinite backwards}
+.up{opacity:1;animation:slideUp 15s ease-out infinite backwards}
+.rt{opacity:1;animation:slideRight 15s ease-out infinite backwards}
+.fade{opacity:1;animation:fadeIn 15s linear infinite backwards}
+.lab{color:#98A2B3;animation:labOn 15s linear infinite}
+.turn{opacity:0;transform-origin:left center;animation:pageTurn 15s ease-in-out infinite}
+.beam{opacity:0;animation:scanBeam 15s linear infinite}
+.pkt{opacity:0;animation:travel 15s ease-in-out infinite}
+.stamp{opacity:0;animation:stampIn 15s ease-out infinite}
+.bub{opacity:0;animation:bubbleK 15s ease-out infinite}
+.qrow{opacity:0;animation:qRow 15s linear infinite}
+.qa{opacity:0;animation:qA 15s linear infinite}
+.qb{opacity:0;animation:qB 15s linear infinite}
+.bar{width:0%;animation:barFill 15s ease-out infinite}
+.bob{animation:bob 3s ease-in-out infinite}
+.live{animation:pulse 2s ease-in-out infinite}
+@keyframes act{0%{opacity:0;transform:translateY(10px)}1.5%,18.5%{opacity:1;transform:translateY(0)}20%,100%{opacity:0;transform:translateY(-6px)}}
+@keyframes popIn{0%{opacity:0;transform:scale(.5)}1.3%{opacity:1;transform:scale(1.08)}2.4%,19%{opacity:1;transform:scale(1)}20%,100%{opacity:0;transform:scale(1)}}
+@keyframes slideUp{0%{opacity:0;transform:translateY(14px)}1.6%,19%{opacity:1;transform:translateY(0)}20%,100%{opacity:0}}
+@keyframes slideRight{0%{opacity:0;transform:translateX(-16px)}1.6%,19%{opacity:1;transform:translateX(0)}20%,100%{opacity:0}}
+@keyframes fadeIn{0%{opacity:0}1.5%,19%{opacity:1}20%,100%{opacity:0}}
+@keyframes labOn{0%,19.5%{color:#142B44}20%,100%{color:#98A2B3}}
+@keyframes fill1{0%{width:0%}19%,98%{width:100%}100%{width:0%}}
+@keyframes fill2{0%,20%{width:0%}39%,98%{width:100%}100%{width:0%}}
+@keyframes fill3{0%,40%{width:0%}59%,98%{width:100%}100%{width:0%}}
+@keyframes fill4{0%,60%{width:0%}79%,98%{width:100%}100%{width:0%}}
+@keyframes fill5{0%,80%{width:0%}98%{width:100%}100%{width:0%}}
+@keyframes pageTurn{0%{opacity:1;transform:rotateY(0deg)}4.5%{opacity:1;transform:rotateY(-110deg)}6.5%{opacity:0;transform:rotateY(-170deg)}7%,100%{opacity:0;transform:rotateY(-170deg)}}
+@keyframes scanBeam{0%{opacity:0;transform:translateY(0)}1%{opacity:1}12%{opacity:1;transform:translateY(272px)}13%,100%{opacity:0;transform:translateY(272px)}}
+@keyframes travel{0%{opacity:0;transform:translateX(0)}1%{opacity:1}6%{opacity:1;transform:translateX(150px)}7%,100%{opacity:0;transform:translateX(150px)}}
+@keyframes stampIn{0%{opacity:0;transform:scale(1.9) rotate(-14deg)}1.4%{opacity:1;transform:scale(.94) rotate(-8deg)}2.2%,19%{opacity:1;transform:scale(1) rotate(-8deg)}20%,100%{opacity:0}}
+@keyframes bubbleK{0%{opacity:0;transform:translateY(6px) scale(.85)}1.3%,6%{opacity:1;transform:translateY(0) scale(1)}7%,100%{opacity:0}}
+@keyframes qRow{0%{opacity:0;background:#FDE2D6}1.5%,6.5%{opacity:1;background:#FDE2D6}8.5%,19%{opacity:1;background:#E0F3EA}20%,100%{opacity:0}}
+@keyframes qA{0%{opacity:0}1.5%,6%{opacity:1}7%,100%{opacity:0}}
+@keyframes qB{0%,7%{opacity:0}8.5%,19%{opacity:1}20%,100%{opacity:0}}
+@keyframes barFill{0%{width:0%}14%,19%{width:66%}20%,100%{width:0%}}
+@keyframes bob{0%,100%{transform:translateY(0)}50%{transform:translateY(-4px)}}
+@keyframes pulse{0%,100%{box-shadow:0 0 0 0 rgba(14,124,90,.55)}50%{box-shadow:0 0 0 6px rgba(14,124,90,0)}}
+@media (prefers-reduced-motion: reduce){
+.act,.pop,.up,.rt,.fade,.turn,.beam,.pkt,.stamp,.bub,.qrow,.qa,.qb,.bar,.bob,.live,.lab{animation:none !important}
+.act{opacity:0 !important}.act.final{opacity:1 !important}.act.final .pop,.act.final .up,.act.final .rt,.act.final .fade{opacity:1 !important;transform:none !important}
+.fillbar{width:100% !important}
+}
+
+</style>
+<!-- /head assets -->
+
+<div style="font-family: 'IBM Plex Sans', system-ui, sans-serif; color: #101828; background: #F6F6F3; min-height: 100%;">
+
+<header style="border-bottom: 1px solid #D9DCE1; background: #F6F6F3;">
+<div style="max-width: 1240px; margin: 0 auto; padding: 18px 40px; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 16px;">
+<a href="#top" style="display: flex; align-items: center; gap: 10px; text-decoration: none;">
+<img src="/images/clindaddy-mark.png" alt="" style="width: 22px; height: 38px; object-fit: contain;">
+<img src="/images/clindaddy-wordmark.png" alt="ClinDaddy" style="width: 124px; height: 26px; object-fit: contain;">
+</a>
+<nav aria-label="Main" style="display: flex; flex-wrap: wrap; align-items: center; gap: 32px; font-size: 15px;">
+<a href="#products" style="text-decoration: none; color: #101828;">FlashEDC</a>
+<a href="#products" style="text-decoration: none; color: #101828;">FlashAnalysis</a>
+<a href="#review" style="text-decoration: none; color: #101828;">Compliance</a>
+<a href="#roadmap" style="text-decoration: none; color: #101828;">Roadmap</a>
+<a href="#founder" style="text-decoration: none; color: #101828;">Company</a>
+<a href="#pilot" style="text-decoration: none; background: #142B44; color: #FFFFFF; padding: 11px 18px; border-radius: 4px; font-weight: 500;">Request a demo</a>
+</nav>
+</div>
+</header>
+
+<section id="top" style="max-width: 1240px; margin: 0 auto; padding: 72px 40px 96px; display: flex; flex-wrap: wrap; align-items: flex-start; gap: 56px;">
+<div style="flex: 1 1 380px; min-width: 0; display: flex; flex-direction: column; gap: 28px; padding-top: 8px;">
+<p style="margin: 0; display: flex; align-items: center; gap: 12px; font-size: 15px; color: #475467;"><span style="width: 28px; height: 2px; background: #D9480F;"></span>For sponsors and CROs running Phase I–II studies</p>
+<h1 style="margin: 0; font-family: 'Newsreader', Georgia, serif; font-weight: 400; font-size: 60px; line-height: 1.04; letter-spacing: -0.02em; color: #101828;">Your protocol already describes the study. We build everything that follows.</h1>
+<p style="margin: 0; font-size: 18px; line-height: 1.6; color: #475467;">ClinDaddy turns a protocol into a CDISC study build, runs data collection in its own EDC, and delivers SDTM, ADaM and TLFs with independent QC. Your data managers review and sign off at every step.</p>
+<div style="display: flex; flex-wrap: wrap; align-items: center; gap: 24px;">
+<a href="#pilot" style="text-decoration: none; background: #142B44; color: #FFFFFF; padding: 15px 22px; border-radius: 4px; font-size: 16px; font-weight: 500;">Request a demo</a>
+<a href="#products" style="font-size: 16px; font-weight: 500; text-underline-offset: 4px;">How it works</a>
+</div>
+<dl style="margin: 8px 0 0; display: grid; grid-template-columns: 96px 1fr; row-gap: 10px; column-gap: 16px; font-size: 14px; border-top: 1px solid #D9DCE1; padding-top: 18px;">
+<dt style="color: #5D6B7E;">Standards</dt><dd style="margin: 0; color: #101828;">CDASH, SDTM, ADaM, Define-XML</dd>
+<dt style="color: #5D6B7E;">Controls</dt><dd style="margin: 0; color: #101828;">Audit trail, versioned designs, human approval</dd>
+<dt style="color: #5D6B7E;">QC code</dt><dd style="margin: 0; color: #101828;">SAS, R and SQL, yours to rerun</dd>
+</dl>
+</div>
+<div id="how" style="background: #FFFFFF; box-shadow: 0 1px 2px rgba(16,24,40,0.04), 0 12px 32px rgba(16,24,40,0.06); flex: 0 0 auto; position: relative; width: 720px; height: 520px; border-radius: 8px; border: 1px solid #D9DCE1; overflow: hidden;" role="img" aria-label="Animated walkthrough in five steps: the protocol is read, the study design is analyzed, forms and specs are extracted and approved, sites collect data, and a validated submission package is produced.">
+
+<div class="st" style="left: 28px; top: 22px; width: 664px; display: flex; gap: 8px;">
+<div style="flex: 1; display: flex; flex-direction: column; gap: 8px;"><div style="height: 4px; border-radius: 2px; background: #E4E7EB; overflow: hidden;"><div class="fillbar" style="height: 4px; width: 0%; background: #142B44; animation: fill1 15s linear infinite;"></div></div><span class="mono lab" style="font-size: 12px; letter-spacing: 0.08em; animation-delay: 0s;">01 READ</span></div>
+<div style="flex: 1; display: flex; flex-direction: column; gap: 8px;"><div style="height: 4px; border-radius: 2px; background: #E4E7EB; overflow: hidden;"><div class="fillbar" style="height: 4px; width: 0%; background: #142B44; animation: fill2 15s linear infinite;"></div></div><span class="mono lab" style="font-size: 12px; letter-spacing: 0.08em; animation-delay: 3s;">02 ANALYZE</span></div>
+<div style="flex: 1; display: flex; flex-direction: column; gap: 8px;"><div style="height: 4px; border-radius: 2px; background: #E4E7EB; overflow: hidden;"><div class="fillbar" style="height: 4px; width: 0%; background: #142B44; animation: fill3 15s linear infinite;"></div></div><span class="mono lab" style="font-size: 12px; letter-spacing: 0.08em; animation-delay: 6s;">03 EXTRACT</span></div>
+<div style="flex: 1; display: flex; flex-direction: column; gap: 8px;"><div style="height: 4px; border-radius: 2px; background: #E4E7EB; overflow: hidden;"><div class="fillbar" style="height: 4px; width: 0%; background: #142B44; animation: fill4 15s linear infinite;"></div></div><span class="mono lab" style="font-size: 12px; letter-spacing: 0.08em; animation-delay: 9s;">04 COLLECT</span></div>
+<div style="flex: 1; display: flex; flex-direction: column; gap: 8px;"><div style="height: 4px; border-radius: 2px; background: #E4E7EB; overflow: hidden;"><div class="fillbar" style="height: 4px; width: 0%; background: #D9480F; animation: fill5 15s linear infinite;"></div></div><span class="mono lab" style="font-size: 12px; letter-spacing: 0.08em; animation-delay: 12s;">05 SUBMIT</span></div>
+</div>
+
+<div class="st act" style="left: 0; top: 0; width: 720px; height: 420px; animation-delay: 0s;">
+<div class="st" style="left: 88px; top: 98px; width: 236px; height: 296px; background: #EEF0F2; border: 1px solid #D9DCE1; border-radius: 6px;"></div>
+<div class="st" style="left: 79px; top: 91px; width: 236px; height: 296px; background: #F5F6F7; border: 1px solid #D9DCE1; border-radius: 6px;"></div>
+<div class="st" style="left: 70px; top: 84px; width: 236px; height: 296px; perspective: 900px;">
+<div class="st" style="left: 0; top: 0; width: 236px; height: 296px; background: #FFFFFF; border: 1px solid #C9CED6; border-radius: 6px; overflow: hidden; box-sizing: border-box;">
+<p class="st mono" style="margin: 0; left: 16px; top: 14px; font-size: 10px; color: #5D6B7E;">PROTOCOL SYN-014 · v2.0</p>
+<div class="st" style="left: 16px; top: 34px; width: 150px; height: 8px; border-radius: 4px; background: #142B44;"></div>
+<div class="st fade" style="left: 12px; top: 54px; width: 210px; height: 16px; border-radius: 3px; background: rgba(31,78,121,0.12); animation-delay: 1.5s;"></div>
+<p class="st" style="margin: 0; left: 16px; top: 55px; font-size: 11px; font-weight: 600; color: #142B44;">5  Study population</p>
+<div class="st" style="left: 16px; top: 78px; width: 200px; height: 5px; background: #E1E4E8;"></div>
+<div class="st" style="left: 16px; top: 90px; width: 176px; height: 5px; background: #E1E4E8;"></div>
+<div class="st" style="left: 16px; top: 102px; width: 188px; height: 5px; background: #E1E4E8;"></div>
+<div class="st fade" style="left: 12px; top: 120px; width: 212px; height: 96px; border-radius: 3px; background: rgba(31,78,121,0.09); animation-delay: 1.9s;"></div>
+<p class="st" style="margin: 0; left: 16px; top: 122px; font-size: 11px; font-weight: 600; color: #142B44;">7  Schedule of assessments</p>
+<div class="st" style="left: 16px; top: 142px; width: 202px; height: 68px; border: 1px solid #C9CED6; box-sizing: border-box; background-color: #FFFFFF; background-image: linear-gradient(#E4E7EB 1px, transparent 1px), linear-gradient(90deg, #E4E7EB 1px, transparent 1px); background-size: 33px 17px;"></div>
+<div class="st fade" style="left: 12px; top: 226px; width: 210px; height: 16px; border-radius: 3px; background: rgba(31,78,121,0.12); animation-delay: 2.5s;"></div>
+<p class="st" style="margin: 0; left: 16px; top: 227px; font-size: 11px; font-weight: 600; color: #142B44;">9  Safety reporting</p>
+<div class="st" style="left: 16px; top: 250px; width: 196px; height: 5px; background: #E1E4E8;"></div>
+<div class="st" style="left: 16px; top: 262px; width: 170px; height: 5px; background: #E1E4E8;"></div>
+<div class="st beam" style="left: 0; top: 0; width: 236px; height: 22px; background: rgba(217,72,15,0.10); border-bottom: 2px solid #D9480F; animation-delay: 0.95s;"></div>
+</div>
+<div class="st turn" style="left: 0; top: 0; width: 236px; height: 296px; background: #FFFFFF; border: 1px solid #C9CED6; border-radius: 6px; box-sizing: border-box; animation-delay: 0.1s;">
+<div style="margin: 34px 16px 0; height: 8px; width: 120px; border-radius: 4px; background: #142B44;"></div>
+<div style="margin: 18px 16px 0; height: 5px; background: #E1E4E8;"></div>
+<div style="margin: 7px 16px 0; height: 5px; width: 150px; background: #E1E4E8;"></div>
+<div style="margin: 7px 16px 0; height: 5px; background: #E1E4E8;"></div>
+</div>
+<div class="st turn" style="left: 0; top: 0; width: 236px; height: 296px; background: #FFFFFF; border: 1px solid #C9CED6; border-radius: 6px; box-sizing: border-box; animation-delay: 0.45s;">
+<div style="margin: 34px 16px 0; height: 8px; width: 90px; border-radius: 4px; background: #142B44;"></div>
+<div style="margin: 18px 16px 0; height: 5px; width: 180px; background: #E1E4E8;"></div>
+<div style="margin: 7px 16px 0; height: 5px; background: #E1E4E8;"></div>
+</div>
+</div>
+<div class="st" style="left: 368px; top: 96px; width: 310px; display: flex; flex-direction: column; gap: 16px;">
+<p class="mono" style="margin: 0; font-size: 12px; letter-spacing: 0.08em; color: #A3360A;">PARSING PROTOCOL</p>
+<div class="rt" style="display: flex; align-items: center; gap: 12px; animation-delay: 0.6s;"><span style="flex: 0 0 auto; width: 26px; height: 26px; border-radius: 50%; background: #0E7C5A; display: flex; align-items: center; justify-content: center;"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7"></path></svg></span><span style="font-size: 17px; font-weight: 500;">Objectives &amp; endpoints</span></div>
+<div class="rt" style="display: flex; align-items: center; gap: 12px; animation-delay: 1.0s;"><span style="flex: 0 0 auto; width: 26px; height: 26px; border-radius: 50%; background: #0E7C5A; display: flex; align-items: center; justify-content: center;"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7"></path></svg></span><span style="font-size: 17px; font-weight: 500;">Eligibility criteria</span></div>
+<div class="rt" style="display: flex; align-items: center; gap: 12px; animation-delay: 1.4s;"><span style="flex: 0 0 auto; width: 26px; height: 26px; border-radius: 50%; background: #0E7C5A; display: flex; align-items: center; justify-content: center;"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7"></path></svg></span><span style="font-size: 17px; font-weight: 500;">Visit schedule &amp; windows</span></div>
+<div class="rt" style="display: flex; align-items: center; gap: 12px; animation-delay: 1.9s;"><span style="flex: 0 0 auto; width: 26px; height: 26px; border-radius: 50%; background: #0E7C5A; display: flex; align-items: center; justify-content: center;"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7"></path></svg></span><span style="font-size: 17px; font-weight: 500;">Assessments per visit</span></div>
+<div class="rt" style="display: flex; align-items: center; gap: 12px; animation-delay: 2.4s;"><span style="flex: 0 0 auto; width: 26px; height: 26px; border-radius: 50%; background: #0E7C5A; display: flex; align-items: center; justify-content: center;"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7"></path></svg></span><span style="font-size: 17px; font-weight: 500;">Safety reporting</span></div>
+</div>
+</div>
+
+<div class="st act" style="left: 0; top: 0; width: 720px; height: 420px; animation-delay: 3s;">
+<div class="st" style="left: 36px; top: 150px; width: 112px; height: 144px; background: #FFFFFF; border: 1px solid #C9CED6; border-radius: 6px;">
+<div style="margin: 16px 12px 0; height: 6px; width: 64px; border-radius: 3px; background: #142B44;"></div>
+<div style="margin: 12px 12px 0; height: 4px; background: #E1E4E8;"></div>
+<div style="margin: 6px 12px 0; height: 4px; width: 60px; background: #E1E4E8;"></div>
+<div style="margin: 10px 12px 0; height: 40px; border: 1px solid #F3B9A3; background: rgba(31,78,121,0.08);"></div>
+<div style="margin: 10px 12px 0; height: 4px; background: #E1E4E8;"></div>
+</div>
+<p class="st mono" style="margin: 0; left: 36px; top: 304px; font-size: 12px; color: #5D6B7E;">protocol.pdf</p>
+<div class="st fade" style="left: 156px; top: 222px; width: 74px; height: 0; border-top: 2px dashed #D9480F; animation-delay: 3.2s;"></div>
+<svg class="st fade" style="left: 222px; top: 215px; animation-delay: 3.2s;" width="14" height="16" viewBox="0 0 14 16" aria-hidden="true"><path d="M2 2l9 6-9 6" fill="none" stroke="#D9480F" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+<div class="st" style="left: 246px; top: 84px; width: 444px;">
+<div class="fade mono" style="display: grid; grid-template-columns: 150px repeat(5, minmax(0, 1fr)); height: 30px; align-items: center; font-size: 12px; color: #5D6B7E; animation-delay: 3.15s;"><span>ASSESSMENT</span><span style="text-align: center;">SCR</span><span style="text-align: center;">D1</span><span style="text-align: center;">D8</span><span style="text-align: center;">D15</span><span style="text-align: center;">EOT</span></div>
+<div class="rt" style="display: grid; grid-template-columns: 150px repeat(5, minmax(0, 1fr)); height: 38px; align-items: center; border-top: 1px solid #E4E7EB; animation-delay: 3.3s;"><span style="font-size: 15px;">Informed consent</span><span style="display: flex; justify-content: center;"><span class="pop" style="width: 14px; height: 14px; border-radius: 50%; background: #142B44; animation-delay: 3.9s;"></span></span><span></span><span></span><span></span><span></span></div>
+<div class="rt" style="display: grid; grid-template-columns: 150px repeat(5, minmax(0, 1fr)); height: 38px; align-items: center; border-top: 1px solid #E4E7EB; animation-delay: 3.4s;"><span style="font-size: 15px;">Demographics</span><span style="display: flex; justify-content: center;"><span class="pop" style="width: 14px; height: 14px; border-radius: 50%; background: #142B44; animation-delay: 3.95s;"></span></span><span></span><span></span><span></span><span></span></div>
+<div class="rt" style="display: grid; grid-template-columns: 150px repeat(5, minmax(0, 1fr)); height: 38px; align-items: center; border-top: 1px solid #E4E7EB; animation-delay: 3.5s;"><span style="font-size: 15px;">Vital signs</span><span style="display: flex; justify-content: center;"><span class="pop" style="width: 14px; height: 14px; border-radius: 50%; background: #142B44; animation-delay: 4.0s;"></span></span><span style="display: flex; justify-content: center;"><span class="pop" style="width: 14px; height: 14px; border-radius: 50%; background: #142B44; animation-delay: 4.22s;"></span></span><span style="display: flex; justify-content: center;"><span class="pop" style="width: 14px; height: 14px; border-radius: 50%; background: #142B44; animation-delay: 4.44s;"></span></span><span style="display: flex; justify-content: center;"><span class="pop" style="width: 14px; height: 14px; border-radius: 50%; background: #142B44; animation-delay: 4.66s;"></span></span><span style="display: flex; justify-content: center;"><span class="pop" style="width: 14px; height: 14px; border-radius: 50%; background: #142B44; animation-delay: 4.88s;"></span></span></div>
+<div class="rt" style="display: grid; grid-template-columns: 150px repeat(5, minmax(0, 1fr)); height: 38px; align-items: center; border-top: 1px solid #E4E7EB; animation-delay: 3.6s;"><span style="font-size: 15px;">Laboratory</span><span style="display: flex; justify-content: center;"><span class="pop" style="width: 14px; height: 14px; border-radius: 50%; background: #142B44; animation-delay: 4.03s;"></span></span><span style="display: flex; justify-content: center;"><span class="pop" style="width: 14px; height: 14px; border-radius: 50%; background: #142B44; animation-delay: 4.25s;"></span></span><span></span><span style="display: flex; justify-content: center;"><span class="pop" style="width: 14px; height: 14px; border-radius: 50%; background: #142B44; animation-delay: 4.69s;"></span></span><span style="display: flex; justify-content: center;"><span class="pop" style="width: 14px; height: 14px; border-radius: 50%; background: #142B44; animation-delay: 4.91s;"></span></span></div>
+<div class="rt" style="display: grid; grid-template-columns: 150px repeat(5, minmax(0, 1fr)); height: 38px; align-items: center; border-top: 1px solid #E4E7EB; animation-delay: 3.7s;"><span style="font-size: 15px;">ECG</span><span style="display: flex; justify-content: center;"><span class="pop" style="width: 14px; height: 14px; border-radius: 50%; background: #142B44; animation-delay: 4.06s;"></span></span><span></span><span></span><span></span><span style="display: flex; justify-content: center;"><span class="pop" style="width: 14px; height: 14px; border-radius: 50%; background: #142B44; animation-delay: 4.94s;"></span></span></div>
+<div class="rt" style="display: grid; grid-template-columns: 150px repeat(5, minmax(0, 1fr)); height: 38px; align-items: center; border-top: 1px solid #E4E7EB; border-bottom: 1px solid #E4E7EB; animation-delay: 3.8s;"><span style="font-size: 15px;">Adverse events</span><span></span><span style="display: flex; justify-content: center;"><span class="pop" style="width: 14px; height: 14px; border-radius: 50%; background: #D9480F; animation-delay: 4.31s;"></span></span><span style="display: flex; justify-content: center;"><span class="pop" style="width: 14px; height: 14px; border-radius: 50%; background: #D9480F; animation-delay: 4.53s;"></span></span><span style="display: flex; justify-content: center;"><span class="pop" style="width: 14px; height: 14px; border-radius: 50%; background: #D9480F; animation-delay: 4.75s;"></span></span><span style="display: flex; justify-content: center;"><span class="pop" style="width: 14px; height: 14px; border-radius: 50%; background: #D9480F; animation-delay: 4.97s;"></span></span></div>
+<div style="display: flex; flex-wrap: wrap; gap: 8px; margin-top: 16px;">
+<span class="pop mono" style="padding: 7px 12px; border-radius: 3px; background: #142B44; color: #FFFFFF; font-size: 13px; animation-delay: 5.1s;">5 visits</span>
+<span class="pop mono" style="padding: 7px 12px; border-radius: 3px; background: #FFFFFF; border: 1px solid #D9DCE1; font-size: 13px; animation-delay: 5.3s;">6 assessments</span>
+<span class="pop mono" style="padding: 7px 12px; border-radius: 3px; background: #FDEDE7; border: 1px solid #F3B9A3; color: #A3360A; font-size: 13px; animation-delay: 5.5s;">window ±2 days</span>
+</div>
+</div>
+</div>
+
+<div class="st act" style="left: 0; top: 0; width: 720px; height: 420px; animation-delay: 6s;">
+<div class="st" style="left: 36px; top: 84px; width: 340px; box-sizing: border-box; background: #FFFFFF; border: 1px solid #D9DCE1; border-radius: 6px; padding: 18px; display: flex; flex-direction: column; gap: 12px;">
+<div style="display: flex; align-items: center; justify-content: space-between; gap: 8px;"><span style="font-size: 18px; font-weight: 600;">Vital Signs <span class="mono" style="font-size: 13px; color: #5D6B7E;">· VS</span></span><span class="mono" style="font-size: 11px; padding: 4px 8px; border-radius: 3px; background: #E0F3EA; color: #0B6B4D;">CDASH</span></div>
+<div class="up" style="display: grid; grid-template-columns: 112px 104px 1fr; align-items: center; gap: 10px; animation-delay: 6.3s;"><span style="font-size: 15px;">Systolic BP</span><span class="mono" style="height: 34px; border: 1px solid #C9CED6; border-radius: 8px; display: flex; align-items: center; padding: 0 10px; font-size: 14px;">128 mmHg</span><span class="mono" style="font-size: 12px; color: #A3360A;">SYSBP</span></div>
+<div class="up" style="display: grid; grid-template-columns: 112px 104px 1fr; align-items: center; gap: 10px; animation-delay: 6.6s;"><span style="font-size: 15px;">Diastolic BP</span><span class="mono" style="height: 34px; border: 1px solid #C9CED6; border-radius: 8px; display: flex; align-items: center; padding: 0 10px; font-size: 14px;">82 mmHg</span><span class="mono" style="font-size: 12px; color: #A3360A;">DIABP</span></div>
+<div class="up" style="display: grid; grid-template-columns: 112px 104px 1fr; align-items: center; gap: 10px; animation-delay: 6.9s;"><span style="font-size: 15px;">Pulse</span><span class="mono" style="height: 34px; border: 1px solid #C9CED6; border-radius: 8px; display: flex; align-items: center; padding: 0 10px; font-size: 14px;">71 bpm</span><span class="mono" style="font-size: 12px; color: #A3360A;">PULSE</span></div>
+<div class="up" style="display: grid; grid-template-columns: 112px 104px 1fr; align-items: center; gap: 10px; animation-delay: 7.2s;"><span style="font-size: 15px;">Position</span><span class="mono" style="height: 34px; border: 1px solid #C9CED6; border-radius: 8px; display: flex; align-items: center; justify-content: space-between; padding: 0 10px; font-size: 14px;">Sitting <span>▾</span></span><span class="mono" style="font-size: 12px; color: #A3360A;">VSPOS</span></div>
+</div>
+<div class="st" style="left: 400px; top: 84px; width: 290px; display: flex; flex-direction: column; gap: 10px;">
+<p class="mono" style="margin: 0 0 2px; font-size: 12px; letter-spacing: 0.08em; color: #A3360A;">GENERATED SPEC</p>
+<div class="rt mono" style="background: #FFFFFF; border: 1px solid #D9DCE1; border-radius: 4px; padding: 10px 12px; font-size: 13px; animation-delay: 6.8s;">VSTESTCD = SYSBP · DIABP · PULSE</div>
+<div class="rt mono" style="background: #FFFFFF; border: 1px solid #D9DCE1; border-radius: 4px; padding: 10px 12px; font-size: 13px; animation-delay: 7.1s;">VSORRESU = mmHg · beats/min</div>
+<div class="rt mono" style="background: #FDEDE7; border: 1px solid #F3B9A3; border-radius: 4px; padding: 10px 12px; font-size: 13px; color: #A3360A; animation-delay: 7.4s;">Edit check: 60 ≤ SYSBP ≤ 250</div>
+<div class="rt mono" style="background: #142B44; border-radius: 4px; padding: 10px 12px; font-size: 13px; line-height: 1.5; color: #FFFFFF; animation-delay: 7.7s;">Codelist POSITION<br>SITTING · STANDING · SUPINE</div>
+</div>
+<div class="st stamp" style="left: 262px; top: 262px; width: 114px; height: 114px; border-radius: 50%; border: 3px solid #0E7C5A; background: rgba(255,255,255,0.96); display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 2px; animation-delay: 8.0s;">
+<svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="#0B6B4D" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7"></path></svg>
+<span class="mono" style="font-size: 12px; font-weight: 600; letter-spacing: 0.06em; color: #0B6B4D;">APPROVED</span>
+<span class="mono" style="font-size: 10px; color: #0B6B4D;">DM review</span>
+</div>
+</div>
+
+<div class="st act" style="left: 0; top: 0; width: 720px; height: 420px; animation-delay: 9s;">
+<div class="st rt" style="left: 30px; top: 100px; width: 168px; height: 66px; box-sizing: border-box; background: #FFFFFF; border: 1px solid #D9DCE1; border-radius: 6px; padding: 12px 14px; display: flex; align-items: center; gap: 10px; animation-delay: 9.15s;"><span class="live" style="flex: 0 0 auto; width: 10px; height: 10px; border-radius: 50%; background: #0E7C5A;"></span><span><span style="display: block; font-size: 16px; font-weight: 600;">Site 101</span><span style="display: block; font-size: 13px; color: #5D6B7E;">Boston, MA</span></span></div>
+<div class="st rt" style="left: 30px; top: 190px; width: 168px; height: 66px; box-sizing: border-box; background: #FFFFFF; border: 1px solid #D9DCE1; border-radius: 6px; padding: 12px 14px; display: flex; align-items: center; gap: 10px; animation-delay: 9.3s;"><span class="live" style="flex: 0 0 auto; width: 10px; height: 10px; border-radius: 50%; background: #0E7C5A;"></span><span><span style="display: block; font-size: 16px; font-weight: 600;">Site 102</span><span style="display: block; font-size: 13px; color: #5D6B7E;">Austin, TX</span></span></div>
+<div class="st rt" style="left: 30px; top: 280px; width: 168px; height: 66px; box-sizing: border-box; background: #FFFFFF; border: 1px solid #D9DCE1; border-radius: 6px; padding: 12px 14px; display: flex; align-items: center; gap: 10px; animation-delay: 9.45s;"><span class="live" style="flex: 0 0 auto; width: 10px; height: 10px; border-radius: 50%; background: #0E7C5A;"></span><span><span style="display: block; font-size: 16px; font-weight: 600;">Site 103</span><span style="display: block; font-size: 13px; color: #5D6B7E;">Toronto, ON</span></span></div>
+<div class="st fade" style="left: 202px; top: 133px; width: 152px; height: 0; border-top: 2px dashed #C9CED6; animation-delay: 9.4s;"></div>
+<div class="st fade" style="left: 202px; top: 223px; width: 152px; height: 0; border-top: 2px dashed #C9CED6; animation-delay: 9.4s;"></div>
+<div class="st fade" style="left: 202px; top: 313px; width: 152px; height: 0; border-top: 2px dashed #C9CED6; animation-delay: 9.4s;"></div>
+<div class="st pkt" style="left: 200px; top: 128px; width: 12px; height: 12px; border-radius: 50%; background: #D9480F; animation-delay: 9.55s;"></div>
+<div class="st pkt" style="left: 200px; top: 128px; width: 12px; height: 12px; border-radius: 50%; background: #D9480F; animation-delay: 10.55s;"></div>
+<div class="st pkt" style="left: 200px; top: 218px; width: 12px; height: 12px; border-radius: 50%; background: #D9480F; animation-delay: 9.9s;"></div>
+<div class="st pkt" style="left: 200px; top: 218px; width: 12px; height: 12px; border-radius: 50%; background: #D9480F; animation-delay: 10.9s;"></div>
+<div class="st pkt" style="left: 200px; top: 308px; width: 12px; height: 12px; border-radius: 50%; background: #D9480F; animation-delay: 10.2s;"></div>
+<div class="st pkt" style="left: 200px; top: 308px; width: 12px; height: 12px; border-radius: 50%; background: #D9480F; animation-delay: 11.2s;"></div>
+<div class="st" style="left: 360px; top: 84px; width: 330px; box-sizing: border-box; background: #FFFFFF; border: 1px solid #D9DCE1; border-radius: 6px; padding: 14px 16px; display: flex; flex-direction: column; gap: 6px;">
+<div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 4px;"><span style="display: flex; align-items: center; gap: 8px; font-size: 15px; font-weight: 600;"><span class="live" style="width: 8px; height: 8px; border-radius: 50%; background: #0E7C5A;"></span>FlashEDC · live</span><span class="mono" style="font-size: 11px; color: #5D6B7E;">SYN-014</span></div>
+<div class="mono" style="display: grid; grid-template-columns: 1.3fr 0.7fr 0.8fr 1.2fr; font-size: 11px; color: #5D6B7E; padding: 0 8px;"><span>SUBJECT</span><span>VISIT</span><span>SYSBP</span><span>STATUS</span></div>
+<div class="up mono" style="display: grid; grid-template-columns: 1.3fr 0.7fr 0.8fr 1.2fr; align-items: center; height: 34px; padding: 0 8px; border-radius: 8px; font-size: 13px; animation-delay: 9.6s;"><span>101-001</span><span>D1</span><span>128</span><span style="color: #0B6B4D;">✓ Clean</span></div>
+<div class="up mono" style="display: grid; grid-template-columns: 1.3fr 0.7fr 0.8fr 1.2fr; align-items: center; height: 34px; padding: 0 8px; border-radius: 8px; font-size: 13px; animation-delay: 9.95s;"><span>102-004</span><span>D1</span><span>134</span><span style="color: #0B6B4D;">✓ Clean</span></div>
+<div class="qrow mono" style="display: grid; grid-template-columns: 1.3fr 0.7fr 0.8fr 1.2fr; align-items: center; height: 34px; padding: 0 8px; border-radius: 8px; font-size: 13px; animation-delay: 10.0s;"><span>103-002</span><span>D8</span><span style="display: grid;"><span class="qa" style="grid-area: 1 / 1; color: #A3360A; font-weight: 600; animation-delay: 10.0s;">260</span><span class="qb" style="grid-area: 1 / 1; animation-delay: 10.0s;">126</span></span><span style="display: grid;"><span class="qa" style="grid-area: 1 / 1; color: #A3360A; font-weight: 600; animation-delay: 10.0s;">⚠ Query</span><span class="qb" style="grid-area: 1 / 1; color: #0B6B4D; animation-delay: 10.0s;">✓ Resolved</span></span></div>
+<div class="up mono" style="display: grid; grid-template-columns: 1.3fr 0.7fr 0.8fr 1.2fr; align-items: center; height: 34px; padding: 0 8px; border-radius: 8px; font-size: 13px; animation-delay: 10.95s;"><span>101-003</span><span>D8</span><span>119</span><span style="color: #0B6B4D;">✓ Clean</span></div>
+<div style="margin-top: 10px; display: flex; justify-content: space-between; font-size: 13px;"><span style="color: #5D6B7E;">Enrollment</span><span class="mono">24 / 36</span></div>
+<div style="height: 8px; border-radius: 4px; background: #EEF0F2; overflow: hidden;"><div class="bar" style="height: 8px; border-radius: 4px; background: #0E7C5A; animation-delay: 9.3s;"></div></div>
+</div>
+</div>
+
+<div class="st act final" style="left: 0; top: 0; width: 720px; height: 420px; animation-delay: 12s;">
+<div class="st" style="left: 36px; top: 88px; width: 118px; display: flex; flex-direction: column; gap: 8px;">
+<p class="mono" style="margin: 0 0 2px; font-size: 12px; letter-spacing: 0.08em; color: #5D6B7E;">SDTM</p>
+<span class="pop mono" style="height: 40px; border-radius: 4px; background: #FFFFFF; border: 1px solid #D9DCE1; display: flex; align-items: center; justify-content: center; font-size: 15px; font-weight: 600; animation-delay: 12.15s;">DM</span>
+<span class="pop mono" style="height: 40px; border-radius: 4px; background: #FFFFFF; border: 1px solid #D9DCE1; display: flex; align-items: center; justify-content: center; font-size: 15px; font-weight: 600; animation-delay: 12.25s;">VS</span>
+<span class="pop mono" style="height: 40px; border-radius: 4px; background: #FFFFFF; border: 1px solid #D9DCE1; display: flex; align-items: center; justify-content: center; font-size: 15px; font-weight: 600; animation-delay: 12.35s;">AE</span>
+<span class="pop mono" style="height: 40px; border-radius: 4px; background: #FFFFFF; border: 1px solid #D9DCE1; display: flex; align-items: center; justify-content: center; font-size: 15px; font-weight: 600; animation-delay: 12.45s;">LB</span>
+</div>
+<svg class="st fade" style="left: 164px; top: 186px; animation-delay: 12.6s;" width="28" height="20" viewBox="0 0 28 20" aria-hidden="true"><path d="M2 10h22M17 3l7 7-7 7" fill="none" stroke="#D9480F" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+<div class="st" style="left: 202px; top: 88px; width: 118px; display: flex; flex-direction: column; gap: 8px;">
+<p class="mono" style="margin: 0 0 2px; font-size: 12px; letter-spacing: 0.08em; color: #5D6B7E;">ADaM</p>
+<span class="pop mono" style="height: 40px; border-radius: 4px; background: #142B44; color: #FFFFFF; display: flex; align-items: center; justify-content: center; font-size: 15px; font-weight: 600; animation-delay: 12.7s;">ADSL</span>
+<span class="pop mono" style="height: 40px; border-radius: 4px; background: #142B44; color: #FFFFFF; display: flex; align-items: center; justify-content: center; font-size: 15px; font-weight: 600; animation-delay: 12.8s;">ADVS</span>
+<span class="pop mono" style="height: 40px; border-radius: 4px; background: #142B44; color: #FFFFFF; display: flex; align-items: center; justify-content: center; font-size: 15px; font-weight: 600; animation-delay: 12.9s;">ADAE</span>
+</div>
+<svg class="st fade" style="left: 330px; top: 186px; animation-delay: 13.0s;" width="28" height="20" viewBox="0 0 28 20" aria-hidden="true"><path d="M2 10h22M17 3l7 7-7 7" fill="none" stroke="#D9480F" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+<div class="st" style="left: 368px; top: 88px; width: 138px; display: flex; flex-direction: column; gap: 8px;">
+<p class="mono" style="margin: 0 0 2px; font-size: 12px; letter-spacing: 0.08em; color: #5D6B7E;">TLFs</p>
+<span class="pop mono" style="height: 40px; border-radius: 4px; background: #FDEDE7; border: 1px solid #F3B9A3; color: #A3360A; display: flex; align-items: center; justify-content: center; font-size: 14px; font-weight: 600; animation-delay: 13.1s;">T 14.1.1</span>
+<span class="pop mono" style="height: 40px; border-radius: 4px; background: #FDEDE7; border: 1px solid #F3B9A3; color: #A3360A; display: flex; align-items: center; justify-content: center; font-size: 14px; font-weight: 600; animation-delay: 13.2s;">T 14.3.1</span>
+<span class="pop mono" style="height: 40px; border-radius: 4px; background: #FDEDE7; border: 1px solid #F3B9A3; color: #A3360A; display: flex; align-items: center; justify-content: center; font-size: 14px; font-weight: 600; animation-delay: 13.3s;">F 14.2.1</span>
+</div>
+<div class="st pop" style="left: 530px; top: 84px; width: 160px; box-sizing: border-box; background: #FFFFFF; border: 2px solid #142B44; border-radius: 6px; padding: 16px; display: flex; flex-direction: column; gap: 10px; animation-delay: 13.5s;">
+<svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="#142B44" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 7l9-4 9 4-9 4-9-4z"></path><path d="M3 7v10l9 4 9-4V7"></path><path d="M12 11v10"></path></svg>
+<span style="font-size: 16px; font-weight: 600; line-height: 1.2;">Submission package</span>
+<span class="mono" style="font-size: 12px; line-height: 1.7; color: #475467;">define.xml<br>acrf.pdf<br>csdrg.pdf<br>adrg.pdf</span>
+<span class="pop mono" style="font-size: 11px; padding: 5px 8px; border-radius: 3px; background: #E0F3EA; color: #0B6B4D; text-align: center; animation-delay: 13.9s;">0 conformance errors</span>
+<span class="pop" style="font-size: 13px; font-weight: 600; padding: 8px; border-radius: 3px; background: #142B44; color: #FFFFFF; text-align: center; animation-delay: 14.2s;">Ready to file ✓</span>
+</div>
+</div>
+
+<img class="st bob" src="/images/clindaddy-mark.png" alt="" style="left: 26px; top: 424px; width: 52px; height: 90px; object-fit: contain;">
+<div class="st bub" style="left: 70px; top: 384px; padding: 8px 12px; background: #FFFFFF; border: 1.5px solid #0E7C5A; border-radius: 6px 14px 14px 4px; font-size: 14px; font-weight: 600; color: #0B6B4D; white-space: nowrap; animation-delay: 8.05s;">Looks right. Approved.</div>
+<div class="st bub" style="left: 70px; top: 384px; padding: 8px 12px; background: #FFFFFF; border: 1.5px solid #142B44; border-radius: 6px 14px 14px 4px; font-size: 14px; font-weight: 600; color: #142B44; white-space: nowrap; animation-delay: 14.0s;">Ready to file!</div>
+
+<div class="st" style="left: 94px; top: 436px; width: 600px; height: 64px;">
+<div class="st act" style="left: 0; top: 0; animation-delay: 0s;"><p style="margin: 0; font-family: 'Newsreader', Georgia, serif; font-size: 24px; font-weight: 500;">Reading the protocol</p><p style="margin: 4px 0 0; font-size: 15px; color: #475467;">Every page: objectives, eligibility, visit schedule, endpoints.</p></div>
+<div class="st act" style="left: 0; top: 0; animation-delay: 3s;"><p style="margin: 0; font-family: 'Newsreader', Georgia, serif; font-size: 24px; font-weight: 500;">Analyzing the design</p><p style="margin: 4px 0 0; font-size: 15px; color: #475467;">Visits, assessments and timing become a structured study model.</p></div>
+<div class="st act" style="left: 0; top: 0; animation-delay: 6s;"><p style="margin: 0; font-family: 'Newsreader', Georgia, serif; font-size: 24px; font-weight: 500;">Extracting the build</p><p style="margin: 4px 0 0; font-size: 15px; color: #475467;">CDASH forms, codelists and edit checks, drafted for your sign-off.</p></div>
+<div class="st act" style="left: 0; top: 0; animation-delay: 9s;"><p style="margin: 0; font-family: 'Newsreader', Georgia, serif; font-size: 24px; font-weight: 500;">Collecting the data</p><p style="margin: 4px 0 0; font-size: 15px; color: #475467;">Sites enter data in FlashEDC; edit checks raise queries instantly.</p></div>
+<div class="st act final" style="left: 0; top: 0; animation-delay: 12s;"><p style="margin: 0; font-family: 'Newsreader', Georgia, serif; font-size: 24px; font-weight: 500;">Submitting with confidence</p><p style="margin: 4px 0 0; font-size: 15px; color: #475467;">SDTM, ADaM, TLFs and Define-XML, validated and packaged.</p></div>
+</div>
+
+</div>
+</section>
+
+<section style="border-top: 1px solid #D9DCE1; background: #FFFFFF;">
+<div style="max-width: 1240px; margin: 0 auto; padding: 104px 40px; display: flex; flex-wrap: wrap; gap: 56px;">
+<div style="flex: 1 1 320px; min-width: 0; display: flex; flex-direction: column; gap: 16px;">
+<h2 style="margin: 0; font-family: 'Newsreader', Georgia, serif; font-weight: 400; font-size: 42px; line-height: 1.1; letter-spacing: -0.015em;">What changes for your team</h2>
+<p style="margin: 0; font-size: 16px; line-height: 1.6; color: #475467; max-width: 36ch;">The work still gets reviewed by the people accountable for it. They stop rebuilding it by hand.</p>
+</div>
+<div style="flex: 2 1 640px; min-width: 0; overflow-x: auto;">
+<table style="width: 100%; border-collapse: collapse; font-size: 15px; line-height: 1.5;">
+<thead>
+<tr style="text-align: left; color: #5D6B7E; font-size: 13px;">
+<th style="padding: 0 16px 12px 0; font-weight: 500; border-bottom: 1px solid #101828; width: 26%;">Task</th>
+<th style="padding: 0 16px 12px 0; font-weight: 500; border-bottom: 1px solid #101828; width: 34%;">Usually</th>
+<th style="padding: 0 0 12px 0; font-weight: 500; border-bottom: 1px solid #101828; width: 40%;">With ClinDaddy</th>
+</tr>
+</thead>
+<tbody>
+<tr><td style="padding: 18px 16px 18px 0; border-bottom: 1px solid #D9DCE1; font-weight: 500;">Database build</td><td style="padding: 18px 16px 18px 0; border-bottom: 1px solid #D9DCE1; color: #475467;">Specified and built by hand from the protocol</td><td style="padding: 18px 0; border-bottom: 1px solid #D9DCE1;">Drafted from the protocol, reviewed by your data manager</td></tr>
+<tr><td style="padding: 18px 16px 18px 0; border-bottom: 1px solid #D9DCE1; font-weight: 500;">Edit checks</td><td style="padding: 18px 16px 18px 0; border-bottom: 1px solid #D9DCE1; color: #475467;">Written and tested one by one</td><td style="padding: 18px 0; border-bottom: 1px solid #D9DCE1;">Generated from the specification, then approved</td></tr>
+<tr><td style="padding: 18px 16px 18px 0; border-bottom: 1px solid #D9DCE1; font-weight: 500;">SDTM and ADaM</td><td style="padding: 18px 16px 18px 0; border-bottom: 1px solid #D9DCE1; color: #475467;">Programmed and double-programmed per study</td><td style="padding: 18px 0; border-bottom: 1px solid #D9DCE1;">Generated, with independent QC code you can rerun</td></tr>
+<tr><td style="padding: 18px 16px 18px 0; border-bottom: 1px solid #D9DCE1; font-weight: 500;">Submission files</td><td style="padding: 18px 16px 18px 0; border-bottom: 1px solid #D9DCE1; color: #475467;">Assembled at the end, under deadline</td><td style="padding: 18px 0; border-bottom: 1px solid #D9DCE1;">Define-XML and reviewer guides produced with the datasets</td></tr>
+</tbody>
+</table>
+</div>
+</div>
+</section>
+
+<section id="products" style="border-top: 1px solid #D9DCE1;">
+<div style="max-width: 1240px; margin: 0 auto; padding: 104px 40px; display: flex; flex-direction: column; gap: 48px;">
+<h2 style="margin: 0; font-family: 'Newsreader', Georgia, serif; font-weight: 400; font-size: 42px; line-height: 1.1; letter-spacing: -0.015em; max-width: 22ch;">Two products on one data model. Start with either.</h2>
+<div style="display: flex; flex-wrap: wrap; border-top: 1px solid #101828;">
+<article style="flex: 1 1 440px; min-width: 0; padding: 32px 48px 8px 0; display: flex; flex-direction: column; gap: 20px;">
+<div style="display: flex; align-items: baseline; gap: 16px; flex-wrap: wrap;"><h3 style="margin: 0; font-family: 'Newsreader', Georgia, serif; font-weight: 500; font-size: 32px;">FlashEDC</h3><span style="font-size: 14px; color: #5D6B7E;">Study build and data collection</span></div>
+<p style="margin: 0; font-size: 16px; line-height: 1.6; color: #475467; max-width: 46ch;">Reads the protocol, drafts the visits, CDASH forms, codelists and edit checks, and runs the study in its own EDC once your team approves the design.</p>
+<dl style="margin: 0; display: grid; grid-template-columns: 110px 1fr; row-gap: 12px; column-gap: 16px; font-size: 15px;">
+<dt style="color: #5D6B7E;">You provide</dt><dd style="margin: 0;">Protocol (PDF)</dd>
+<dt style="color: #5D6B7E;">You receive</dt><dd style="margin: 0;">Review-ready study build, then a live EDC</dd>
+<dt style="color: #5D6B7E;">Changes</dt><dd style="margin: 0;">New design version on every change; nothing overwritten</dd>
+</dl>
+<a href="#pilot" style="font-size: 15px; font-weight: 500; text-underline-offset: 4px;">Request a FlashEDC demo</a>
+</article>
+<article style="flex: 1 1 440px; min-width: 0; padding: 32px 0 8px 48px; border-left: 1px solid #D9DCE1; display: flex; flex-direction: column; gap: 20px;">
+<div style="display: flex; align-items: baseline; gap: 16px; flex-wrap: wrap;"><h3 style="margin: 0; font-family: 'Newsreader', Georgia, serif; font-weight: 500; font-size: 32px;">FlashAnalysis</h3><span style="font-size: 14px; color: #5D6B7E;">Standards and submission outputs</span></div>
+<p style="margin: 0; font-size: 16px; line-height: 1.6; color: #475467; max-width: 46ch;">Takes raw data from FlashEDC or any other EDC and produces SDTM, ADaM, TLFs and the files a reviewer expects, with full traceability.</p>
+<dl style="margin: 0; display: grid; grid-template-columns: 110px 1fr; row-gap: 12px; column-gap: 16px; font-size: 15px;">
+<dt style="color: #5D6B7E;">You provide</dt><dd style="margin: 0;">EDC export and, if you have them, your specs</dd>
+<dt style="color: #5D6B7E;">You receive</dt><dd style="margin: 0;">SDTM, ADaM, TLFs, Define-XML, aCRF, reviewer guides</dd>
+<dt style="color: #5D6B7E;">QC</dt><dd style="margin: 0;">Independent QC code in SAS, R and SQL</dd>
+</dl>
+<a href="#pilot" style="font-size: 15px; font-weight: 500; text-underline-offset: 4px;">Request a FlashAnalysis demo</a>
+</article>
+</div>
+</div>
+</section>
+
+<section id="review" style="background: #142B44; color: #FFFFFF;">
+<div style="max-width: 1240px; margin: 0 auto; padding: 104px 40px; display: flex; flex-wrap: wrap; gap: 56px; align-items: flex-start;">
+<div style="flex: 1 1 360px; min-width: 0; display: flex; flex-direction: column; gap: 20px;">
+<h2 style="margin: 0; font-family: 'Newsreader', Georgia, serif; font-weight: 400; font-size: 42px; line-height: 1.1; letter-spacing: -0.015em; color: #FFFFFF;">Nothing goes live until a person signs it off.</h2>
+<p style="margin: 0; font-size: 16px; line-height: 1.6; color: #C3CCD8; max-width: 40ch;">The AI proposes. Your data manager approves, edits or rejects, and every decision is recorded with who, when and why.</p>
+<a href="#pilot" style="color: #FFFFFF; font-size: 15px; font-weight: 500; text-underline-offset: 4px;">Request validation documentation (NDA)</a>
+</div>
+<div style="flex: 1.4 1 560px; min-width: 0; background: #0F2133; border: 1px solid #2B4360; border-radius: 6px; overflow-x: auto;">
+<div style="display: flex; justify-content: space-between; padding: 14px 18px; border-bottom: 1px solid #2B4360; font-size: 13px; color: #C3CCD8;"><span>Audit trail · Study SYN-014</span><span>Example, synthetic data</span></div>
+<table style="width: 100%; border-collapse: collapse; font-family: 'IBM Plex Mono', monospace; font-size: 13px; line-height: 1.5; color: #E6EBF1;">
+<tr style="color: #8FA0B5; text-align: left;"><th style="padding: 12px 18px; font-weight: 400;">Time</th><th style="padding: 12px 18px; font-weight: 400;">By</th><th style="padding: 12px 18px; font-weight: 400;">Action</th></tr>
+<tr style="border-top: 1px solid #22384F;"><td style="padding: 12px 18px; color: #8FA0B5;">11-04 14:02</td><td style="padding: 12px 18px;">J. Rivera, DM</td><td style="padding: 12px 18px;"><span style="color: #6CD0A6;">Approved</span> form VS, version 3</td></tr>
+<tr style="border-top: 1px solid #22384F;"><td style="padding: 12px 18px; color: #8FA0B5;">11-04 13:57</td><td style="padding: 12px 18px;">J. Rivera, DM</td><td style="padding: 12px 18px;">Edited edit check VS-004, reason: amendment 2</td></tr>
+<tr style="border-top: 1px solid #22384F;"><td style="padding: 12px 18px; color: #8FA0B5;">11-04 13:41</td><td style="padding: 12px 18px;">ClinDaddy AI</td><td style="padding: 12px 18px;"><span style="color: #F4A27E;">Proposed</span> edit check VS-004</td></tr>
+<tr style="border-top: 1px solid #22384F;"><td style="padding: 12px 18px; color: #8FA0B5;">11-04 13:40</td><td style="padding: 12px 18px;">ClinDaddy AI</td><td style="padding: 12px 18px;"><span style="color: #F4A27E;">Proposed</span> form VS from protocol §7.2</td></tr>
+</table>
+</div>
+</div>
+</section>
+
+<section id="roadmap" style="max-width: 1240px; margin: 0 auto; padding: 104px 40px; display: flex; flex-direction: column; gap: 40px;">
+<h2 style="margin: 0; font-family: 'Newsreader', Georgia, serif; font-weight: 400; font-size: 42px; line-height: 1.1; letter-spacing: -0.015em;">Roadmap</h2>
+<div style="display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 24px; border-top: 1px solid #101828; padding-top: 24px;">
+<div style="display: flex; flex-direction: column; gap: 8px;"><p style="margin: 0; font-size: 13px; font-weight: 600; color: #0B6B4D;">Available now</p><p style="margin: 0; font-size: 17px;">FlashEDC and FlashAnalysis</p></div>
+<div style="display: flex; flex-direction: column; gap: 8px;"><p style="margin: 0; font-size: 13px; font-weight: 600; color: #A3360A;">2027, in development</p><p style="margin: 0; font-size: 17px;">RTSM / IRT</p></div>
+<div style="display: flex; flex-direction: column; gap: 8px;"><p style="margin: 0; font-size: 13px; font-weight: 600; color: #5D6B7E;">Planned</p><p style="margin: 0; font-size: 17px;">eConsent, ePRO, eCOA, eSource</p></div>
+<div style="display: flex; flex-direction: column; gap: 8px;"><p style="margin: 0; font-size: 13px; font-weight: 600; color: #5D6B7E;">Planned</p><p style="margin: 0; font-size: 17px;">CTMS, eTMF</p></div>
+</div>
+</section>
+
+<section id="founder" style="border-top: 1px solid #D9DCE1; background: #FFFFFF;">
+<div style="max-width: 1240px; margin: 0 auto; padding: 104px 40px; display: flex; flex-wrap: wrap; gap: 56px; align-items: center;">
+<img src="/images/clindaddy-mark.png" alt="ClinDaddy mascot" style="flex: 0 0 auto; width: 140px; height: 242px; object-fit: contain;">
+<div style="flex: 1 1 560px; min-width: 0; display: flex; flex-direction: column; gap: 24px;">
+<p style="margin: 0; font-family: 'Newsreader', Georgia, serif; font-size: 30px; line-height: 1.35; color: #101828; max-width: 40ch;">“I’ve spent more than thirteen years building EDC software. Every study started the same way: someone reading the protocol and rebuilding it by hand. ClinDaddy removes the rebuild, not the people who check it.”</p>
+<p style="margin: 0; font-size: 15px; color: #475467;"><span style="color: #101828; font-weight: 600;">Bilal Bayindir</span>, Founder and CEO</p>
+</div>
+</div>
+</section>
+
+<section id="pilot" style="border-top: 1px solid #D9DCE1;">
+<div style="max-width: 1240px; margin: 0 auto; padding: 104px 40px; display: flex; flex-wrap: wrap; gap: 56px; align-items: flex-start;">
+<div style="flex: 1 1 380px; min-width: 0; display: flex; flex-direction: column; gap: 20px;">
+<h2 style="margin: 0; font-family: 'Newsreader', Georgia, serif; font-weight: 400; font-size: 48px; line-height: 1.05; letter-spacing: -0.02em;">Start with one study.</h2>
+<p style="margin: 0; font-size: 17px; line-height: 1.6; color: #475467; max-width: 42ch;">Send a protocol or a dataset. We deliver one study build or one SDTM package at a fixed pilot price, with a written path to a per-study contract.</p>
+<p style="margin: 0; font-size: 15px; color: #475467;">Or write to <a href="#pilot">hello@clindaddy.com</a></p>
+</div>
+<form style="flex: 1 1 480px; min-width: 0; background: #FFFFFF; border: 1px solid #D9DCE1; border-radius: 6px; padding: 32px; display: flex; flex-direction: column; gap: 18px;">
+<div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px;">
+<div style="display: flex; flex-direction: column; gap: 6px;"><label for="f-name" style="font-size: 14px; font-weight: 500;">Name</label><input id="f-name" type="text" style="height: 44px; border: 1px solid #C9CED6; border-radius: 4px; padding: 0 12px; font-size: 15px; font-family: inherit;"></div>
+<div style="display: flex; flex-direction: column; gap: 6px;"><label for="f-company" style="font-size: 14px; font-weight: 500;">Company</label><input id="f-company" type="text" style="height: 44px; border: 1px solid #C9CED6; border-radius: 4px; padding: 0 12px; font-size: 15px; font-family: inherit;"></div>
+</div>
+<div style="display: flex; flex-direction: column; gap: 6px;"><label for="f-email" style="font-size: 14px; font-weight: 500;">Work email</label><input id="f-email" type="email" style="height: 44px; border: 1px solid #C9CED6; border-radius: 4px; padding: 0 12px; font-size: 15px; font-family: inherit;"></div>
+<fieldset style="margin: 0; padding: 0; border: 0; display: flex; flex-direction: column; gap: 10px;">
+<legend style="font-size: 14px; font-weight: 500; margin-bottom: 10px;">What would you like to start with?</legend>
+<label style="display: flex; align-items: center; gap: 10px; font-size: 15px;"><input type="radio" name="start" checked style="width: 18px; height: 18px; accent-color: #142B44;">A protocol, for a FlashEDC study build</label>
+<label style="display: flex; align-items: center; gap: 10px; font-size: 15px;"><input type="radio" name="start" style="width: 18px; height: 18px; accent-color: #142B44;">A dataset, for an SDTM package</label>
+</fieldset>
+<button type="submit" style="align-self: flex-start; height: 48px; padding: 0 22px; border: 0; border-radius: 4px; background: #142B44; color: #FFFFFF; font-size: 15px; font-weight: 500; font-family: inherit;">Request a pilot</button>
+</form>
+</div>
+</section>
+
+<footer style="background: #FFFFFF; border-top: 1px solid #D9DCE1;">
+<div style="max-width: 1240px; margin: 0 auto; padding: 48px 40px; display: flex; flex-wrap: wrap; justify-content: space-between; gap: 32px; font-size: 14px; color: #475467;">
+<div style="display: flex; flex-direction: column; gap: 10px;">
+<img src="/images/clindaddy-wordmark.png" alt="ClinDaddy" style="width: 112px; height: 24px; object-fit: contain; object-position: left;">
+<p style="margin: 0;">1028 W Airy St, Norristown, PA 19401</p>
+<p style="margin: 0;">© 2026 ClinDaddy LLC</p>
+</div>
+<div style="display: flex; flex-wrap: wrap; gap: 56px;">
+<div style="display: flex; flex-direction: column; gap: 10px;"><p style="margin: 0; color: #101828; font-weight: 600;">Product</p><a href="#products" style="color: #475467; text-decoration: none;">FlashEDC</a><a href="#products" style="color: #475467; text-decoration: none;">FlashAnalysis</a><a href="#roadmap" style="color: #475467; text-decoration: none;">Roadmap</a></div>
+<div style="display: flex; flex-direction: column; gap: 10px;"><p style="margin: 0; color: #101828; font-weight: 600;">Company</p><a href="#founder" style="color: #475467; text-decoration: none;">About</a><a href="#review" style="color: #475467; text-decoration: none;">Trust and governance</a><a href="#top" style="color: #475467; text-decoration: none;">Investors</a></div>
+<div style="display: flex; flex-direction: column; gap: 10px;"><p style="margin: 0; color: #101828; font-weight: 600;">Contact</p><a href="#pilot" style="color: #475467; text-decoration: none;">hello@clindaddy.com</a><a href="#top" style="color: #475467; text-decoration: none;">Privacy</a></div>
+</div>
+</div>
+</footer>
+
+</div>
+
+</body>
+</html>

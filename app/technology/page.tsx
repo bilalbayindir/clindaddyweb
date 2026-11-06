@@ -95,10 +95,10 @@ export default function TechnologyPage() {
 
         <div className="mt-14 grid gap-10 lg:grid-cols-2 lg:gap-14">
           <Reveal>
-            <div className="rounded-2xl border border-line bg-surface p-6 sm:p-8">
+            <div className="rounded-[6px] border border-line bg-surface p-6 sm:p-8">
               <div className="flex items-baseline justify-between gap-4">
                 <h3 className="text-base font-semibold">FlashEDC</h3>
-                <span className="font-mono text-[0.6875rem] tracking-[0.1em] text-teal-700 uppercase">
+                <span className="text-[13px] text-brand">
                   Protocol → EDC & Data Capture
                 </span>
               </div>
@@ -107,10 +107,10 @@ export default function TechnologyPage() {
           </Reveal>
 
           <Reveal delay={0.08}>
-            <div className="rounded-2xl border border-line bg-surface p-6 sm:p-8">
+            <div className="rounded-[6px] border border-line bg-surface p-6 sm:p-8">
               <div className="flex items-baseline justify-between gap-4">
                 <h3 className="text-base font-semibold">FlashAnalysis</h3>
-                <span className="font-mono text-[0.6875rem] tracking-[0.1em] text-navy-600 uppercase">
+                <span className="text-[13px] text-text-3">
                   Data → Submission
                 </span>
               </div>
@@ -125,10 +125,10 @@ export default function TechnologyPage() {
           review, approval and validation path.
         </p>
 
-        <div className="mt-14 grid gap-px overflow-hidden rounded-2xl border border-line bg-line sm:grid-cols-2 lg:grid-cols-4">
+        <div className="mt-14 grid gap-px overflow-hidden rounded-[6px] border border-line bg-line sm:grid-cols-2 lg:grid-cols-4">
           {technologyStack.map((item) => (
             <div key={item.layer} className="bg-white p-6">
-              <p className="font-mono text-[0.625rem] tracking-[0.12em] text-muted uppercase">
+              <p className="text-xs text-text-3">
                 {item.layer}
               </p>
               <p className="mt-2 text-sm font-medium text-ink">{item.detail}</p>
@@ -216,3 +216,5 @@ export default function TechnologyPage() {
     </>
   );
 }
+
+

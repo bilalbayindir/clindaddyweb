@@ -30,21 +30,21 @@ export function Section({
       id={id}
       className={cn(
         "relative scroll-mt-24",
-        tone === "light" && "bg-white",
-        tone === "surface" && "bg-surface",
-        tone === "dark" && "bg-navy-950 text-navy-100",
-        bordered && "border-t border-line",
+        tone === "light" && "bg-paper",
+        tone === "surface" && "bg-white",
+        tone === "dark" && "bg-ink-strong text-white",
+        bordered && "border-t border-rule",
         className,
       )}
     >
-      <Container size={size} className="py-20 sm:py-24 lg:py-28">
+      <Container size={size} className="py-12 sm:py-16 lg:py-[6.5rem]">
         {children}
       </Container>
     </Tag>
   );
 }
 
-/** Small monospace label that sits above a heading. */
+/** Small section label. Sans, sentence case, with a signal-coloured rule. */
 export function Eyebrow({
   children,
   className,
@@ -57,20 +57,14 @@ export function Eyebrow({
   return (
     <p
       className={cn(
-        "eyebrow flex items-center gap-2.5",
-        tone === "light" && "text-navy-500",
-        tone === "teal" && "text-teal-700",
-        tone === "dark" && "text-teal-300",
+        "eyebrow flex items-center gap-3",
+        tone === "light" && "text-text-3",
+        tone === "teal" && "text-brand",
+        tone === "dark" && "text-navy-300",
         className,
       )}
     >
-      <span
-        aria-hidden
-        className={cn(
-          "h-px w-6",
-          tone === "dark" ? "bg-teal-300/60" : "bg-navy-300",
-        )}
-      />
+      <span aria-hidden className="h-0.5 w-7 bg-signal" />
       {children}
     </p>
   );
@@ -117,7 +111,7 @@ export function SectionHeading({
 
       <Heading
         className={cn(
-          "text-[1.75rem] leading-[1.15] font-semibold sm:text-4xl lg:text-[2.625rem]",
+          "text-[1.875rem] leading-[1.08] font-normal sm:text-[2.625rem] sm:leading-[1.1]",
           align === "center" && "max-w-4xl",
           tone === "dark" && "text-white",
           titleClassName,
@@ -129,9 +123,9 @@ export function SectionHeading({
       {lead ? (
         <div
           className={cn(
-            "max-w-2xl text-base leading-relaxed sm:text-lg",
+            "max-w-2xl text-base leading-[1.6] sm:text-[1.0625rem]",
             align === "center" && "mx-auto",
-            tone === "dark" ? "text-navy-200" : "text-body",
+            tone === "dark" ? "text-navy-300" : "text-text-2",
           )}
         >
           {lead}

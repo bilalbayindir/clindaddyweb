@@ -66,7 +66,7 @@ export default function SolutionsPage() {
               <p className="text-base leading-relaxed text-body">{solution.intro}</p>
 
               <div className="mt-7 flex flex-wrap items-center gap-2">
-                <span className="font-mono text-[0.625rem] tracking-[0.12em] text-muted uppercase">
+                <span className="text-xs text-text-3">
                   Relevant products
                 </span>
                 {solution.relevantProducts.map((name) => (
@@ -148,3 +148,4 @@ export default function SolutionsPage() {
     </>
   );
 }
+

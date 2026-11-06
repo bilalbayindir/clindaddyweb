@@ -30,7 +30,7 @@ export function AppWindow({
   return (
     <div
       className={cn(
-        "overflow-hidden rounded-2xl border border-line bg-white shadow-card",
+        "overflow-hidden rounded-[6px] border border-line bg-white shadow-card",
         className,
       )}
     >
@@ -261,3 +261,4 @@ export function FlashAnalysisPanel({ className }: { className?: string }) {
     </AppWindow>
   );
 }
+

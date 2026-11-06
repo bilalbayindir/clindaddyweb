@@ -32,7 +32,7 @@ export default function RoadmapPage() {
       <PageHero
         eyebrow="Roadmap"
         title="Two products today. More of the trial next."
-        lead="Every module is designed on the same protocol-derived data model, so new systems ship faster and integrate on day one. The status below each item is literal."
+        lead="Every module is designed on the same protocol-derived data model, so new systems ship faster and integrate on day one. The current status of each item is shown below."
         actions={
           <HeroActions
             primary={{ label: primaryCTA.label, href: primaryCTA.href }}
@@ -58,7 +58,7 @@ export default function RoadmapPage() {
 
                 <div className="flex flex-wrap items-baseline gap-x-4 gap-y-2">
                   <Eyebrow>{stage.stage}</Eyebrow>
-                  <span className="font-mono text-[0.625rem] tracking-[0.12em] text-muted uppercase">
+                  <span className="text-xs text-text-3">
                     {stage.timeline}
                   </span>
                   <Badge tone={TONES[stage.status]}>{stage.statusLabel}</Badge>
@@ -72,7 +72,7 @@ export default function RoadmapPage() {
                   {stage.items.map((item) => (
                     <div
                       key={item.name}
-                      className="flex flex-col rounded-xl border border-line bg-white p-5"
+                      className="flex flex-col rounded-[4px] border border-line bg-white p-5"
                     >
                       <h3 className="text-base font-semibold text-ink">{item.name}</h3>
                       <p className="mt-1.5 text-sm leading-relaxed text-muted">{item.label}</p>
@@ -120,3 +120,5 @@ export default function RoadmapPage() {
     </>
   );
 }
+
+

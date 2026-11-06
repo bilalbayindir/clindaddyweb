@@ -162,7 +162,7 @@ function ProductSpan({
   return (
     <div className={cn("flex flex-col justify-end", className)}>
       <div className="rounded-t-lg border border-b-0 border-line bg-surface px-4 py-3 text-center">
-        <p className="font-mono text-[0.6875rem] tracking-[0.14em] text-teal-700 uppercase">{name}</p>
+        <p className="text-[13px] text-brand">{name}</p>
         <p className="mt-1 text-xs text-body">{tagline}</p>
       </div>
     </div>
@@ -187,7 +187,7 @@ function MobileGroup({
     <div className="relative mt-6 pl-6 first:mt-0">
       <span aria-hidden className="absolute top-1 bottom-1 left-[0.6875rem] w-px bg-teal-200" />
 
-      <p className="font-mono text-[0.6875rem] tracking-[0.14em] text-teal-700 uppercase">{label}</p>
+      <p className="text-[13px] text-brand">{label}</p>
       <p className="mt-1 text-xs text-muted">{tagline}</p>
 
       <div className="mt-4 flex flex-col gap-6">
@@ -244,3 +244,4 @@ function MobileStage({
     </div>
   );
 }
+

@@ -59,8 +59,8 @@ export default function InvestorsPage() {
         <div className="mt-14 grid gap-6 lg:grid-cols-3">
           {THESIS_PARTS.map((part) => (
             <Reveal key={part.label}>
-              <div className="flex h-full flex-col rounded-2xl border border-line bg-white p-7 sm:p-9">
-                <p className="font-mono text-[0.6875rem] tracking-[0.14em] text-teal-700 uppercase">
+              <div className="flex h-full flex-col rounded-[6px] border border-line bg-white p-7 sm:p-9">
+                <p className="text-sm text-brand">
                   {part.label}
                 </p>
                 <h3 className="mt-4 text-xl font-semibold sm:text-2xl">
@@ -75,8 +75,8 @@ export default function InvestorsPage() {
 
         {/* Long-term platform */}
         <Reveal className="mt-6">
-          <div className="rounded-2xl border border-navy-200 bg-navy-50/50 p-7 sm:p-9">
-            <p className="font-mono text-[0.6875rem] tracking-[0.14em] text-navy-600 uppercase">
+          <div className="rounded-[6px] border border-navy-200 bg-navy-50/50 p-7 sm:p-9">
+            <p className="text-sm text-text-3">
               {investorThesis.platform.label}
             </p>
             <h3 className="mt-4 text-xl font-semibold sm:text-2xl">
@@ -89,7 +89,7 @@ export default function InvestorsPage() {
             <ol className="mt-8 flex flex-wrap items-center gap-x-3 gap-y-3">
               {lifecycleStages.map((stage, index) => (
                 <li key={stage.id} className="flex items-center gap-3">
-                  <span className="rounded-full border border-navy-200 bg-white px-3.5 py-1.5 text-xs font-medium text-navy-700">
+                  <span className="rounded-[3px] border border-navy-200 bg-white px-3.5 py-1.5 text-xs font-medium text-navy-700">
                     {stage.title}
                   </span>
                   {index < lifecycleStages.length - 1 ? (
@@ -120,7 +120,7 @@ export default function InvestorsPage() {
               {evidence.map((item) => (
                 <div key={item.label} className="py-6">
                   <dt className="flex flex-wrap items-baseline gap-x-4 gap-y-1">
-                    <span className="font-mono text-[0.6875rem] tracking-[0.12em] text-muted uppercase">
+                    <span className="text-[13px] text-text-3">
                       {item.label}
                     </span>
                     <span className="text-lg font-semibold text-ink">{item.value}</span>
@@ -206,3 +206,6 @@ export default function InvestorsPage() {
     </>
   );
 }
+
+
+

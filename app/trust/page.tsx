@@ -74,7 +74,7 @@ export default function TrustPage() {
             <a
               key={anchor.href}
               href={anchor.href}
-              className="font-mono text-[0.6875rem] tracking-[0.12em] text-muted uppercase transition-colors hover:text-ink"
+              className="text-[13px] text-text-3 transition-colors hover:text-ink"
               data-analytics="nav_click"
               data-analytics-label={anchor.label}
             >
@@ -118,7 +118,7 @@ export default function TrustPage() {
                 ))}
               </ul>
 
-              <p className="mt-6 font-mono text-[0.625rem] leading-relaxed tracking-[0.08em] text-muted uppercase">
+              <p className="mt-6 text-xs leading-relaxed text-text-3">
                 {pillar.diagramLabel}
               </p>
             </div>
@@ -137,12 +137,12 @@ export default function TrustPage() {
             lead="Validation documentation, security details and hosting controls are shared during evaluation rather than summarized as a marketing claim."
           />
 
-          <div className="flex flex-col items-start gap-4 rounded-2xl border border-line bg-white p-7 sm:p-9">
+          <div className="flex flex-col items-start gap-4 rounded-[6px] border border-line bg-white p-7 sm:p-9">
             <p className="text-sm leading-relaxed text-body">
               Tell us what your quality or procurement process needs and we will route the request
               to the right person.
             </p>
-            <Button href="/contact?interest=other" variant="primary">
+            <Button href="/contact?interest=validation" variant="primary">
               Request validation documentation
             </Button>
             <p className="text-xs leading-relaxed text-muted">
@@ -187,3 +187,5 @@ export default function TrustPage() {
     </>
   );
 }
+
+

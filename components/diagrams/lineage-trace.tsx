@@ -34,7 +34,7 @@ export function LineageTrace({
   return (
     <div
       className={cn(
-        "overflow-hidden rounded-2xl border",
+        "overflow-hidden rounded-[6px] border",
         dark ? "border-white/12 bg-white/[0.03]" : "border-line bg-white",
         className,
       )}
@@ -131,3 +131,4 @@ export function LineageTrace({
     </div>
   );
 }
+

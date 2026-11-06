@@ -23,9 +23,9 @@ export const site = {
   legalName: "ClinDaddy LLC",
   /** Used in metadata, JSON-LD, and the sitemap. */
   url: process.env.NEXT_PUBLIC_SITE_URL?.replace(/\/$/, "") ?? "https://www.clindaddy.com",
-  title: "ClinDaddy | Clinical Data Automation from Protocol to Submission",
+  title: "ClinDaddy — From protocol to CDISC submission",
   description:
-    "ClinDaddy automates clinical data workflows from protocol and EDC study design through data capture, analysis, QC, and regulatory submission.",
+    "ClinDaddy turns a protocol into a CDISC study build, runs data collection in its own EDC, and delivers SDTM, ADaM and TLFs with independent QC. Your data managers review and sign off at every step.",
   contactEmail: process.env.NEXT_PUBLIC_CONTACT_EMAIL ?? "hello@clindaddy.com",
   founderEmail: "bilal.bayindir@clindaddy.com",
   address: {

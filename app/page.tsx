@@ -1,26 +1,13 @@
-import { ArrowRight } from "lucide-react";
 import type { Metadata } from "next";
+import Image from "next/image";
 import Link from "next/link";
 
-import { FlashAnalysisPanel, FlashEdcPanel } from "@/components/diagrams/product-panels";
-import { CtaBand } from "@/components/sections/cta-band";
-import { HomeHero } from "@/components/sections/home-hero";
-import { ProductCard } from "@/components/sections/product-card";
-import { BorderedGrid, BorderedGridCell } from "@/components/ui/card";
-import { Eyebrow, Section, SectionHeading } from "@/components/ui/section";
-import { Reveal } from "@/components/motion/reveal";
-import {
-  evidence,
-  flashanalysis,
-  flashedc,
-  problemPoints,
-  products,
-  roadmapStages,
-  team,
-  whyNow,
-} from "@/lib/content";
+import { PipelineStage } from "@/components/landing/pipeline-stage";
+import { PilotForm } from "@/components/landing/pilot-form";
+import { Container } from "@/components/ui/container";
+import { products } from "@/lib/content";
 import { pageMetadata } from "@/lib/metadata";
-import { primaryCTA, secondaryCTA, site } from "@/lib/site";
+import { site } from "@/lib/site";
 
 export const metadata: Metadata = pageMetadata({
   title: site.title,
@@ -29,238 +16,362 @@ export const metadata: Metadata = pageMetadata({
   absolute: true,
 });
 
+const COMPARISON = [
+  {
+    task: "Database build",
+    usually: "Specified and built by hand from the protocol",
+    withUs: "Drafted from the protocol, reviewed by your data manager",
+  },
+  {
+    task: "Edit checks",
+    usually: "Written and tested one by one",
+    withUs: "Generated from the specification, then approved",
+  },
+  {
+    task: "SDTM and ADaM",
+    usually: "Programmed and double-programmed per study",
+    withUs: "Generated, with independent QC code you can rerun",
+  },
+  {
+    task: "Submission files",
+    usually: "Assembled at the end, under deadline",
+    withUs: "Define-XML and reviewer guides produced with the datasets",
+  },
+];
+
+const AUDIT = [
+  { time: "11-04 14:02", by: "J. Rivera, DM", action: "Approved", rest: "form VS, version 3", tone: "ok" },
+  { time: "11-04 13:57", by: "J. Rivera, DM", action: "", rest: "Edited edit check VS-004, reason: amendment 2", tone: "" },
+  { time: "11-04 13:41", by: "ClinDaddy AI", action: "Proposed", rest: "edit check VS-004", tone: "signal" },
+  { time: "11-04 13:40", by: "ClinDaddy AI", action: "Proposed", rest: "form VS from protocol §7.2", tone: "signal" },
+];
+
+const ROADMAP = [
+  { status: "Available now", color: "text-[#0B6B4D]", item: "FlashEDC and FlashAnalysis" },
+  { status: "2027, in development", color: "text-[#A3360A]", item: "RTSM / IRT" },
+  { status: "Planned", color: "text-text-3", item: "eConsent, ePRO, eCOA, eSource" },
+  { status: "Planned", color: "text-text-3", item: "CTMS, eTMF" },
+];
+
 export default function HomePage() {
   return (
     <>
-      <HomeHero />
-
       {/* ---------------------------------------------------------------- */}
-      {/* The problem                                                       */}
+      {/* Hero                                                              */}
       {/* ---------------------------------------------------------------- */}
-      <Section tone="surface" bordered>
-        <SectionHeading
-          eyebrow="The problem"
-          title="Clinical data work is still assembled by hand, study after study."
-          lead="Between an approved protocol and a submission sits a large body of translation work. It is high-volume, high-consequence, and repeated for every study."
-        />
+      <section id="top">
+        <Container>
+          <div className="flex flex-wrap items-start gap-10 pb-12 pt-9 sm:pt-12 lg:gap-14 lg:pb-24 lg:pt-[72px]">
+            <div className="flex min-w-0 flex-1 basis-[380px] flex-col gap-7 pt-0 lg:pt-2">
+              <p className="flex items-center gap-3 text-[15px] text-text-2">
+                <span aria-hidden className="h-0.5 w-7 shrink-0 bg-signal" />
+                <span className="hidden sm:inline">For sponsors and CROs running Phase I–II studies</span>
+                <span className="sm:hidden">For sponsors and CROs, Phase I–II</span>
+              </p>
 
-        <BorderedGrid columns={3} className="mt-14">
-          {problemPoints.map((point) => (
-            <BorderedGridCell key={point.title}>
-              <h3 className="text-[0.9375rem] leading-snug font-semibold">{point.title}</h3>
-              <p className="mt-2 text-sm leading-relaxed text-muted">{point.description}</p>
-            </BorderedGridCell>
-          ))}
-        </BorderedGrid>
-      </Section>
+              <h1 className="text-[38px] leading-[1.08] tracking-[-0.02em] text-ink sm:text-[48px] lg:text-[60px] lg:leading-[1.04]">
+                Your protocol already describes the study. We build everything that follows.
+              </h1>
 
-      {/* ---------------------------------------------------------------- */}
-      {/* Two products, one pipeline                                        */}
-      {/* ---------------------------------------------------------------- */}
-      <Section tone="light" bordered id="platform">
-        <SectionHeading
-          eyebrow="Two products, one pipeline"
-          title="Build the study. Then carry the data to submission."
-          lead="FlashEDC covers protocol to eCRFs to EDC data collection. FlashAnalysis covers clinical data through SDTM, ADaM and TLFs, with independent QC and the submission artifacts behind them. One study identity runs through both."
-        />
+              <p className="text-base leading-[1.6] text-text-2 lg:text-[18px]">
+                ClinDaddy turns a protocol into a CDISC study build, runs data collection in its own
+                EDC, and delivers SDTM, ADaM and TLFs with independent QC. Your data managers review
+                and sign off at every step.
+              </p>
 
-        <div className="mt-14 flex flex-col gap-6">
-          <Reveal>
-            <ProductCard product={flashedc}>
-              <FlashEdcPanel />
-            </ProductCard>
-          </Reveal>
+              <div className="flex flex-wrap items-center gap-6">
+                <Link
+                  href="#pilot"
+                  data-analytics="cta_demo_click"
+                  data-analytics-label="Request a demo"
+                  data-analytics-location="hero"
+                  className="rounded-[4px] bg-ink-strong px-[22px] py-[15px] text-base font-medium text-white transition-colors hover:bg-ink-deep"
+                >
+                  Request a demo
+                </Link>
+                <Link
+                  href="#products"
+                  data-analytics="cta_how_it_works_click"
+                  data-analytics-label="How it works"
+                  className="text-base font-medium text-ink underline decoration-1 underline-offset-4 hover:text-brand"
+                >
+                  How it works
+                </Link>
+              </div>
 
-          <Reveal>
-            <ProductCard product={flashanalysis}>
-              <FlashAnalysisPanel />
-            </ProductCard>
-          </Reveal>
-        </div>
+              <dl className="mt-2 hidden grid-cols-[96px_1fr] gap-x-4 gap-y-2.5 border-t border-rule pt-[18px] text-sm lg:grid">
+                <dt className="text-text-3">Standards</dt>
+                <dd className="text-ink">CDASH, SDTM, ADaM, Define-XML</dd>
+                <dt className="text-text-3">Controls</dt>
+                <dd className="text-ink">Audit trail, versioned designs, human approval</dd>
+                <dt className="text-text-3">QC code</dt>
+                <dd className="text-ink">SAS, R and SQL, yours to rerun</dd>
+              </dl>
+            </div>
 
-        <p className="mt-6 text-xs leading-relaxed text-muted">
-          Interfaces shown are illustrative and built with synthetic values. They are not customer
-          systems, and no study data is reproduced anywhere on this site.
-        </p>
-      </Section>
-
-      {/* ---------------------------------------------------------------- */}
-      {/* Why now                                                           */}
-      {/* ---------------------------------------------------------------- */}
-      <Section tone="dark" bordered>
-        <div className="grid gap-14 lg:grid-cols-[minmax(0,0.9fr)_minmax(0,1.1fr)] lg:gap-16">
-          <div>
-            <SectionHeading
-              tone="dark"
-              eyebrow="Why now"
-              title="The standards are mandatory. The models can finally read the protocol."
-              lead="Three changes make this the right moment to automate the clinical data lifecycle."
-            />
-            <Link
-              href="/technology"
-              className="mt-8 inline-flex items-center gap-2 text-sm font-medium text-teal-300 transition-colors hover:text-teal-200"
-              data-analytics="nav_click"
-              data-analytics-label="Technology"
-            >
-              See how the platform works
-              <ArrowRight className="size-4" aria-hidden />
-            </Link>
+            <div className="w-[720px] max-w-full flex-none">
+              <PipelineStage />
+            </div>
           </div>
-
-          <ul className="flex flex-col divide-y divide-white/10 border-y border-white/10">
-            {whyNow.map((point, index) => (
-              <li key={point.title} className="flex gap-6 py-6">
-                <span className="font-mono text-[0.6875rem] tracking-[0.14em] text-teal-300">
-                  {String(index + 1).padStart(2, "0")}
-                </span>
-                <div className="min-w-0">
-                  <h3 className="text-base font-semibold text-white">{point.title}</h3>
-                  <p className="mt-2 text-sm leading-relaxed text-navy-300">{point.description}</p>
-                </div>
-              </li>
-            ))}
-          </ul>
-        </div>
-      </Section>
+        </Container>
+      </section>
 
       {/* ---------------------------------------------------------------- */}
-      {/* Roadmap teaser                                                    */}
+      {/* What changes for your team                                        */}
       {/* ---------------------------------------------------------------- */}
-      <Section tone="light" bordered>
-        <div className="flex flex-col gap-8 lg:flex-row lg:items-end lg:justify-between">
-          <SectionHeading
-            eyebrow="Roadmap"
-            title="Two products today. More of the trial next."
-            lead="Every module reuses the protocol-derived data model, so new systems integrate on day one. Statuses are literal."
-          />
-          <Link
-            href="/roadmap"
-            className="inline-flex shrink-0 items-center gap-2 text-sm font-medium text-teal-700 transition-colors hover:text-teal-800"
-            data-analytics="nav_click"
-            data-analytics-label="Roadmap"
-          >
-            See the full roadmap
-            <ArrowRight className="size-4" aria-hidden />
-          </Link>
-        </div>
+      <section className="border-t border-rule bg-white">
+        <Container>
+          <div className="flex flex-wrap gap-10 py-12 sm:py-16 lg:gap-14 lg:py-[104px]">
+            <div className="flex min-w-0 flex-1 basis-[320px] flex-col gap-4">
+              <h2 className="text-[30px] leading-[1.1] tracking-[-0.015em] lg:text-[42px]">
+                What changes for your team
+              </h2>
+              <p className="max-w-[36ch] text-base leading-[1.6] text-text-2">
+                The work still gets reviewed by the people accountable for it. They stop rebuilding
+                it by hand.
+              </p>
+            </div>
 
-        <div className="mt-14 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-          {roadmapStages.slice(0, 4).map((stage) => (
-            <Link
-              key={stage.id}
-              href={`/roadmap#${stage.id}`}
-              className="group flex flex-col rounded-2xl border border-line bg-white p-6 transition-colors hover:border-navy-300"
-              data-analytics="nav_click"
-              data-analytics-label={`Roadmap — ${stage.stage}`}
-            >
-              <span className="font-mono text-[0.6875rem] tracking-[0.14em] text-muted uppercase">
-                {stage.stage} · {stage.timeline}
-              </span>
-              <span className="mt-4 text-base font-semibold text-ink">
-                {stage.items.map((item) => item.name).join(" · ")}
-              </span>
-              <span className="mt-3 inline-flex items-center gap-1.5 text-sm font-medium text-teal-700">
-                {stage.statusLabel}
-                <ArrowRight className="size-3.5 transition-transform group-hover:translate-x-0.5" aria-hidden />
-              </span>
-            </Link>
-          ))}
-        </div>
-      </Section>
+            {/* Desktop table */}
+            <div className="hidden min-w-0 flex-[2_1_640px] overflow-x-auto md:block">
+              <table className="w-full border-collapse text-[15px] leading-normal">
+                <thead>
+                  <tr className="text-left text-[13px] text-text-3">
+                    <th className="w-[26%] border-b border-ink pb-3 pr-4 font-medium">Task</th>
+                    <th className="w-[34%] border-b border-ink pb-3 pr-4 font-medium">Usually</th>
+                    <th className="w-[40%] border-b border-ink pb-3 font-medium">With ClinDaddy</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {COMPARISON.map((row) => (
+                    <tr key={row.task}>
+                      <td className="border-b border-rule py-[18px] pr-4 font-medium text-ink">{row.task}</td>
+                      <td className="border-b border-rule py-[18px] pr-4 text-text-2">{row.usually}</td>
+                      <td className="border-b border-rule py-[18px] text-ink">{row.withUs}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
 
-      {/* ---------------------------------------------------------------- */}
-      {/* Pilot band                                                        */}
-      {/* ---------------------------------------------------------------- */}
-      <Section tone="surface" bordered>
-        <div className="grid gap-10 rounded-2xl border border-navy-200 bg-navy-50/60 p-7 sm:p-10 lg:grid-cols-[minmax(0,1.1fr)_minmax(0,0.9fr)] lg:items-center lg:gap-16">
-          <div>
-            <Eyebrow>Pilot program</Eyebrow>
-            <h2 className="mt-5 text-[1.75rem] leading-[1.15] font-semibold sm:text-4xl">
-              Now accepting pilot sponsors.
-            </h2>
-            <p className="mt-4 max-w-2xl text-base leading-relaxed text-body">
-              One real deliverable — an SDTM/ADaM/TLF package from your current EDC data, or one
-              FlashEDC study build — at discounted pilot pricing, with a written path to a
-              full-price per-study contract.
-            </p>
-          </div>
-          <div className="flex flex-col gap-3 sm:flex-row lg:justify-end">
-            <Link
-              href="/pilot"
-              className="inline-flex h-12 items-center justify-center rounded-full bg-navy-900 px-7 text-sm font-medium text-white transition-colors hover:bg-navy-800"
-              data-analytics="cta_pilot_click"
-              data-analytics-label="Join the pilot program"
-            >
-              {secondaryCTA.label}
-            </Link>
-            <Link
-              href={primaryCTA.href}
-              className="inline-flex h-12 items-center justify-center rounded-full border border-navy-300 px-7 text-sm font-medium text-navy-800 transition-colors hover:bg-white"
-              data-analytics="cta_demo_click"
-              data-analytics-label={primaryCTA.label}
-            >
-              {primaryCTA.label}
-            </Link>
-          </div>
-        </div>
-      </Section>
-
-      {/* ---------------------------------------------------------------- */}
-      {/* Evidence + founder                                                */}
-      {/* ---------------------------------------------------------------- */}
-      <Section tone="light" bordered>
-        <div className="grid gap-14 lg:grid-cols-[minmax(0,1fr)_minmax(0,1fr)] lg:gap-16">
-          <div>
-            <SectionHeading
-              eyebrow="Where the technology is today"
-              title="Finished products, demo-ready now."
-              lead="FlashEDC and FlashAnalysis are working products. ClinDaddy is early as a company, and we say so."
-            />
-
-            <dl className="mt-10 flex flex-col divide-y divide-line border-y border-line">
-              {evidence.map((item) => (
-                <div key={item.label} className="py-5">
-                  <dt className="flex flex-wrap items-baseline gap-x-4 gap-y-1">
-                    <span className="font-mono text-[0.6875rem] tracking-[0.12em] text-muted uppercase">
-                      {item.label}
-                    </span>
-                    <span className="text-lg font-semibold text-ink">{item.value}</span>
-                  </dt>
-                  <dd className="mt-2 text-sm leading-relaxed text-muted">{item.detail}</dd>
+            {/* Mobile stacked list */}
+            <div className="flex min-w-0 flex-1 basis-full flex-col border-t border-ink md:hidden">
+              {COMPARISON.map((row) => (
+                <div key={row.task} className="flex flex-col gap-1.5 border-b border-rule py-4">
+                  <p className="text-[15px] font-medium text-ink">{row.task}</p>
+                  <p className="text-[15px] leading-normal text-text-2">{row.withUs}</p>
                 </div>
               ))}
-            </dl>
+            </div>
           </div>
+        </Container>
+      </section>
 
-          <div className="flex flex-col justify-center rounded-2xl border border-line bg-white p-7 sm:p-9">
-            <Eyebrow>Built by a clinical data insider</Eyebrow>
-            <p className="mt-5 text-[1.375rem] leading-snug font-semibold sm:text-2xl">
-              13+ years building EDC software.
-            </p>
-            <p className="mt-4 text-sm leading-relaxed text-body">
-              {team.members[0].bio}
-            </p>
-            <Link
-              href="/about"
-              className="mt-7 inline-flex items-center gap-2 text-sm font-medium text-teal-700 transition-colors hover:text-teal-800"
-              data-analytics="nav_click"
-              data-analytics-label="About"
-            >
-              More about ClinDaddy
-              <ArrowRight className="size-4" aria-hidden />
-            </Link>
+      {/* ---------------------------------------------------------------- */}
+      {/* Products                                                          */}
+      {/* ---------------------------------------------------------------- */}
+      <section id="products" className="border-t border-rule">
+        <Container>
+          <div className="flex flex-col gap-10 py-12 sm:py-16 lg:gap-12 lg:py-[104px]">
+            <h2 className="max-w-[22ch] text-[30px] leading-[1.1] tracking-[-0.015em] lg:text-[42px]">
+              Two products on one data model. Start with either.
+            </h2>
+
+            <div className="flex flex-wrap border-t border-ink">
+              <article className="flex min-w-0 flex-1 basis-[440px] flex-col gap-5 pb-2 pt-8 lg:pr-12">
+                <div className="flex flex-wrap items-baseline gap-4">
+                  <h3 className="text-[26px] font-medium text-ink lg:text-[32px]">FlashEDC</h3>
+                  <span className="text-sm text-text-3">Study build and data collection</span>
+                </div>
+                <p className="max-w-[46ch] text-base leading-[1.6] text-text-2">
+                  Reads the protocol, drafts the visits, CDASH forms, codelists and edit checks, and
+                  runs the study in its own EDC once your team approves the design.
+                </p>
+                <dl className="grid grid-cols-[110px_1fr] gap-x-4 gap-y-3 text-[15px]">
+                  <dt className="text-text-3">You provide</dt>
+                  <dd className="text-ink">Protocol (PDF)</dd>
+                  <dt className="text-text-3">You receive</dt>
+                  <dd className="text-ink">Review-ready study build, then a live EDC</dd>
+                  <dt className="text-text-3">Changes</dt>
+                  <dd className="text-ink">New design version on every change; nothing overwritten</dd>
+                </dl>
+                <Link
+                  href="/contact?interest=demo"
+                  data-analytics="product_demo_click"
+                  data-analytics-label="FlashEDC"
+                  className="text-[15px] font-medium text-ink underline decoration-1 underline-offset-4 hover:text-brand"
+                >
+                  Request a FlashEDC demo
+                </Link>
+              </article>
+
+              <article className="flex min-w-0 flex-1 basis-[440px] flex-col gap-5 border-t border-rule pb-2 pt-8 lg:border-l lg:border-t-0 lg:pl-12">
+                <div className="flex flex-wrap items-baseline gap-4">
+                  <h3 className="text-[26px] font-medium text-ink lg:text-[32px]">FlashAnalysis</h3>
+                  <span className="text-sm text-text-3">Standards and submission outputs</span>
+                </div>
+                <p className="max-w-[46ch] text-base leading-[1.6] text-text-2">
+                  Takes raw data from FlashEDC or any other EDC and produces SDTM, ADaM, TLFs and the
+                  files a reviewer expects, with full traceability.
+                </p>
+                <dl className="grid grid-cols-[110px_1fr] gap-x-4 gap-y-3 text-[15px]">
+                  <dt className="text-text-3">You provide</dt>
+                  <dd className="text-ink">EDC export and, if you have them, your specs</dd>
+                  <dt className="text-text-3">You receive</dt>
+                  <dd className="text-ink">SDTM, ADaM, TLFs, Define-XML, aCRF, reviewer guides</dd>
+                  <dt className="text-text-3">QC</dt>
+                  <dd className="text-ink">Independent QC code in SAS, R and SQL</dd>
+                </dl>
+                <Link
+                  href="/contact?interest=demo"
+                  data-analytics="product_demo_click"
+                  data-analytics-label="FlashAnalysis"
+                  className="text-[15px] font-medium text-ink underline decoration-1 underline-offset-4 hover:text-brand"
+                >
+                  Request a FlashAnalysis demo
+                </Link>
+              </article>
+            </div>
           </div>
-        </div>
-      </Section>
+        </Container>
+      </section>
 
-      <CtaBand
-        title="See the platform against a study you already know."
-        body="Bring a protocol or a dataset and we will walk through what the platform produces today, and where a person still has to decide."
-        primary={{ label: primaryCTA.label, href: primaryCTA.href }}
-        secondary={{ label: secondaryCTA.label, href: secondaryCTA.href, analytics: "cta_pilot_click" }}
-      />
+      {/* ---------------------------------------------------------------- */}
+      {/* Review and audit trail                                            */}
+      {/* ---------------------------------------------------------------- */}
+      <section id="review" className="bg-ink-strong text-white">
+        <Container>
+          <div className="flex flex-wrap items-start gap-10 py-12 sm:py-16 lg:gap-14 lg:py-[104px]">
+            <div className="flex min-w-0 flex-1 basis-[360px] flex-col gap-5">
+              <h2 className="text-[30px] leading-[1.1] tracking-[-0.015em] text-white lg:text-[42px]">
+                Nothing goes live until a person signs it off.
+              </h2>
+              <p className="max-w-[40ch] text-base leading-[1.6] text-navy-300">
+                The AI proposes. Your data manager approves, edits or rejects, and every decision is
+                recorded with who, when and why.
+              </p>
+              <Link
+                href="/contact?interest=validation"
+                data-analytics="cta_validation_click"
+                data-analytics-label="Request validation documentation (NDA)"
+                className="text-[15px] font-medium text-white underline decoration-1 underline-offset-4 hover:text-white/80"
+              >
+                Request validation documentation (NDA)
+              </Link>
+            </div>
 
-      {/* Structured data for search engines — facts only. */}
+            <div className="min-w-0 flex-1 basis-[560px] overflow-x-auto rounded-[6px] border border-[#2B4360] bg-ink-deep">
+              <div className="flex justify-between border-b border-[#2B4360] px-[18px] py-3.5 text-[13px] text-navy-300">
+                <span>Audit trail · Study SYN-014</span>
+                <span>Example, synthetic data</span>
+              </div>
+              <table className="w-full border-collapse font-mono text-[13px] leading-normal text-[#E6EBF1]">
+                <thead>
+                  <tr className="text-left text-[#8FA0B5]">
+                    <th className="px-[18px] py-3 font-normal">Time</th>
+                    <th className="px-[18px] py-3 font-normal">By</th>
+                    <th className="px-[18px] py-3 font-normal">Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {AUDIT.map((row, index) => (
+                    <tr
+                      key={`${row.time}-${row.action}-${row.rest}`}
+                      className={`border-t border-[#22384F] ${index === 3 ? "hidden sm:table-row" : ""}`}
+                    >
+                      <td className="px-[18px] py-3 text-[#8FA0B5]">{row.time}</td>
+                      <td className="px-[18px] py-3">{row.by}</td>
+                      <td className="px-[18px] py-3">
+                        {row.action ? (
+                          <span style={{ color: row.tone === "ok" ? "#6CD0A6" : "#F4A27E" }}>{row.action}</span>
+                        ) : null}
+                        {row.action ? " " : ""}
+                        {row.rest}
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </Container>
+      </section>
+
+      {/* ---------------------------------------------------------------- */}
+      {/* Roadmap                                                           */}
+      {/* ---------------------------------------------------------------- */}
+      <section id="roadmap">
+        <Container>
+          <div className="flex flex-col gap-10 py-12 sm:py-16 lg:gap-10 lg:py-[104px]">
+            <h2 className="text-[30px] leading-[1.1] tracking-[-0.015em] lg:text-[42px]">Roadmap</h2>
+            <div className="grid gap-6 border-t border-ink pt-6 sm:grid-cols-2 lg:grid-cols-4">
+              {ROADMAP.map((item) => (
+                <div key={item.item} className="flex flex-col gap-2">
+                  <p className={`text-[13px] font-semibold ${item.color}`}>{item.status}</p>
+                  <p className="text-[17px] text-ink">{item.item}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+        </Container>
+      </section>
+
+      {/* ---------------------------------------------------------------- */}
+      {/* Founder                                                           */}
+      {/* ---------------------------------------------------------------- */}
+      <section id="founder" className="border-t border-rule bg-white">
+        <Container>
+          <div className="flex flex-wrap items-center gap-10 py-12 sm:py-16 lg:gap-14 lg:py-[104px]">
+            <Image
+              src="/images/clindaddy-mark.png"
+              alt="ClinDaddy mascot"
+              width={259}
+              height={447}
+              className="h-auto w-[100px] flex-none object-contain sm:w-[140px]"
+            />
+            <div className="flex min-w-0 flex-1 basis-[560px] flex-col gap-6">
+              <blockquote className="max-w-[40ch] font-display text-[22px] leading-[1.4] text-ink sm:text-[30px] sm:leading-[1.35]">
+                “I’ve spent more than thirteen years building EDC software. Every study started the
+                same way: someone reading the protocol and rebuilding it by hand. ClinDaddy removes
+                the rebuild, not the people who check it.”
+              </blockquote>
+              <p className="text-[15px] text-text-2">
+                <span className="font-semibold text-ink">Bilal Bayindir</span>, Founder and CEO
+              </p>
+            </div>
+          </div>
+        </Container>
+      </section>
+
+      {/* ---------------------------------------------------------------- */}
+      {/* Pilot                                                             */}
+      {/* ---------------------------------------------------------------- */}
+      <section id="pilot" className="border-t border-rule">
+        <Container>
+          <div className="flex flex-wrap items-start gap-10 py-12 sm:py-16 lg:gap-14 lg:py-[104px]">
+            <div className="flex min-w-0 flex-1 basis-[380px] flex-col gap-5">
+              <h2 className="text-[34px] leading-[1.06] tracking-[-0.02em] lg:text-[48px]">
+                Start with one study.
+              </h2>
+              <p className="max-w-[42ch] text-[17px] leading-[1.6] text-text-2">
+                Send a protocol or a dataset. We deliver one study build or one SDTM package at a
+                fixed pilot price, with a written path to a per-study contract.
+              </p>
+              <p className="text-[15px] text-text-2">
+                Or write to{" "}
+                <a href={`mailto:${site.contactEmail}`} className="underline decoration-1 underline-offset-4">
+                  {site.contactEmail}
+                </a>
+              </p>
+            </div>
+            <div className="min-w-0 flex-1 basis-[480px]">
+              <PilotForm />
+            </div>
+          </div>
+        </Container>
+      </section>
+
+      {/* Structured data — facts only. */}
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{
@@ -268,8 +379,7 @@ export default function HomePage() {
             "@context": "https://schema.org",
             "@type": "Organization",
             name: site.legalName,
-            description:
-              "Clinical data automation company spanning the clinical-trial data lifecycle from protocol to regulatory submission.",
+            description: site.description,
             url: site.url,
             email: site.contactEmail,
             address: {

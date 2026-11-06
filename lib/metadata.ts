@@ -15,7 +15,7 @@ export const OG_IMAGE = {
   url: "/images/og.png",
   width: 1200,
   height: 630,
-  alt: "ClinDaddy — From protocol to submission, one AI-native platform.",
+  alt: "ClinDaddy — From protocol to CDISC submission.",
 } as const;
 
 export function pageMetadata({
