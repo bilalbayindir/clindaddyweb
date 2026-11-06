@@ -25,3 +25,5 @@ screenshots.mjs
 /record.mjs
 /lighthouse*.json
 /public/images/og-stage.png
+
+/qa3.mjs

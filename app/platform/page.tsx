@@ -8,6 +8,7 @@ import { Reveal } from "@/components/motion/reveal";
 import { CtaBand } from "@/components/sections/cta-band";
 import { DemoSection } from "@/components/sections/demo-section";
 import { HeroActions, PageHero } from "@/components/sections/page-hero";
+import { IllustrationFigure } from "@/components/sections/illustration-figure";
 import { ProductCard } from "@/components/sections/product-card";
 import { BorderedGrid, BorderedGridCell } from "@/components/ui/card";
 import { Section, SectionHeading } from "@/components/ui/section";
@@ -71,6 +72,17 @@ export default function PlatformPage() {
           <HeroActions
             primary={{ label: primaryCTA.label, href: primaryCTA.href }}
             secondary={{ label: secondaryCTA.label, href: secondaryCTA.href, analytics: "cta_pilot_click" }}
+          />
+        }
+        aside={
+          <IllustrationFigure
+            src="/images/lifecycle-illustration.jpg"
+            alt="Illustration of the clinical data lifecycle running from protocol through FlashEDC data collection and FlashAnalysis to submission."
+            width={1408}
+            height={768}
+            sizes="(min-width: 1024px) 34rem, 100vw"
+            priority
+            caption="Illustration. Protocol, eCRFs and EDC at the front; SDTM, ADaM and TLFs downstream."
           />
         }
       />
@@ -169,6 +181,39 @@ export default function PlatformPage() {
             Read about the technology
             <ArrowRight className="size-4" aria-hidden />
           </Link>
+        </div>
+      </Section>
+
+      {/* ------------------------------------------------------------------ */}
+      {/* One protocol read, many systems                                     */}
+      {/* ------------------------------------------------------------------ */}
+      <Section tone="light" bordered>
+        <div className="grid gap-12 lg:grid-cols-[minmax(0,0.9fr)_minmax(0,1.1fr)] lg:items-center lg:gap-16">
+          <div>
+            <SectionHeading
+              eyebrow="One protocol read, many systems"
+              title="The study model is the product. EDC is its first projection."
+              lead="The protocol is read once into a system-neutral study model: visits, forms, fields, codelists and edit checks, each carrying the protocol source behind it. EDC is the first system projected from that model — RTSM follows in 2027, then patient-facing capture and trial operations."
+            />
+            <Link
+              href="/roadmap"
+              className="mt-8 inline-flex items-center gap-2 text-sm font-medium text-brand transition-colors hover:text-ink-strong"
+              data-analytics="nav_click"
+              data-analytics-label="Roadmap"
+            >
+              See what is available now
+              <ArrowRight className="size-4" aria-hidden />
+            </Link>
+          </div>
+
+          <IllustrationFigure
+            src="/images/platform-illustration.jpg"
+            alt="Illustration of the ClinDaddy character holding one study model card that projects into EDC, RTSM, eSource, CTMS, eTMF, ePRO, eCOA and eConsent panels."
+            width={1408}
+            height={768}
+            sizes="(min-width: 1024px) 40rem, 100vw"
+            caption="Illustration. One study model, projected outward. EDC is available today; RTSM is in development for 2027; the rest are planned."
+          />
         </div>
       </Section>
 

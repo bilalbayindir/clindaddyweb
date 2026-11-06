@@ -95,6 +95,16 @@ export default function FlashEdcPage() {
           lead="The structure that was reviewed at study build is the structure data is captured against. There is no second build in another system, and no translation step between design and collection."
         />
 
+        <IllustrationFigure
+          className="mt-12"
+          src="/images/flashedc-speed-illustration.jpg"
+          alt="Illustration of a protocol document entering a study-build machine and emerging as visit, form and lab-panel artifacts, with a clock reading 10–30 minutes and a stack labelled ten weeks of manual processes behind it."
+          width={1379}
+          height={752}
+          sizes="(min-width: 1024px) 64rem, 100vw"
+          caption="Illustration. A protocol becomes a review-ready study build; the time shown is to a review-ready build, not to a live study. Live studies follow the same review, approval and validation path."
+        />
+
         <BorderedGrid columns={2} className="mt-14">
           {BUILD_POINTS.map((point) => (
             <BorderedGridCell key={point.title}>

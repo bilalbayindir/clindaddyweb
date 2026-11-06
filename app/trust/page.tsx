@@ -6,6 +6,7 @@ import { QcDiagram } from "@/components/diagrams/qc-diagram";
 import { Reveal } from "@/components/motion/reveal";
 import { CtaBand } from "@/components/sections/cta-band";
 import { HeroActions, PageHero } from "@/components/sections/page-hero";
+import { IllustrationFigure } from "@/components/sections/illustration-figure";
 import { Button } from "@/components/ui/button";
 import { Container } from "@/components/ui/container";
 import { Eyebrow, Section, SectionHeading } from "@/components/ui/section";
@@ -127,6 +128,42 @@ export default function TrustPage() {
           </div>
         </Section>
       ))}
+
+      {/* ------------------------------------------------------------------ */}
+      {/* Human approval                                                      */}
+      {/* ------------------------------------------------------------------ */}
+      <Section tone="light" bordered>
+        <div className="grid gap-12 lg:grid-cols-[minmax(0,0.9fr)_minmax(0,1.1fr)] lg:items-center lg:gap-16">
+          <div>
+            <SectionHeading
+              eyebrow="Human approval"
+              title="A person presses approve. The system records who, when and why."
+              lead="Production and independent QC converge on a reconciliation step. A named reviewer sees both results, resolves the difference, and only then is the output submission-ready."
+            />
+            <ul className="mt-8 flex flex-col divide-y divide-rule border-y border-rule">
+              {[
+                "Approval is an explicit act by a named person",
+                "Every AI proposal and reviewer edit is written to the audit trail",
+                "QC differences are surfaced for review, never reconciled silently",
+              ].map((point) => (
+                <li key={point} className="flex gap-3 py-3.5 text-sm leading-relaxed text-text-2">
+                  <span aria-hidden className="mt-2 size-1 shrink-0 rounded-full bg-signal" />
+                  {point}
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          <IllustrationFigure
+            src="/images/trust-illustration.jpg"
+            alt="Illustration of a reviewer at a console comparing production data with independent QC, then pressing an approve control for a regulatory submission."
+            width={1408}
+            height={768}
+            sizes="(min-width: 1024px) 40rem, 100vw"
+            caption="Illustration. Production and independent QC reconcile; approval is the human act that releases the output."
+          />
+        </div>
+      </Section>
 
       {/* Validation */}
       <Section tone="surface" bordered>
