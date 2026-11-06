@@ -45,7 +45,7 @@ const AUDIT = [
   { time: "11-04 14:02", by: "J. Rivera, DM", action: "Approved", rest: "form VS, version 3", tone: "ok" },
   { time: "11-04 13:57", by: "J. Rivera, DM", action: "", rest: "Edited edit check VS-004, reason: amendment 2", tone: "" },
   { time: "11-04 13:41", by: "ClinDaddy AI", action: "Proposed", rest: "edit check VS-004", tone: "signal" },
-  { time: "11-04 13:40", by: "ClinDaddy AI", action: "Proposed", rest: "form VS from protocol §7.2", tone: "signal" },
+  { time: "11-04 13:40", by: "ClinDaddy AI", action: "Proposed", rest: "form VS from the protocol", tone: "signal" },
 ];
 
 const ROADMAP = [

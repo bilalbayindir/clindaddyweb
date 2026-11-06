@@ -160,7 +160,7 @@ export function StudioStage() {
             >
               <div style={{ height: 64, boxSizing: "border-box", padding: "12px 18px", borderBottom: "1px solid #E4E7EB", display: "flex", flexDirection: "column", justifyContent: "center", gap: 2 }}>
                 <span style={{ fontSize: 17, fontWeight: 600 }}>Vital signs</span>
-                <span style={{ fontSize: 12, color: "#5D6B7E" }}>VS · 5 fields drafted from protocol §7.2</span>
+                <span style={{ fontSize: 12, color: "#5D6B7E" }}>VS · 5 fields drafted from the protocol</span>
               </div>
               <div style={{ height: 40, boxSizing: "border-box", padding: "0 18px", background: "#F2F4F7", borderBottom: "1px solid #E4E7EB", display: "flex", alignItems: "center", fontSize: 13, fontWeight: 600, color: "#344054" }}>
                 Measurements
@@ -256,10 +256,6 @@ export function StudioStage() {
               <dt style={{ color: "#5D6B7E" }}>CDASH</dt><dd className="font-mono" style={{ margin: 0, fontSize: 12 }}>VSORRES · SYSBP</dd>
               <dt style={{ color: "#5D6B7E" }}>Unit</dt><dd style={{ margin: 0 }}>mmHg</dd>
               <dt style={{ color: "#5D6B7E" }}>Edit check</dt><dd style={{ margin: 0 }}>60–250, raise query</dd>
-              <dt style={{ color: "#5D6B7E" }}>Source</dt>
-              <dd style={{ margin: 0, color: "#1F4E79", textDecoration: "underline", textUnderlineOffset: 3 }}>
-                Protocol §7.2, p. 34
-              </dd>
             </dl>
 
             <div style={{ marginTop: "auto", border: "1px solid #D9DCE1", borderRadius: 6, padding: 12, display: "flex", flexDirection: "column", gap: 10, background: "#F6F6F3" }}>
@@ -325,7 +321,7 @@ export function StudioStage() {
           <div style={{ background: "#FFFFFF", border: "1px solid #D9DCE1", borderRadius: 6, overflow: "hidden" }}>
             <div style={{ padding: "10px 14px", borderBottom: "1px solid #E4E7EB" }}>
               <p style={{ margin: 0, fontSize: 15, fontWeight: 600 }}>Vital signs</p>
-              <p style={{ margin: "2px 0 0", fontSize: 11, color: "#5D6B7E" }}>VS · drafted from protocol §7.2</p>
+              <p style={{ margin: "2px 0 0", fontSize: 11, color: "#5D6B7E" }}>VS · drafted from the protocol</p>
             </div>
             <div style={{ padding: "8px 14px", background: "#F2F4F7", borderBottom: "1px solid #E4E7EB", fontSize: 12, fontWeight: 600, color: "#344054" }}>
               Measurements
