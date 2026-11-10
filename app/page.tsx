@@ -503,7 +503,7 @@ export default function HomePage() {
       <section id="recognition" className="border-t border-rule bg-paper">
         <Container>
           <div className="flex flex-col items-center gap-5 py-8 text-center sm:flex-row sm:justify-center sm:gap-8 sm:py-10 sm:text-left">
-            <span className="inline-flex p-6 lg:p-7">
+            <span className="inline-flex p-8 lg:p-10">
               <NvidiaInceptionBadge variant="light" />
             </span>
             <div>
