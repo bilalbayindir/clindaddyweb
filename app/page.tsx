@@ -502,13 +502,13 @@ export default function HomePage() {
       {/* ---------------------------------------------------------------- */}
       <section id="recognition" className="border-t border-rule bg-paper">
         <Container>
-          <div className="flex flex-col gap-5 py-8 sm:flex-row sm:items-center sm:justify-between sm:gap-10">
-            <p className="text-sm font-medium text-text-3">Recognition</p>
-            <div className="flex flex-wrap items-center gap-4">
-              <span className="inline-flex p-4 lg:p-5">
-                <NvidiaInceptionBadge variant="light" />
-              </span>
-              <p className="max-w-[38ch] text-sm leading-[1.5] text-text-2">
+          <div className="flex flex-col items-center gap-5 py-8 text-center sm:flex-row sm:justify-center sm:gap-8 sm:py-10 sm:text-left">
+            <span className="inline-flex p-6 lg:p-7">
+              <NvidiaInceptionBadge variant="light" />
+            </span>
+            <div>
+              <p className="text-sm font-medium text-text-3">Recognition</p>
+              <p className="mt-1 max-w-[38ch] text-base leading-[1.5] text-text-2">
                 ClinDaddy is a member of the NVIDIA Inception program.
               </p>
             </div>

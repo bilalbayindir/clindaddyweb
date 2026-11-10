@@ -29,7 +29,7 @@ export function NvidiaInceptionBadge({
       width={500}
       height={216}
       unoptimized
-      className={cn("h-8 w-auto lg:h-10", className)}
+      className={cn("h-11 w-auto lg:h-14", className)}
     />
   );
 }

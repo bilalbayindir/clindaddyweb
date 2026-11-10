@@ -193,7 +193,7 @@ export default function TrustPage() {
       {/* Programs */}
       <Section tone="surface" bordered id="programs">
         <div className="flex flex-col gap-8 sm:flex-row sm:items-center sm:gap-10">
-          <span className="inline-flex shrink-0 p-4 lg:p-5">
+          <span className="inline-flex shrink-0 p-6 lg:p-7">
             <NvidiaInceptionBadge variant="light" />
           </span>
           <div>
