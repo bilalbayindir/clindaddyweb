@@ -65,9 +65,13 @@ export function Footer() {
           </div>
         </div>
 
-        <p className="border-t border-rule py-6 text-xs leading-relaxed text-text-3">
-          {legalFooter}
-        </p>
+        <div className="border-t border-rule py-6">
+          <p className="text-xs leading-relaxed text-text-3">{legalFooter}</p>
+          <p className="mt-2 text-[11px] leading-relaxed text-text-3">
+            © 2026 NVIDIA, the NVIDIA logo, and NVIDIA Inception are trademarks and/or registered
+            trademarks of NVIDIA Corporation in the U.S. and other countries.
+          </p>
+        </div>
       </Container>
     </footer>
   );

@@ -36,3 +36,6 @@ screenshots.mjs
 /debug-studio.mjs
 /debug-ghost.mjs
 /measure-ref.mjs
+
+/shots-nvidia.mjs
+/check-badge.mjs
