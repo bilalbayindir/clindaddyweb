@@ -5,6 +5,7 @@ import Link from "next/link";
 import { PipelineStage } from "@/components/landing/pipeline-stage";
 import { PilotForm } from "@/components/landing/pilot-form";
 import { StudioStage } from "@/components/landing/studio-stage";
+import { NvidiaInceptionBadge } from "@/components/brand/nvidia-inception-badge";
 import { IllustrationFigure } from "@/components/sections/illustration-figure";
 import { Container } from "@/components/ui/container";
 import { products } from "@/lib/content";
@@ -491,6 +492,25 @@ export default function HomePage() {
             </div>
             <div className="min-w-0 flex-1 basis-[480px]">
               <PilotForm />
+            </div>
+          </div>
+        </Container>
+      </section>
+
+      {/* ---------------------------------------------------------------- */}
+      {/* Recognition                                                       */}
+      {/* ---------------------------------------------------------------- */}
+      <section id="recognition" className="border-t border-rule bg-paper">
+        <Container>
+          <div className="flex flex-col items-center gap-5 py-8 text-center sm:flex-row sm:justify-center sm:gap-8 sm:py-10 sm:text-left">
+            <span className="inline-flex p-8 lg:p-10">
+              <NvidiaInceptionBadge variant="light" />
+            </span>
+            <div>
+              <p className="text-sm font-medium text-text-3">Recognition</p>
+              <p className="mt-1 max-w-[38ch] text-base leading-[1.5] text-text-2">
+                ClinDaddy is a member of the NVIDIA Inception program.
+              </p>
             </div>
           </div>
         </Container>

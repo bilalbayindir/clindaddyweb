@@ -5,6 +5,7 @@ import { FlowChain } from "@/components/diagrams/flow-chain";
 import { QcDiagram } from "@/components/diagrams/qc-diagram";
 import { Reveal } from "@/components/motion/reveal";
 import { CtaBand } from "@/components/sections/cta-band";
+import { NvidiaInceptionBadge } from "@/components/brand/nvidia-inception-badge";
 import { HeroActions, PageHero } from "@/components/sections/page-hero";
 import { IllustrationFigure } from "@/components/sections/illustration-figure";
 import { Button } from "@/components/ui/button";
@@ -184,6 +185,21 @@ export default function TrustPage() {
             </Button>
             <p className="text-xs leading-relaxed text-muted">
               Please do not send confidential study data through the website.
+            </p>
+          </div>
+        </div>
+      </Section>
+
+      {/* Programs */}
+      <Section tone="surface" bordered id="programs">
+        <div className="flex flex-col gap-8 sm:flex-row sm:items-center sm:gap-10">
+          <span className="inline-flex shrink-0 p-8 lg:p-10">
+            <NvidiaInceptionBadge variant="light" />
+          </span>
+          <div>
+            <h2 className="text-[1.75rem] leading-[1.15] font-normal sm:text-4xl">Programs</h2>
+            <p className="mt-4 max-w-xl text-base leading-relaxed text-text-2">
+              ClinDaddy is a member of the NVIDIA Inception program.
             </p>
           </div>
         </div>
