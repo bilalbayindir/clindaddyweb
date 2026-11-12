@@ -1,5 +1,6 @@
 import Image from "next/image";
 
+import { features } from "@/lib/site";
 import { cn } from "@/lib/utils";
 
 import { NvidiaInceptionBadge } from "./nvidia-inception-badge";
@@ -12,8 +13,9 @@ import { NvidiaInceptionBadge } from "./nvidia-inception-badge";
  * mobile and 40px from `sm` up, so the badges stay visibly subordinate to the
  * ClinDaddy wordmark and wrap without distortion at narrow widths.
  *
- * The AWS Activate file is a placeholder until the official asset from the
- * AWS Activate logo guidelines is supplied; keep the filename and dimensions.
+ * The AWS Activate mark is behind `features.awsActivateBadge` in `lib/site.ts`.
+ * It is off until the official artwork is supplied at the path below; turning
+ * the flag on also adds the AWS Activate logo to the footer trademark notice.
  */
 export function ProgramBadges({ className }: { className?: string }) {
   return (
@@ -21,16 +23,18 @@ export function ProgramBadges({ className }: { className?: string }) {
       <li className="flex items-center">
         <NvidiaInceptionBadge className="h-8 w-auto max-w-full lg:h-10" />
       </li>
-      <li className="flex items-center">
-        <Image
-          src="/images/aws-activate-badge.png"
-          alt="AWS Activate member"
-          width={500}
-          height={216}
-          unoptimized
-          className="h-8 w-auto max-w-full lg:h-10"
-        />
-      </li>
+      {features.awsActivateBadge ? (
+        <li className="flex items-center">
+          <Image
+            src="/images/aws-activate-badge.png"
+            alt="AWS Activate member"
+            width={500}
+            height={216}
+            unoptimized
+            className="h-8 w-auto max-w-full lg:h-10"
+          />
+        </li>
+      ) : null}
     </ul>
   );
 }

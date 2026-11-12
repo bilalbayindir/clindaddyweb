@@ -40,6 +40,18 @@ export const site = {
 
 export const siteAddress = `${site.address.street}, ${site.address.city}, ${site.address.state} ${site.address.postalCode}`;
 
+/**
+ * Feature flags.
+ *
+ * `awsActivateBadge` stays off until the official AWS Activate mark exists at
+ * `public/images/aws-activate-badge.png`. Enabling it adds the badge to the
+ * Programs strips and the AWS Activate logo to the footer trademark notice, so
+ * shipping the real asset is a one-line change.
+ */
+export const features = {
+  awsActivateBadge: false,
+} as const;
+
 /** The one primary conversion action, reused across every page. */
 export const primaryCTA = {
   label: "Request a demo",

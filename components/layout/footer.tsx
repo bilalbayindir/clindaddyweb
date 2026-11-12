@@ -2,7 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 
 import { Container } from "@/components/ui/container";
-import { legalFooter, site, siteAddress } from "@/lib/site";
+import { features, legalFooter, site, siteAddress } from "@/lib/site";
 
 const COLUMNS = [
   {
@@ -72,8 +72,9 @@ export function Footer() {
             trademarks of NVIDIA Corporation in the U.S. and other countries.
           </p>
           <p className="mt-2 text-[11px] leading-relaxed text-text-3">
-            Amazon Web Services, AWS and the AWS Activate logo are trademarks of Amazon.com, Inc. or
-            its affiliates.
+            {features.awsActivateBadge
+              ? "Amazon Web Services, AWS and the AWS Activate logo are trademarks of Amazon.com, Inc. or its affiliates."
+              : "Amazon Web Services and AWS are trademarks of Amazon.com, Inc. or its affiliates."}
           </p>
         </div>
       </Container>
