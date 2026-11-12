@@ -168,6 +168,9 @@ export default function InvestorsPage() {
             <h2 className="mt-5 text-[1.75rem] leading-[1.15] font-semibold text-white sm:text-4xl">
               Products built. Customers next.
             </h2>
+            <p className="mt-5 max-w-sm text-sm leading-relaxed text-navy-300">
+              Member of NVIDIA Inception and AWS Activate.
+            </p>
           </div>
 
           <ul className="flex flex-col divide-y divide-white/10 border-y border-white/10">

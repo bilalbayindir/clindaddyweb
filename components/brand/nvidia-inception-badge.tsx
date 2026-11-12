@@ -6,9 +6,9 @@ import { cn } from "@/lib/utils";
  * NVIDIA Inception program badge.
  *
  * The supplied artwork is used unmodified: no recolouring, cropping, filters or
- * opacity changes. Height is fixed (40px desktop / 32px mobile) and the width
- * follows the intrinsic 500.43 × 216 ratio. Parents must leave clear space of at
- * least half the badge height on every side.
+ * opacity changes. Callers set the height (see `ProgramBadges`: 40px desktop /
+ * 32px mobile) and the width follows the intrinsic 500.43 × 216 ratio. Parents
+ * must leave clear space of at least half the badge height on every side.
  */
 export function NvidiaInceptionBadge({
   variant = "light",
@@ -25,7 +25,7 @@ export function NvidiaInceptionBadge({
   return (
     <Image
       src={src}
-      alt="NVIDIA Inception program member"
+      alt="NVIDIA Inception Program member"
       width={500}
       height={216}
       unoptimized

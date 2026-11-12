@@ -52,6 +52,9 @@ export default function AboutPage() {
               </div>
             ))}
           </div>
+          <p className="py-5 text-xs leading-relaxed text-text-3">
+            Member of NVIDIA Inception and AWS Activate.
+          </p>
         </Container>
       </section>
 

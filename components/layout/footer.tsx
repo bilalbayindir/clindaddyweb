@@ -71,6 +71,10 @@ export function Footer() {
             © 2026 NVIDIA, the NVIDIA logo, and NVIDIA Inception are trademarks and/or registered
             trademarks of NVIDIA Corporation in the U.S. and other countries.
           </p>
+          <p className="mt-2 text-[11px] leading-relaxed text-text-3">
+            Amazon Web Services, AWS and the AWS Activate logo are trademarks of Amazon.com, Inc. or
+            its affiliates.
+          </p>
         </div>
       </Container>
     </footer>
